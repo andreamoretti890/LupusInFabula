@@ -13,6 +13,7 @@ struct DayPhaseView: View {
     @State private var showingVoting = false
     @State private var showingGameEnd = false
     @State private var winMessage: String?
+    @State private var showingHunterRevenge = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -78,7 +79,7 @@ struct DayPhaseView: View {
                             
                             // Show Jester if present
                             if let session = gameService.currentSession,
-                               session.players.contains(where: { $0.isAlive && $0.roleID == "jester" }) {
+                               session.players.contains(where: { $0.isAlive && $0.roleID == RoleID.jester.rawValue }) {
                                 VStack(spacing: 8) {
                                     Text("1")
                                         .font(.largeTitle)
@@ -163,12 +164,20 @@ struct DayPhaseView: View {
             }
         }
         .navigationBarHidden(true)
+        .onAppear {
+            checkForHunterRevenge()
+        }
+        .sheet(isPresented: $showingHunterRevenge) {
+            if let hunter = gameService.getPendingHunter() {
+                HunterRevengeView(hunter: hunter)
+            }
+        }
         .overlay(alignment: .topLeading) {
             VStack(spacing: 8) {
                 // Development restart button
-                Button(action: {
+                Button {
                     gameService.quickRestartGame()
-                }) {
+                } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.clockwise")
                         Text("Restart")
@@ -182,9 +191,9 @@ struct DayPhaseView: View {
                 }
                 
                 // Debug button
-                Button(action: {
+                Button {
                     gameService.printGameState()
-                }) {
+                } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "info.circle")
                         Text("Debug")
@@ -201,7 +210,7 @@ struct DayPhaseView: View {
             .padding(.leading, 20)
         }
         .sheet(isPresented: $showingVoting) {
-            VotingView()
+            VotingView(showingHunterRevenge: $showingHunterRevenge)
         }
         .sheet(isPresented: $showingGameEnd) {
             GameEndView(message: winMessage ?? "Game ended")
@@ -240,6 +249,12 @@ struct DayPhaseView: View {
             startVoting()
         }
     }
+    
+    private func checkForHunterRevenge() {
+        if gameService.hasPendingHunterRevenge() {
+            showingHunterRevenge = true
+        }
+    }
 }
 
 struct PlayerStatusCard: View {
@@ -274,6 +289,7 @@ struct VotingView: View {
     @Environment(GameService.self) private var gameService: GameService
     @State private var selectedPlayer: Player?
     @State private var showingResults = false
+    @Binding var showingHunterRevenge: Bool
     
     var body: some View {
         NavigationStack {
@@ -343,7 +359,7 @@ struct VotingView: View {
             }
         }
         .sheet(isPresented: $showingResults) {
-            VotingResultsView(eliminatedPlayer: selectedPlayer)
+            VotingResultsView(eliminatedPlayer: selectedPlayer, showingHunterRevenge: $showingHunterRevenge)
         }
     }
     
@@ -407,6 +423,7 @@ struct VotingResultsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(GameService.self) private var gameService: GameService
     let eliminatedPlayer: Player?
+    @Binding var showingHunterRevenge: Bool
     @State private var hasProcessedElimination = false
     
     var body: some View {
@@ -437,6 +454,13 @@ struct VotingResultsView: View {
                 if let player = eliminatedPlayer, !hasProcessedElimination {
                     gameService.eliminatePlayer(player, method: "vote")
                     hasProcessedElimination = true
+                    
+                    // Check for Hunter revenge after elimination
+                    if gameService.hasPendingHunterRevenge() {
+                        // Don't navigate to night yet, wait for Hunter revenge
+                        dismiss()
+                        return
+                    }
                 }
                 dismiss()
                 gameService.navigateToNight()
@@ -450,6 +474,13 @@ struct VotingResultsView: View {
             if let player = eliminatedPlayer, !hasProcessedElimination {
                 gameService.eliminatePlayer(player, method: "vote")
                 hasProcessedElimination = true
+                
+                // Check for Hunter revenge after elimination
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if gameService.hasPendingHunterRevenge() {
+                        showingHunterRevenge = true
+                    }
+                }
             }
         }
     }

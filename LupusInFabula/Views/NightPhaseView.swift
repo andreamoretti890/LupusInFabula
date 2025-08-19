@@ -12,6 +12,7 @@ struct NightPhaseView: View {
     @Environment(GameService.self) private var gameService: GameService
     @State private var currentActionIndex = 0
     @State private var showingDayPhase = false
+    @State private var showingHunterRevenge = false
     
     private var nightActions: [NightAction] {
         guard let session = gameService.currentSession else { return [] }
@@ -19,7 +20,7 @@ struct NightPhaseView: View {
         var actions: [NightAction] = []
         
         // Werewolves go first
-        let werewolves = session.players.filter { $0.isAlive && $0.roleID == "werewolf" }
+        let werewolves = session.players.filter { $0.isAlive && $0.roleID == RoleID.werewolf.rawValue }
         if !werewolves.isEmpty {
             actions.append(NightAction(
                 type: .werewolf,
@@ -31,7 +32,7 @@ struct NightPhaseView: View {
         }
         
         // Seer action
-        if let seer = session.players.first(where: { $0.isAlive && $0.roleID == "seer" }) {
+        if let seer = session.players.first(where: { $0.isAlive && $0.roleID == RoleID.seer.rawValue }) {
             actions.append(NightAction(
                 type: .seer,
                 title: "Seer",
@@ -42,7 +43,7 @@ struct NightPhaseView: View {
         }
         
         // Doctor action
-        if let doctor = session.players.first(where: { $0.isAlive && $0.roleID == "doctor" }) {
+        if let doctor = session.players.first(where: { $0.isAlive && $0.roleID == RoleID.doctor.rawValue }) {
             var doctorDescription = "Choose a player to protect"
             
             // If werewolf has already targeted someone, show it to the doctor
@@ -51,24 +52,27 @@ struct NightPhaseView: View {
                 doctorDescription = "The werewolves targeted \(targetedPlayer.displayName). Choose a player to protect"
             }
             
+            // Get valid targets based on house rules
+            let validTargets = gameService.getDoctorValidTargets()
+            
             actions.append(NightAction(
                 type: .doctor,
                 title: "Doctor",
                 description: doctorDescription,
                 players: [doctor],
-                targetPlayers: session.players.filter { $0.isAlive }
+                targetPlayers: validTargets
             ))
         }
         
         // Medium action
-        if let medium = session.players.first(where: { $0.isAlive && $0.roleID == "medium" }) {
+        if let medium = session.players.first(where: { $0.isAlive && $0.roleID == RoleID.medium.rawValue }) {
             let eliminatedPlayers = session.players.filter { !$0.isAlive }
             
             if !eliminatedPlayers.isEmpty {
                 actions.append(NightAction(
                     type: .medium,
                     title: "Medium",
-                    description: "Indica un giocatore eliminato per sapere se era un lupo",
+                    description: "Point to an eliminated player to learn if they were a werewolf",
                     players: [medium],
                     targetPlayers: eliminatedPlayers
                 ))
@@ -79,33 +83,22 @@ struct NightPhaseView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                // Background
-                LinearGradient(
-                    colors: [.black.opacity(0.8), .blue.opacity(0.3)],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-                
+        ZStack {
+            // Background
+            LinearGradient(
+                colors: [.black.opacity(0.8), .blue.opacity(0.3)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            
+            ScrollView {
                 VStack(spacing: 32) {
-                    // Header
-                    VStack(spacing: 16) {
-                        HStack {
-                            Image(systemName: "moon.fill")
-                                .font(.title)
-                                .foregroundStyle(.yellow)
-                            Text("Night Phase")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                        }
-                        
-                        Text("Round \(gameService.currentSession?.currentRound ?? 1)")
-                            .font(.title3)
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.top, 40)
+                    // Round info
+//                    Text("Round \(gameService.currentSession?.currentRound ?? 1)")
+//                        .font(.title3)
+//                        .foregroundStyle(.secondary)
+//                        .padding(.top, 20)
                     
                     // Phase Timer
                     if let settings = gameService.gameSettings, settings.phaseTimer > 0 {
@@ -151,30 +144,30 @@ struct NightPhaseView: View {
                         .padding(40)
                     }
                     
-                    Spacer()
+                    Spacer(minLength: 100)
                 }
                 .padding(.horizontal, 24)
             }
         }
-        .navigationBarHidden(true)
-        .overlay(alignment: .topLeading) {
-            // Development restart button
-            Button(action: {
-                gameService.quickRestartGame()
-            }) {
-                HStack(spacing: 4) {
-                    Image(systemName: "arrow.clockwise")
-                    Text("Restart")
+        .navigationTitle("Night Phase 🌙")
+        .toolbarTitleDisplayMode(.inline)
+        .navigationSubtitle("Round \(gameService.currentSession?.currentRound ?? 1)")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Restart") {
+                    gameService.quickRestartGame()
                 }
+                .foregroundStyle(.orange)
                 .font(.caption)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(.orange.opacity(0.8))
-                .foregroundStyle(.white)
-                .clipShape(Capsule())
             }
-            .padding(.top, 50)
-            .padding(.leading, 20)
+        }
+        .onAppear {
+            checkForHunterRevenge()
+        }
+        .sheet(isPresented: $showingHunterRevenge) {
+            if let hunter = gameService.getPendingHunter() {
+                HunterRevengeView(hunter: hunter)
+            }
         }
     }
     
@@ -201,6 +194,10 @@ struct NightPhaseView: View {
                 // Show medium result
                 showMediumResult(target)
             }
+        case .hunter:
+            // Hunter revenge is handled immediately when hunter is eliminated
+            // This case shouldn't normally occur during night actions
+            break
         }
         
         // Move to next action
@@ -216,23 +213,29 @@ struct NightPhaseView: View {
         // Resolve all night actions (werewolf attack vs doctor protection)
         gameService.resolveNightActions()
         
-        // Show day phase after a brief delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            showingDayPhase = true
+        // Check for Hunter revenge after werewolf attack
+        if gameService.hasPendingHunterRevenge() {
+            // Show Hunter revenge immediately
+            showingHunterRevenge = true
+        } else {
+            // Show day phase after a brief delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                showingDayPhase = true
+            }
         }
     }
     
     private func showSeerResult(_ player: Player) {
         // In a real implementation, this would show the seer the player's alignment
-        let isWerewolf = player.roleID == "werewolf"
+        let isWerewolf = player.roleID == RoleID.werewolf.rawValue
         print("Seer learned that \(player.displayName) is \(isWerewolf ? "a werewolf" : "a villager")")
     }
     
     private func showMediumResult(_ player: Player) {
         guard let session = gameService.currentSession else { return }
         
-        let isWerewolf = player.roleID == "werewolf"
-        let resultMessage = "\(player.displayName) \(isWerewolf ? "era un lupo" : "non era un lupo")"
+        let isWerewolf = player.roleID == RoleID.werewolf.rawValue
+        let resultMessage = "\(player.displayName) \(isWerewolf ? "was a werewolf" : "was not a werewolf")"
         
         // Add game event for medium check
         let event = GameEvent(
@@ -259,7 +262,7 @@ struct NightPhaseView: View {
         switch action.type {
         case .werewolf:
             return settings.allowSkipWerewolfKill
-        case .seer, .doctor, .medium:
+        case .seer, .doctor, .medium, .hunter:
             return false // Only werewolf kill can be skipped based on settings
         }
     }
@@ -276,21 +279,20 @@ struct NightPhaseView: View {
             }
         }
     }
+    
+    private func checkForHunterRevenge() {
+        if gameService.hasPendingHunterRevenge() {
+            showingHunterRevenge = true
+        }
+    }
 }
 
 struct NightAction {
-    let type: ActionType
+    let type: NightActionType
     let title: String
     let description: String
     let players: [Player]
     let targetPlayers: [Player]
-    
-    enum ActionType {
-        case werewolf
-        case seer
-        case doctor
-        case medium
-    }
 }
 
 struct NightActionView: View {
@@ -299,7 +301,7 @@ struct NightActionView: View {
     let allowSkip: Bool
     let onComplete: (Player?) -> Void
     
-    @State private var selectedTarget: Player?
+    @State private var selectedTarget: Player? = nil
     
     var body: some View {
         VStack(spacing: 24) {
@@ -317,7 +319,7 @@ struct NightActionView: View {
             
             // Player info
             VStack(spacing: 8) {
-                Text("Current Player:")
+                Text("Current \(Text("Player", countToInflect: action.players.count)):")
                     .font(.headline)
                 
                 ForEach(action.players, id: \.id) { player in
@@ -365,6 +367,7 @@ struct NightActionView: View {
                 if allowSkip {
                     Button("Skip Phase") {
                         onComplete(nil)
+                        selectedTarget = nil
                     }
                     .buttonStyle(.bordered)
                     .foregroundStyle(.orange)
@@ -378,6 +381,7 @@ struct NightActionView: View {
                 
                 Button("Confirm") {
                     onComplete(selectedTarget)
+                    selectedTarget = nil
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(selectedTarget == nil)

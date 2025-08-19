@@ -8,14 +8,6 @@
 import Foundation
 import SwiftData
 import SwiftUI
-import Combine
-
-enum GamePhase: Hashable {
-    case setup
-    case reveal
-    case night
-    case day
-}
 
 @Observable
 class GameService {
@@ -76,7 +68,7 @@ class GameService {
         }
         
         // Seed data if empty or force refresh if we have missing roles
-        let expectedRoleIds = ["werewolf", "villager", "seer", "doctor", "hunter", "jester", "medium"]
+        let expectedRoleIds = RoleID.allCases.map { $0.rawValue }
         let currentRoleIds = Set(availableRoles.map { $0.id })
         let missingRoles = expectedRoleIds.filter { !currentRoleIds.contains($0) }
         
@@ -112,15 +104,10 @@ class GameService {
     }
     
     private func seedRoles() {
-        let roles = [
-            Role(id: "werewolf", name: "Werewolf", alignment: "Werewolf", abilities: ["Kill at night"], isUnique: false, minPlayers: 4, notes: "Choose a villager to kill each night", emoji: "🐺"),
-            Role(id: "villager", name: "Villager", alignment: "Villager", abilities: ["Vote during day"], isUnique: false, minPlayers: 1, notes: "Vote to eliminate suspected werewolves", emoji: "👨🏻"),
-            Role(id: "seer", name: "Seer", alignment: "Villager", abilities: ["Check alignment at night"], isUnique: true, minPlayers: 6, notes: "Learn if a player is a werewolf", emoji: "🔮"),
-            Role(id: "doctor", name: "Doctor", alignment: "Villager", abilities: ["Protect at night"], isUnique: true, minPlayers: 8, notes: "Save a player from werewolf attack", emoji: "💊"),
-            Role(id: "hunter", name: "Hunter", alignment: "Villager", abilities: ["Kill when eliminated"], isUnique: true, minPlayers: 10, notes: "Take revenge when eliminated", emoji: "🏹"),
-            Role(id: "jester", name: "Jester", alignment: "Neutral", abilities: ["Win by being voted out"], isUnique: true, minPlayers: 7, notes: "Wins the game by being voted out during the day phase", emoji: "🃏"),
-            Role(id: "medium", name: "Medium", alignment: "Villager", abilities: ["Check eliminated players at night"], isUnique: true, minPlayers: 8, notes: "During night, check if an eliminated player was a werewolf or not", emoji: "👻")
-        ]
+        // Create roles using enums for type safety
+        let roles = RoleID.allCases.map { roleID in
+            Role(roleID: roleID)
+        }
         
         for role in roles {
             modelContext.insert(role)
@@ -144,8 +131,8 @@ class GameService {
                 id: "beginner_4",
                 name: "Beginner (4 players)",
                 roleCounts: [
-                    RoleCount(roleID: "werewolf", count: 1),
-                    RoleCount(roleID: "villager", count: 3)
+                    RoleCount(roleID: .werewolf, count: 1),
+                    RoleCount(roleID: .villager, count: 3)
                 ],
                 minPlayers: 4,
                 maxPlayers: 4,
@@ -155,9 +142,9 @@ class GameService {
                 id: "classic_6",
                 name: "Classic (6 players)",
                 roleCounts: [
-                    RoleCount(roleID: "werewolf", count: 2),
-                    RoleCount(roleID: "villager", count: 3),
-                    RoleCount(roleID: "seer", count: 1)
+                    RoleCount(roleID: .werewolf, count: 2),
+                    RoleCount(roleID: .villager, count: 3),
+                    RoleCount(roleID: .seer, count: 1)
                 ],
                 minPlayers: 6,
                 maxPlayers: 6,
@@ -167,10 +154,10 @@ class GameService {
                 id: "classic_8",
                 name: "Classic (8 players)",
                 roleCounts: [
-                    RoleCount(roleID: "werewolf", count: 2),
-                    RoleCount(roleID: "villager", count: 4),
-                    RoleCount(roleID: "seer", count: 1),
-                    RoleCount(roleID: "doctor", count: 1)
+                    RoleCount(roleID: .werewolf, count: 2),
+                    RoleCount(roleID: .villager, count: 4),
+                    RoleCount(roleID: .seer, count: 1),
+                    RoleCount(roleID: .doctor, count: 1)
                 ],
                 minPlayers: 8,
                 maxPlayers: 8,
@@ -180,46 +167,61 @@ class GameService {
                 id: "advanced_10",
                 name: "Advanced (10 players)",
                 roleCounts: [
-                    RoleCount(roleID: "werewolf", count: 2),
-                    RoleCount(roleID: "villager", count: 5),
-                    RoleCount(roleID: "seer", count: 1),
-                    RoleCount(roleID: "doctor", count: 1),
-                    RoleCount(roleID: "jester", count: 1)
+                    RoleCount(roleID: .werewolf, count: 2),
+                    RoleCount(roleID: .villager, count: 5),
+                    RoleCount(roleID: .seer, count: 1),
+                    RoleCount(roleID: .doctor, count: 1),
+                    RoleCount(roleID: .jester, count: 1)
                 ],
                 minPlayers: 10,
                 maxPlayers: 10,
-                presetDescription: "Con il Matto che può vincere"
+                presetDescription: "With the Jester who can win"
             ),
             RolePreset(
                 id: "expert_12",
                 name: "Expert (12 players)",
                 roleCounts: [
-                    RoleCount(roleID: "werewolf", count: 3),
-                    RoleCount(roleID: "villager", count: 5),
-                    RoleCount(roleID: "seer", count: 1),
-                    RoleCount(roleID: "doctor", count: 1),
-                    RoleCount(roleID: "hunter", count: 1),
-                    RoleCount(roleID: "medium", count: 1)
+                    RoleCount(roleID: .werewolf, count: 3),
+                    RoleCount(roleID: .villager, count: 5),
+                    RoleCount(roleID: .seer, count: 1),
+                    RoleCount(roleID: .doctor, count: 1),
+                    RoleCount(roleID: .hunter, count: 1),
+                    RoleCount(roleID: .medium, count: 1)
                 ],
                 minPlayers: 12,
                 maxPlayers: 12,
-                presetDescription: "Tutti i ruoli speciali"
+                presetDescription: "All special roles"
+            ),
+            RolePreset(
+                id: "mayor_10",
+                name: "Mayor's Village (10 players)",
+                roleCounts: [
+                    RoleCount(roleID: .werewolf, count: 2),
+                    RoleCount(roleID: .villager, count: 5),
+                    RoleCount(roleID: .seer, count: 1),
+                    RoleCount(roleID: .doctor, count: 1),
+                    RoleCount(roleID: .mayor, count: 1)
+                ],
+                minPlayers: 10,
+                maxPlayers: 10,
+                presetDescription: "Features the Mayor role for village leadership"
             ),
             RolePreset(
                 id: "chaos_14",
                 name: "Chaos (14 players)",
                 roleCounts: [
-                    RoleCount(roleID: "werewolf", count: 3),
-                    RoleCount(roleID: "villager", count: 6),
-                    RoleCount(roleID: "seer", count: 1),
-                    RoleCount(roleID: "doctor", count: 1),
-                    RoleCount(roleID: "hunter", count: 1),
-                    RoleCount(roleID: "medium", count: 1),
-                    RoleCount(roleID: "jester", count: 1)
+                    RoleCount(roleID: .werewolf, count: 3),
+                    RoleCount(roleID: .villager, count: 5),
+                    RoleCount(roleID: .seer, count: 1),
+                    RoleCount(roleID: .doctor, count: 1),
+                    RoleCount(roleID: .hunter, count: 1),
+                    RoleCount(roleID: .medium, count: 1),
+                    RoleCount(roleID: .mayor, count: 1),
+                    RoleCount(roleID: .jester, count: 1)
                 ],
                 minPlayers: 14,
                 maxPlayers: 14,
-                presetDescription: "Caos totale con tutti i ruoli"
+                presetDescription: "Total chaos with all roles including Mayor"
             )
         ]
         
@@ -254,7 +256,7 @@ class GameService {
         selectedRoles = preset.roleCounts
         
         // Update includeJester based on whether preset contains Jester
-        includeJester = preset.roleCounts.contains { $0.roleID == "jester" }
+        includeJester = preset.roleCounts.contains { $0.roleID == RoleID.jester.rawValue }
     }
     
     func updateRoleCount(roleID: String, count: Int) {
@@ -268,7 +270,7 @@ class GameService {
         selectedRoles.removeAll { $0.count <= 0 }
         
         // Sync includeJester with actual Jester count
-        includeJester = selectedRoles.contains { $0.roleID == "jester" && $0.count > 0 }
+        includeJester = selectedRoles.contains { $0.roleID == RoleID.jester.rawValue && $0.count > 0 }
     }
     
     func getRoleCount(roleID: String) -> Int {
@@ -281,7 +283,7 @@ class GameService {
     
     func isSetupValid() -> Bool {
         let total = getTotalSelectedRoles()
-        let werewolfCount = getRoleCount(roleID: "werewolf")
+        let werewolfCount = getRoleCount(roleID: RoleID.werewolf.rawValue)
         
         // Basic requirements: total matches player count, minimum 4 players
         guard total == playerCount && total >= 4 else { return false }
@@ -297,7 +299,7 @@ class GameService {
     
     func getSetupValidationMessage() -> String? {
         let total = getTotalSelectedRoles()
-        let werewolfCount = getRoleCount(roleID: "werewolf")
+        let werewolfCount = getRoleCount(roleID: RoleID.werewolf.rawValue)
         
         if total != playerCount {
             let diff = playerCount - total
@@ -337,36 +339,41 @@ class GameService {
         let werewolfCount = max(1, playerCount / 4)
         
         // Add werewolves
-        selectedRoles.append(RoleCount(roleID: "werewolf", count: werewolfCount))
+        selectedRoles.append(RoleCount(roleID: .werewolf, count: werewolfCount))
         
         // Calculate remaining villager slots
         var remainingSlots = playerCount - werewolfCount
         
         // Add special roles based on player count
         if playerCount >= 6 && remainingSlots > 0 {
-            selectedRoles.append(RoleCount(roleID: "seer", count: 1))
+            selectedRoles.append(RoleCount(roleID: .seer, count: 1))
             remainingSlots -= 1
         }
         
         if playerCount >= 8 && remainingSlots > 0 {
-            selectedRoles.append(RoleCount(roleID: "doctor", count: 1))
+            selectedRoles.append(RoleCount(roleID: .doctor, count: 1))
+            remainingSlots -= 1
+        }
+        
+        if playerCount >= 9 && remainingSlots > 0 {
+            selectedRoles.append(RoleCount(roleID: .mayor, count: 1))
             remainingSlots -= 1
         }
         
         if playerCount >= 10 && remainingSlots > 0 {
-            selectedRoles.append(RoleCount(roleID: "hunter", count: 1))
+            selectedRoles.append(RoleCount(roleID: .hunter, count: 1))
             remainingSlots -= 1
         }
         
         // Add Jester if enabled and we have enough players
         if includeJester && playerCount >= 7 && remainingSlots > 0 {
-            selectedRoles.append(RoleCount(roleID: "jester", count: 1))
+            selectedRoles.append(RoleCount(roleID: .jester, count: 1))
             remainingSlots -= 1
         }
         
         // Fill remaining slots with villagers
         if remainingSlots > 0 {
-            selectedRoles.append(RoleCount(roleID: "villager", count: remainingSlots))
+            selectedRoles.append(RoleCount(roleID: .villager, count: remainingSlots))
         }
         
         print("Suggested balanced setup for \(playerCount) players:")
@@ -415,7 +422,7 @@ class GameService {
             id: UUID().uuidString,
             startDate: Date(),
             players: players,
-            currentPhase: "reveal"
+            currentPhase: GamePhase.reveal.rawValue
         )
         
         currentSession = session
@@ -474,7 +481,7 @@ class GameService {
         
         if currentRevealPlayerIndex >= session.players.count {
             // All players have seen their roles, start the game
-            session.currentPhase = "night"
+            session.currentPhase = GamePhase.night.rawValue
             currentRevealPlayerIndex = 0
             
             do {
@@ -498,7 +505,7 @@ class GameService {
         currentRevealPlayerIndex = session.players.count
         
         // Update session phase to night
-        session.currentPhase = "night"
+        session.currentPhase = GamePhase.night.rawValue
         
         // Save the changes
         do {
@@ -558,17 +565,17 @@ class GameService {
     
     func getWerewolves() -> [Player] {
         guard let session = currentSession else { return [] }
-        return session.players.filter { $0.isAlive && $0.roleID == "werewolf" }
+        return session.players.filter { $0.isAlive && $0.roleID == RoleID.werewolf.rawValue }
     }
     
     func getVillagers() -> [Player] {
         guard let session = currentSession else { return [] }
-        return session.players.filter { $0.isAlive && $0.roleID != "werewolf" && $0.roleID != "jester" }
+        return session.players.filter { $0.isAlive && $0.roleID != RoleID.werewolf.rawValue && $0.roleID != RoleID.jester.rawValue }
     }
     
     func getAllNonWerewolves() -> [Player] {
         guard let session = currentSession else { return [] }
-        return session.players.filter { $0.isAlive && $0.roleID != "werewolf" }
+        return session.players.filter { $0.isAlive && $0.roleID != RoleID.werewolf.rawValue }
     }
     
     func eliminatePlayer(_ player: Player, method: String = "unknown") {
@@ -584,8 +591,15 @@ class GameService {
             session.players[playerIndex].isAlive = false
         }
         
+        // Check if eliminated player is Hunter - trigger revenge ability
+        if player.roleID == RoleID.hunter.rawValue && method != "hunter" {
+            // Hunter was killed, set pending revenge
+            session.pendingHunterRevenge = player.id
+            print("Hunter \(player.displayName) was eliminated and can take revenge!")
+        }
+        
         // Check if eliminated player is Jester and was voted out
-        if player.roleID == "jester" && method == "vote" {
+        if player.roleID == RoleID.jester.rawValue && method == "vote" {
             // Jester wins by being voted out!
             let winEvent = GameEvent(
                 id: UUID().uuidString,
@@ -618,6 +632,68 @@ class GameService {
         }
     }
     
+    // MARK: - Hunter Functions
+    
+    func executeHunterRevenge(hunterID: String, targetID: String) {
+        guard let session = currentSession else { return }
+        guard session.pendingHunterRevenge == hunterID else { return }
+        
+        // Find the hunter and target players
+        guard let hunter = session.players.first(where: { $0.id == hunterID }),
+              let target = session.players.first(where: { $0.id == targetID }) else { return }
+        
+        // Execute hunter's revenge
+        session.hunterTarget = targetID
+        eliminatePlayer(target, method: "hunter")
+        
+        // Clear pending revenge
+        session.pendingHunterRevenge = nil
+        
+        // Add game event for hunter revenge
+        let revengeEvent = GameEvent(
+            id: UUID().uuidString,
+            timestamp: Date(),
+            type: "hunter_revenge",
+            description: "Hunter \(hunter.displayName) takes revenge on \(target.displayName)",
+            playerID: hunterID,
+            targetPlayerID: targetID,
+            eliminationMethod: "hunter"
+        )
+        session.gameHistory.append(revengeEvent)
+        
+        print("Hunter \(hunter.displayName) executed revenge on \(target.displayName)")
+        
+        // Save changes
+        do {
+            try modelContext.save()
+        } catch {
+            print("Error saving hunter revenge: \(error)")
+        }
+    }
+    
+    func getAvailableHunterTargets() -> [Player] {
+        guard let session = currentSession else { return [] }
+        guard session.pendingHunterRevenge != nil else { return [] }
+        
+        // Hunter can target any living player
+        return session.players.filter { $0.isAlive }
+    }
+    
+    func hasPendingHunterRevenge() -> Bool {
+        guard let session = currentSession else { return false }
+        return session.pendingHunterRevenge != nil
+    }
+    
+    func getPendingHunter() -> Player? {
+        guard let session = currentSession,
+              let hunterID = session.pendingHunterRevenge else { return nil }
+        return session.players.first(where: { $0.id == hunterID })
+    }
+    
+    func canSkipHunterRevenge() -> Bool {
+        return gameSettings?.allowSkipHunterRevenge ?? false
+    }
+    
     func setWerewolfTarget(_ player: Player) {
         guard let session = currentSession else { return }
         session.werewolfTarget = player.id
@@ -642,7 +718,15 @@ class GameService {
     
     func setDoctorProtection(_ player: Player) {
         guard let session = currentSession else { return }
+        
+        // Check if doctor is protecting himself and track self-save usage
+        if let doctor = session.players.first(where: { $0.isAlive && $0.roleID == RoleID.doctor.rawValue }),
+           doctor.id == player.id {
+            session.doctorSelfSaveUsed = true
+        }
+        
         session.doctorProtection = player.id
+        session.lastDoctorProtection = player.id
         
         // Add game event for tracking
         let event = GameEvent(
@@ -692,6 +776,7 @@ class GameService {
         // Reset night action tracking for next round
         session.werewolfTarget = nil
         session.doctorProtection = nil
+        // Note: lastDoctorProtection is kept for consecutive saves rule
         
         do {
             try modelContext.save()
@@ -702,7 +787,7 @@ class GameService {
     }
     
     func saveEvent(_ event: GameEvent) throws {
-        guard var session = currentSession else { return }
+        guard let session = currentSession else { return }
         session.gameHistory.append(event)
         currentSession = session
         
@@ -767,5 +852,50 @@ class GameService {
             print("- \(player.displayName) (\(player.roleID)) - \(status)")
         }
         print("========================\n")
+    }
+    
+    // MARK: - Doctor Functions
+    
+    func getDoctorValidTargets() -> [Player] {
+        guard let session = currentSession,
+              let settings = gameSettings,
+              let doctor = session.players.first(where: { $0.isAlive && $0.roleID == RoleID.doctor.rawValue }) else { return [] }
+        
+        var validTargets = session.players.filter { $0.isAlive }
+        
+        // Remove doctor from targets if self-save is disabled or already used
+        if !settings.doctorCanSaveHimself || session.doctorSelfSaveUsed {
+            validTargets.removeAll { $0.id == doctor.id }
+        }
+        
+        // Remove last protected player if consecutive saves are disabled
+        if !settings.doctorCanSaveSamePersonTwice,
+           let lastProtected = session.lastDoctorProtection {
+            validTargets.removeAll { $0.id == lastProtected }
+        }
+        
+        return validTargets
+    }
+    
+    func canDoctorSaveHimself() -> Bool {
+        guard let session = currentSession,
+              let settings = gameSettings else { return false }
+        
+        return settings.doctorCanSaveHimself && !session.doctorSelfSaveUsed
+    }
+    
+    func canDoctorSaveSamePersonTwice() -> Bool {
+        return gameSettings?.doctorCanSaveSamePersonTwice ?? false
+    }
+    
+    // MARK: - Mayor Functions
+    
+    func getMayor() -> Player? {
+        guard let session = currentSession else { return nil }
+        return session.players.first { $0.isAlive && $0.roleID == RoleID.mayor.rawValue }
+    }
+    
+    func isMayorAlive() -> Bool {
+        return getMayor() != nil
     }
 }

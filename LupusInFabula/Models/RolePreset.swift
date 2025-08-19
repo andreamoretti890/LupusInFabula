@@ -35,4 +35,15 @@ struct RoleCount: Codable {
         self.roleID = roleID
         self.count = count
     }
+    
+    // Convenience initializer using enum
+    init(roleID: RoleID, count: Int) {
+        self.roleID = roleID.rawValue
+        self.count = count
+    }
+    
+    // Computed property for type-safe access
+    var role: RoleID? {
+        return RoleID(rawValue: roleID)
+    }
 }

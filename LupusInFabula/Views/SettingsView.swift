@@ -65,6 +65,17 @@ struct SettingsView: View {
                         }
                     }
                     .toggleStyle(SwitchToggleStyle())
+                    
+                    Toggle(isOn: Bindable(settings).allowSkipHunterRevenge) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Allow Skipping Hunter Revenge")
+                                .font(.body)
+                            Text("Shows a 'Skip Revenge' button when Hunter is eliminated")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .toggleStyle(SwitchToggleStyle())
                 }
                 
                 Section("Timer Settings") {
@@ -114,6 +125,30 @@ struct SettingsView: View {
                         }
                     }
                     .padding(.vertical, 4)
+                }
+                
+                Section("Doctor Rules") {
+                    Toggle(isOn: Bindable(settings).doctorCanSaveHimself) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Can Save Himself (Once Per Match)")
+                                .font(.body)
+                            Text("Doctor can choose to self-heal one time only")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .toggleStyle(SwitchToggleStyle())
+                    
+                    Toggle(isOn: Bindable(settings).doctorCanSaveSamePersonTwice) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Can Save Same Person Twice in a Row")
+                                .font(.body)
+                            Text("Allows saving the same target in consecutive nights")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .toggleStyle(SwitchToggleStyle())
                 }
                 
                 Section {

@@ -212,7 +212,7 @@ struct RoleCard: View {
                     VStack(spacing: 12) {
                         Text(role.alignment)
                             .font(.headline)
-                            .foregroundStyle(role.alignment == "Werewolf" ? .red : .green)
+                            .foregroundStyle(role.roleAlignment?.color ?? .green)
                             .transition(.opacity)
                         
                         Text(role.notes)

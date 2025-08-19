@@ -16,16 +16,16 @@ struct GameSetupView: View {
         ScrollView {
             VStack(spacing: 32) {
                 // Header
-                VStack(spacing: 16) {
-                    Text("Game Setup")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    
-                    Text("Configure your game")
-                        .font(.title3)
-                        .foregroundStyle(.secondary)
-                }
-                .padding(.top, 20)
+//                VStack(spacing: 16) {
+//                    Text("Game Setup")
+//                        .font(.largeTitle)
+//                        .fontWeight(.bold)
+//                    
+//                    Text("Configure your game")
+//                        .font(.title3)
+//                        .foregroundStyle(.secondary)
+//                }
+//                .padding(.top, 20)
                 
                 // Player count
                 VStack(spacing: 16) {
@@ -134,12 +134,12 @@ struct GameSetupView: View {
                             // Update role counts when toggle changes
                             if newValue {
                                 // Add Jester if not already present
-                                if !gameService.selectedRoles.contains(where: { $0.roleID == "jester" }) {
-                                    gameService.updateRoleCount(roleID: "jester", count: 1)
+                                if !gameService.selectedRoles.contains(where: { $0.roleID == RoleID.jester.rawValue }) {
+                                    gameService.updateRoleCount(roleID: RoleID.jester.rawValue, count: 1)
                                 }
                             } else {
                                 // Remove Jester if present
-                                gameService.updateRoleCount(roleID: "jester", count: 0)
+                                gameService.updateRoleCount(roleID: RoleID.jester.rawValue, count: 0)
                             }
                         }
                         
@@ -194,7 +194,7 @@ struct GameSetupView: View {
                     }
                     
                     LazyVStack(spacing: 12) {
-                        ForEach(gameService.availableRoles.filter { $0.id != "jester" }, id: \.id) { role in
+                        ForEach(gameService.availableRoles.filter { $0.id != RoleID.jester.rawValue }, id: \.id) { role in
                             RoleSelectionRow(
                                 role: role,
                                 count: gameService.getRoleCount(roleID: role.id),
@@ -232,7 +232,9 @@ struct GameSetupView: View {
             .padding(.horizontal, 24)
             .padding(.bottom, 40)
         }
+        .navigationTitle("Game Setup")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationSubtitle("Configure your game")
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -291,7 +293,7 @@ struct RoleSelectionRow: View {
     let onCountChanged: (Int) -> Void
     
     var isWerewolf: Bool {
-        role.alignment == "Werewolf"
+        role.roleAlignment == .werewolf
     }
     
     var isSpecialRole: Bool {

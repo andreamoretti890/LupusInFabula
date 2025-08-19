@@ -22,8 +22,14 @@ final class GameSession {
     // Night action tracking
     var werewolfTarget: String? // player ID targeted by werewolves
     var doctorProtection: String? // player ID protected by doctor
+    var hunterTarget: String? // player ID targeted by hunter's revenge
+    var pendingHunterRevenge: String? // hunter player ID waiting to take revenge
     
-    init(id: String, startDate: Date, players: [Player], currentPhase: String = "setup", currentRound: Int = 1, currentPlayerIndex: Int = 0, eliminatedPlayers: [String] = [], gameHistory: [GameEvent] = [], werewolfTarget: String? = nil, doctorProtection: String? = nil) {
+    // Doctor tracking for house rules
+    var doctorSelfSaveUsed: Bool // Track if doctor has used self-save
+    var lastDoctorProtection: String? // player ID of last protection (for consecutive saves rule)
+    
+    init(id: String, startDate: Date, players: [Player], currentPhase: String = "setup", currentRound: Int = 1, currentPlayerIndex: Int = 0, eliminatedPlayers: [String] = [], gameHistory: [GameEvent] = [], werewolfTarget: String? = nil, doctorProtection: String? = nil, hunterTarget: String? = nil, pendingHunterRevenge: String? = nil, doctorSelfSaveUsed: Bool = false, lastDoctorProtection: String? = nil) {
         self.id = id
         self.startDate = startDate
         self.players = players
@@ -34,6 +40,10 @@ final class GameSession {
         self.gameHistory = gameHistory
         self.werewolfTarget = werewolfTarget
         self.doctorProtection = doctorProtection
+        self.hunterTarget = hunterTarget
+        self.pendingHunterRevenge = pendingHunterRevenge
+        self.doctorSelfSaveUsed = doctorSelfSaveUsed
+        self.lastDoctorProtection = lastDoctorProtection
     }
 }
 
@@ -54,7 +64,7 @@ struct Player: Codable {
 struct GameEvent: Codable {
     var id: String
     var timestamp: Date
-    var type: String // "player_eliminated", "role_action", "vote_result", "matto_win", "medium_check"
+    var type: String // "player_eliminated", "role_action", "vote_result", "jester_win", "medium_check"
     var description: String
     var playerID: String?
     var targetPlayerID: String?
