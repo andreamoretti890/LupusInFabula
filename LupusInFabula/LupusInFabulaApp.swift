@@ -12,7 +12,11 @@ import SwiftData
 struct LupusInFabulaApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Role.self,
+            RolePreset.self,
+            SavedConfig.self,
+            GameSession.self,
+            GameSettings.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -22,7 +26,7 @@ struct LupusInFabulaApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

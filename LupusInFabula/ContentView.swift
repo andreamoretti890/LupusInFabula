@@ -10,52 +10,41 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @State private var gameService: GameService
+    
+    init() {
+        // We need to create GameService with a temporary model context
+        // It will be properly initialized when the view appears
+        let tempContainer = try! ModelContainer(for: Role.self, RolePreset.self, SavedConfig.self, GameSession.self, GameSettings.self)
+        let tempContext = ModelContext(tempContainer)
+        _gameService = State(wrappedValue: GameService(modelContext: tempContext))
+    }
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        NavigationStack(path: $gameService.navigationPath) {
+            HomeView()
+                .navigationDestination(for: GamePhase.self) { phase in
+                    switch phase {
+                    case .setup:
+                        GameSetupView()
+                    case .reveal:
+                        RoleRevealView()
+                    case .night:
+                        NightPhaseView()
+                    case .day:
+                        DayPhaseView()
                     }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+        .environment(gameService)
+        .onAppear {
+            // Update GameService with the proper model context when view appears
+            gameService.updateModelContext(modelContext)
         }
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: [Role.self, RolePreset.self, SavedConfig.self, GameSession.self, GameSettings.self], inMemory: true)
 }
