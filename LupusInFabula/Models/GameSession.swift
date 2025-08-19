@@ -54,17 +54,19 @@ struct Player: Codable {
 struct GameEvent: Codable {
     var id: String
     var timestamp: Date
-    var type: String // "player_eliminated", "role_action", "vote_result"
+    var type: String // "player_eliminated", "role_action", "vote_result", "matto_win", "medium_check"
     var description: String
     var playerID: String?
     var targetPlayerID: String?
+    var eliminationMethod: String? // "vote", "werewolf", "hunter"
     
-    init(id: String, timestamp: Date, type: String, description: String, playerID: String? = nil, targetPlayerID: String? = nil) {
+    init(id: String, timestamp: Date, type: String, description: String, playerID: String? = nil, targetPlayerID: String? = nil, eliminationMethod: String? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.type = type
         self.description = description
         self.playerID = playerID
         self.targetPlayerID = targetPlayerID
+        self.eliminationMethod = eliminationMethod
     }
 }

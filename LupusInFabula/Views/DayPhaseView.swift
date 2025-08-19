@@ -5,6 +5,7 @@
 //  Created by Andrea Moretti on 18/08/25.
 //
 
+import SwiftData
 import SwiftUI
 
 struct DayPhaseView: View {
@@ -42,10 +43,19 @@ struct DayPhaseView: View {
                     }
                     .padding(.top, 40)
                     
+                    // Phase Timer
+                    if let settings = gameService.gameSettings, settings.phaseTimer > 0 {
+                        PhaseTimerView(totalSeconds: settings.phaseTimer) {
+                            // Auto-advance when timer expires
+                            handleTimerExpired()
+                        }
+                        .padding(.horizontal, 24)
+                    }
+                    
                     // Game status
                     VStack(spacing: 24) {
                         // Player counts
-                        HStack(spacing: 40) {
+                        HStack(spacing: 30) {
                             VStack(spacing: 8) {
                                 Text("\(gameService.getVillagers().count)")
                                     .font(.largeTitle)
@@ -64,6 +74,20 @@ struct DayPhaseView: View {
                                 Text("Werewolves")
                                     .font(.headline)
                                     .foregroundStyle(.secondary)
+                            }
+                            
+                            // Show Jester if present
+                            if let session = gameService.currentSession,
+                               session.players.contains(where: { $0.isAlive && $0.roleID == "jester" }) {
+                                VStack(spacing: 8) {
+                                    Text("1")
+                                        .font(.largeTitle)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.purple)
+                                    Text("Jester")
+                                        .font(.headline)
+                                        .foregroundStyle(.secondary)
+                                }
                             }
                         }
                         
@@ -100,6 +124,22 @@ struct DayPhaseView: View {
                             .background(.blue)
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        
+                        // Skip Voting button (conditional)
+                        if let settings = gameService.gameSettings, settings.allowSkipDayVoting {
+                            Button(action: skipVoting) {
+                                HStack {
+                                    Image(systemName: "forward.fill")
+                                    Text("Skip Voting Phase")
+                                        .fontWeight(.semibold)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(.orange)
+                                .foregroundStyle(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
                         }
                         
                         Button(action: endGame) {
@@ -185,16 +225,37 @@ struct DayPhaseView: View {
             showingGameEnd = true
         }
     }
+    
+    private func skipVoting() {
+        // Skip voting phase and go directly to night
+        gameService.navigateToNight()
+    }
+    
+    private func handleTimerExpired() {
+        // Auto-skip voting when timer expires if skip is enabled
+        if let settings = gameService.gameSettings, settings.allowSkipDayVoting {
+            skipVoting()
+        } else {
+            // Otherwise, just start voting automatically
+            startVoting()
+        }
+    }
 }
 
 struct PlayerStatusCard: View {
+    @Environment(GameService.self) private var gameService: GameService
     let player: Player
     
     var body: some View {
         VStack(spacing: 8) {
-            Image(systemName: "person.circle.fill")
-                .font(.title2)
-                .foregroundStyle(.blue)
+            if let role = gameService.getRole(for: player) {
+                Text(role.emoji)
+                    .font(.title2)
+            } else {
+                Image(systemName: "person.circle.fill")
+                    .font(.title2)
+                    .foregroundStyle(.blue)
+            }
             
             Text(player.displayName)
                 .font(.caption)
@@ -229,6 +290,15 @@ struct VotingView: View {
                         .multilineTextAlignment(.center)
                 }
                 .padding(.top, 20)
+                
+                // Phase Timer for voting
+                if let settings = gameService.gameSettings, settings.phaseTimer > 0 {
+                    PhaseTimerView(totalSeconds: settings.phaseTimer) {
+                        // Auto-submit vote when timer expires
+                        handleVotingTimerExpired()
+                    }
+                    .padding(.horizontal, 24)
+                }
                 
                 // Player selection
                 ScrollView {
@@ -285,9 +355,15 @@ struct VotingView: View {
         
         showingResults = true
     }
+    
+    private func handleVotingTimerExpired() {
+        // Auto-submit vote with current selection, or no elimination
+        showingResults = true
+    }
 }
 
 struct VotingPlayerCard: View {
+    @Environment(GameService.self) private var gameService: GameService
     let player: Player
     let isSelected: Bool
     let onSelect: () -> Void
@@ -295,9 +371,14 @@ struct VotingPlayerCard: View {
     var body: some View {
         Button(action: onSelect) {
             VStack(spacing: 12) {
-                Image(systemName: "person.circle.fill")
-                    .font(.system(size: 40))
-                    .foregroundStyle(isSelected ? .red : .blue)
+                if let role = gameService.getRole(for: player) {
+                    Text(role.emoji)
+                        .font(.system(size: 40))
+                } else {
+                    Image(systemName: "person.circle.fill")
+                        .font(.system(size: 40))
+                        .foregroundStyle(isSelected ? .red : .blue)
+                }
                 
                 Text(player.displayName)
                     .font(.headline)
@@ -354,7 +435,7 @@ struct VotingResultsView: View {
             
             Button("Continue to Night") {
                 if let player = eliminatedPlayer, !hasProcessedElimination {
-                    gameService.eliminatePlayer(player)
+                    gameService.eliminatePlayer(player, method: "vote")
                     hasProcessedElimination = true
                 }
                 dismiss()
@@ -367,7 +448,7 @@ struct VotingResultsView: View {
         .onAppear {
             // Process elimination when view appears
             if let player = eliminatedPlayer, !hasProcessedElimination {
-                gameService.eliminatePlayer(player)
+                gameService.eliminatePlayer(player, method: "vote")
                 hasProcessedElimination = true
             }
         }
@@ -408,5 +489,12 @@ struct GameEndView: View {
 }
 
 #Preview {
-    DayPhaseView()
+    let tempContainer = try! ModelContainer(for: Role.self, RolePreset.self, SavedConfig.self, GameSession.self, GameSettings.self)
+    let tempContext = ModelContext(tempContainer)
+    let gameService = GameService(modelContext: tempContext)
+    
+    NavigationStack {
+        DayPhaseView()
+            .environment(gameService)
+    }
 }

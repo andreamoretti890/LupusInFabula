@@ -50,7 +50,7 @@ struct HomeView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     
-                    if let lastConfig = gameService.lastSavedConfig {
+                    if let _ = gameService.lastSavedConfig {
                         Button(action: continueLastGame) {
                             HStack {
                                 Image(systemName: "arrow.clockwise")

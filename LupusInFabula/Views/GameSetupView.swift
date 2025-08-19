@@ -90,6 +90,75 @@ struct GameSetupView: View {
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
+                // Special Role Options
+                VStack(spacing: 16) {
+                    HStack {
+                        Image(systemName: "star.fill")
+                            .foregroundStyle(.purple)
+                        Text("Special Roles")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    
+                    VStack(spacing: 12) {
+                        Toggle(isOn: Bindable(gameService).includeJester) {
+                            HStack(spacing: 12) {
+                                Text("🃏")
+                                    .font(.title2)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    HStack(spacing: 8) {
+                                        Text("Include Jester")
+                                            .font(.headline)
+                                        
+                                        Text("JESTER")
+                                            .font(.caption2)
+                                            .fontWeight(.bold)
+                                            .padding(.horizontal, 6)
+                                            .padding(.vertical, 2)
+                                            .background(.purple)
+                                            .foregroundStyle(.white)
+                                            .clipShape(Capsule())
+                                    }
+                                    
+                                    Text("Wins the game by being voted out during the day phase")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                
+                                Spacer()
+                            }
+                        }
+                        .toggleStyle(SwitchToggleStyle())
+                        .onChange(of: gameService.includeJester) { _, newValue in
+                            // Update role counts when toggle changes
+                            if newValue {
+                                // Add Jester if not already present
+                                if !gameService.selectedRoles.contains(where: { $0.roleID == "jester" }) {
+                                    gameService.updateRoleCount(roleID: "jester", count: 1)
+                                }
+                            } else {
+                                // Remove Jester if present
+                                gameService.updateRoleCount(roleID: "jester", count: 0)
+                            }
+                        }
+                        
+                        if gameService.includeJester && gameService.playerCount < 7 {
+                            HStack {
+                                Image(systemName: "exclamationmark.triangle.fill")
+                                    .foregroundStyle(.orange)
+                                Text("Jester requires at least 7 players")
+                                    .font(.caption)
+                                    .foregroundStyle(.orange)
+                                Spacer()
+                            }
+                        }
+                    }
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                
                 // Role selection
                 VStack(spacing: 16) {
                     HStack {
@@ -97,15 +166,35 @@ struct GameSetupView: View {
                             .foregroundStyle(.orange)
                         Text("Role Selection")
                             .font(.headline)
+                        
                         Spacer()
                         
-                        Text("\(gameService.getTotalSelectedRoles())/\(gameService.playerCount)")
-                            .font(.subheadline)
-                            .foregroundStyle(gameService.isSetupValid() ? .green : .red)
+                        Button("Auto-Balance") {
+                            gameService.suggestBalancedSetup()
+                        }
+                        .buttonStyle(.bordered)
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                        
+                        VStack(alignment: .trailing, spacing: 4) {
+                            Text("\(gameService.getTotalSelectedRoles())/\(gameService.playerCount)")
+                                .font(.subheadline)
+                                .foregroundStyle(gameService.isSetupValid() ? .green : .red)
+                            
+                            if let validationMessage = gameService.getSetupValidationMessage() {
+                                Text(validationMessage)
+                                    .font(.caption)
+                                    .foregroundStyle(.red)
+                            } else if gameService.isSetupValid() {
+                                Text("Ready to play!")
+                                    .font(.caption)
+                                    .foregroundStyle(.green)
+                            }
+                        }
                     }
                     
                     LazyVStack(spacing: 12) {
-                        ForEach(gameService.availableRoles, id: \.id) { role in
+                        ForEach(gameService.availableRoles.filter { $0.id != "jester" }, id: \.id) { role in
                             RoleSelectionRow(
                                 role: role,
                                 count: gameService.getRoleCount(roleID: role.id),
@@ -121,11 +210,11 @@ struct GameSetupView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
                 // Start button
-                Button(action: {
+                Button {
                     if gameService.isSetupValid() {
                         gameService.startGame()
                     }
-                }) {
+                } label: {
                     HStack {
                         Image(systemName: "play.fill")
                         Text("Start Game")
@@ -201,19 +290,41 @@ struct RoleSelectionRow: View {
     let count: Int
     let onCountChanged: (Int) -> Void
     
+    var isWerewolf: Bool {
+        role.alignment == "Werewolf"
+    }
+    
+    var isSpecialRole: Bool {
+        false // No special roles in the regular selection now
+    }
+    
     var body: some View {
         HStack(spacing: 12) {
             Text(role.emoji)
                 .font(.title2)
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(role.name)
-                    .font(.headline)
+                HStack(spacing: 8) {
+                    Text(role.name)
+                        .font(.headline)
+                    
+                    if isWerewolf {
+                        Text("REQUIRED")
+                            .font(.caption2)
+                            .fontWeight(.bold)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(.red)
+                            .foregroundStyle(.white)
+                            .clipShape(Capsule())
+                    }
+                }
+                
                 Text(role.notes)
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
-            
+                
             Spacer()
             
             HStack(spacing: 8) {
@@ -225,7 +336,7 @@ struct RoleSelectionRow: View {
                 
                 Text("\(count)")
                     .font(.headline)
-                    .frame(minWidth: 30)
+                    .frame(minWidth: 20)
                 
                 Button(action: { onCountChanged(count + 1) }) {
                     Image(systemName: "plus.circle.fill")

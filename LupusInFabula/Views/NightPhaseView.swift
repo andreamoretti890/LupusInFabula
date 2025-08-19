@@ -5,6 +5,7 @@
 //  Created by Andrea Moretti on 18/08/25.
 //
 
+import SwiftData
 import SwiftUI
 
 struct NightPhaseView: View {
@@ -25,7 +26,7 @@ struct NightPhaseView: View {
                 title: "Werewolves",
                 description: "Choose a villager to eliminate",
                 players: werewolves,
-                targetPlayers: gameService.getVillagers()
+                targetPlayers: gameService.getAllNonWerewolves()
             ))
         }
         
@@ -57,6 +58,21 @@ struct NightPhaseView: View {
                 players: [doctor],
                 targetPlayers: session.players.filter { $0.isAlive }
             ))
+        }
+        
+        // Medium action
+        if let medium = session.players.first(where: { $0.isAlive && $0.roleID == "medium" }) {
+            let eliminatedPlayers = session.players.filter { !$0.isAlive }
+            
+            if !eliminatedPlayers.isEmpty {
+                actions.append(NightAction(
+                    type: .medium,
+                    title: "Medium",
+                    description: "Indica un giocatore eliminato per sapere se era un lupo",
+                    players: [medium],
+                    targetPlayers: eliminatedPlayers
+                ))
+            }
         }
         
         return actions
@@ -91,10 +107,20 @@ struct NightPhaseView: View {
                     }
                     .padding(.top, 40)
                     
+                    // Phase Timer
+                    if let settings = gameService.gameSettings, settings.phaseTimer > 0 {
+                        PhaseTimerView(totalSeconds: settings.phaseTimer) {
+                            // Auto-advance when timer expires
+                            handleTimerExpired()
+                        }
+                        .padding(.horizontal, 24)
+                    }
+                    
                     if currentActionIndex < nightActions.count {
                         let action = nightActions[currentActionIndex]
                         NightActionView(
                             action: action,
+                            allowSkip: shouldAllowSkip(for: action),
                             onComplete: { targetPlayer in
                                 completeAction(action: action, targetPlayer: targetPlayer)
                             }
@@ -170,6 +196,11 @@ struct NightPhaseView: View {
                 // Set doctor protection
                 gameService.setDoctorProtection(target)
             }
+        case .medium:
+            if let target = targetPlayer {
+                // Show medium result
+                showMediumResult(target)
+            }
         }
         
         // Move to next action
@@ -196,6 +227,55 @@ struct NightPhaseView: View {
         let isWerewolf = player.roleID == "werewolf"
         print("Seer learned that \(player.displayName) is \(isWerewolf ? "a werewolf" : "a villager")")
     }
+    
+    private func showMediumResult(_ player: Player) {
+        guard let session = gameService.currentSession else { return }
+        
+        let isWerewolf = player.roleID == "werewolf"
+        let resultMessage = "\(player.displayName) \(isWerewolf ? "era un lupo" : "non era un lupo")"
+        
+        // Add game event for medium check
+        let event = GameEvent(
+            id: UUID().uuidString,
+            timestamp: Date(),
+            type: "medium_check",
+            description: "Medium checked \(player.displayName): \(resultMessage)",
+            targetPlayerID: player.id
+        )
+        
+        print("Medium learned that \(resultMessage)")
+        
+        // Save the event
+        do {
+            try gameService.saveEvent(event)
+        } catch {
+            print("Error saving medium check: \(error)")
+        }
+    }
+    
+    private func shouldAllowSkip(for action: NightAction) -> Bool {
+        guard let settings = gameService.gameSettings else { return false }
+        
+        switch action.type {
+        case .werewolf:
+            return settings.allowSkipWerewolfKill
+        case .seer, .doctor, .medium:
+            return false // Only werewolf kill can be skipped based on settings
+        }
+    }
+    
+    private func handleTimerExpired() {
+        // Auto-advance to next action or complete phase when timer expires
+        if currentActionIndex < nightActions.count {
+            // Skip current action
+            currentActionIndex += 1
+            
+            // If all actions are complete, resolve the night
+            if currentActionIndex >= nightActions.count {
+                resolveNightPhase()
+            }
+        }
+    }
 }
 
 struct NightAction {
@@ -209,11 +289,14 @@ struct NightAction {
         case werewolf
         case seer
         case doctor
+        case medium
     }
 }
 
 struct NightActionView: View {
+    @Environment(GameService.self) private var gameService: GameService
     let action: NightAction
+    let allowSkip: Bool
     let onComplete: (Player?) -> Void
     
     @State private var selectedTarget: Player?
@@ -239,8 +322,13 @@ struct NightActionView: View {
                 
                 ForEach(action.players, id: \.id) { player in
                     HStack {
-                        Image(systemName: "person.fill")
-                            .foregroundStyle(.blue)
+                        if let role = gameService.getRole(for: player) {
+                            Text(role.emoji)
+                                .font(.title2)
+                        } else {
+                            Image(systemName: "person.fill")
+                                .foregroundStyle(.blue)
+                        }
                         Text(player.displayName)
                             .font(.title3)
                     }
@@ -274,10 +362,19 @@ struct NightActionView: View {
             
             // Action buttons
             HStack(spacing: 16) {
-                Button("Skip") {
-                    onComplete(nil)
+                if allowSkip {
+                    Button("Skip Phase") {
+                        onComplete(nil)
+                    }
+                    .buttonStyle(.bordered)
+                    .foregroundStyle(.orange)
                 }
-                .buttonStyle(.bordered)
+//                else {
+//                    Button("Skip") {
+//                        onComplete(nil)
+//                    }
+//                    .buttonStyle(.bordered)
+//                }
                 
                 Button("Confirm") {
                     onComplete(selectedTarget)
@@ -293,6 +390,7 @@ struct NightActionView: View {
 }
 
 struct PlayerSelectionCard: View {
+    @Environment(GameService.self) private var gameService: GameService
     let player: Player
     let isSelected: Bool
     let onSelect: () -> Void
@@ -300,9 +398,14 @@ struct PlayerSelectionCard: View {
     var body: some View {
         Button(action: onSelect) {
             VStack(spacing: 8) {
-                Image(systemName: "person.circle.fill")
-                    .font(.title)
-                    .foregroundStyle(isSelected ? .blue : .secondary)
+                if let role = gameService.getRole(for: player) {
+                    Text(role.emoji)
+                        .font(.title)
+                } else {
+                    Image(systemName: "person.circle.fill")
+                        .font(.title)
+                        .foregroundStyle(isSelected ? .blue : .secondary)
+                }
                 
                 Text(player.displayName)
                     .font(.headline)
@@ -322,5 +425,12 @@ struct PlayerSelectionCard: View {
 }
 
 #Preview {
-    NightPhaseView()
+    let tempContainer = try! ModelContainer(for: Role.self, RolePreset.self, SavedConfig.self, GameSession.self, GameSettings.self)
+    let tempContext = ModelContext(tempContainer)
+    let gameService = GameService(modelContext: tempContext)
+    
+    NavigationStack {
+        NightPhaseView()
+            .environment(gameService)
+    }
 }

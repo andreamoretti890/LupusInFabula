@@ -49,7 +49,7 @@ struct RoleRevealView: View {
                     Spacer()
                     
                     // Role card
-                    if let player = gameService.getCurrentPlayer(),
+                    if let _ = gameService.getCurrentPlayer(),
                        let role = gameService.getCurrentPlayerRole() {
                         RoleCard(
                             role: role,

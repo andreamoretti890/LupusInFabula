@@ -83,23 +83,21 @@ struct SettingsView: View {
                             .foregroundStyle(.secondary)
                         
                         HStack {
-                            Text("0s")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                            
-                            Slider(
-                                value: Binding(
-                                    get: { Double(settings.phaseTimer) },
-                                    set: { settings.phaseTimer = Int($0) }
-                                ),
-                                in: 0...180,
-                                step: 30
-                            )
+                            Slider(value: Binding(
+                                get: { Double(settings.phaseTimer) },
+                                set: { settings.phaseTimer = Int($0) }
+                            ), in: 0...180, step: 15) {
+                                Text("\(settings.phaseTimer)")
+                            } minimumValueLabel: {
+                                Text("0s")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            } maximumValueLabel: {
+                                Text("3m")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
                             .accentColor(.orange)
-                            
-                            Text("3m")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
                         }
                         
                         if settings.phaseTimer > 0 {
