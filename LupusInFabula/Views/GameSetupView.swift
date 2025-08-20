@@ -90,6 +90,74 @@ struct GameSetupView: View {
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
+                // Role selection
+                VStack(spacing: 16) {
+                    HStack {
+                        Image(systemName: "person.badge.key")
+                            .foregroundStyle(.orange)
+                        Text("Role Selection")
+                            .font(.headline)
+                        
+                        Spacer()
+                        
+                        Button("Auto-Balance") {
+                            gameService.suggestBalancedSetup()
+                        }
+                        .buttonStyle(.bordered)
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                        
+                        VStack(alignment: .trailing, spacing: 4) {
+                            Text("\(gameService.getTotalSelectedRoles())/\(gameService.playerCount)")
+                                .font(.subheadline)
+                                .foregroundStyle(gameService.isSetupValid() ? .green : .red)
+                            
+                            if let validationMessage = gameService.getSetupValidationMessage() {
+                                Text(validationMessage)
+                                    .font(.caption)
+                                    .foregroundStyle(.red)
+                            } else if gameService.isSetupValid() {
+                                Text("Ready to play!")
+                                    .font(.caption)
+                                    .foregroundStyle(.green)
+                            }
+                        }
+                    }
+                    
+                    LazyVStack(spacing: 16) {
+                        // Group roles by alignment
+                        ForEach(RoleAlignment.allCases, id: \.self) { alignment in
+                            let rolesForAlignment = gameService.availableRoles.filter { 
+                                $0.roleAlignment == alignment && $0.id != RoleID.jester.rawValue 
+                            }
+                            
+                            if !rolesForAlignment.isEmpty {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    Text(alignment.displayName)
+                                        .font(.subheadline)
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(alignment.color)
+                                    
+                                    LazyVStack(spacing: 8) {
+                                        ForEach(rolesForAlignment, id: \.id) { role in
+                                            RoleSelectionRow(
+                                                role: role,
+                                                count: gameService.getRoleCount(roleID: role.id),
+                                                onCountChanged: { count in
+                                                    gameService.updateRoleCount(roleID: role.id, count: count)
+                                                }
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                
                 // Special Role Options
                 VStack(spacing: 16) {
                     HStack {
@@ -107,19 +175,8 @@ struct GameSetupView: View {
                                     .font(.title2)
                                 
                                 VStack(alignment: .leading, spacing: 4) {
-                                    HStack(spacing: 8) {
-                                        Text("Include Jester")
-                                            .font(.headline)
-                                        
-                                        Text("JESTER")
-                                            .font(.caption2)
-                                            .fontWeight(.bold)
-                                            .padding(.horizontal, 6)
-                                            .padding(.vertical, 2)
-                                            .background(.purple)
-                                            .foregroundStyle(.white)
-                                            .clipShape(Capsule())
-                                    }
+                                    Text("Jester")
+                                        .font(.headline)
                                     
                                     Text("Wins the game by being voted out during the day phase")
                                         .font(.caption)
@@ -159,56 +216,6 @@ struct GameSetupView: View {
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
-                // Role selection
-                VStack(spacing: 16) {
-                    HStack {
-                        Image(systemName: "person.badge.key")
-                            .foregroundStyle(.orange)
-                        Text("Role Selection")
-                            .font(.headline)
-                        
-                        Spacer()
-                        
-                        Button("Auto-Balance") {
-                            gameService.suggestBalancedSetup()
-                        }
-                        .buttonStyle(.bordered)
-                        .font(.caption)
-                        .foregroundStyle(.orange)
-                        
-                        VStack(alignment: .trailing, spacing: 4) {
-                            Text("\(gameService.getTotalSelectedRoles())/\(gameService.playerCount)")
-                                .font(.subheadline)
-                                .foregroundStyle(gameService.isSetupValid() ? .green : .red)
-                            
-                            if let validationMessage = gameService.getSetupValidationMessage() {
-                                Text(validationMessage)
-                                    .font(.caption)
-                                    .foregroundStyle(.red)
-                            } else if gameService.isSetupValid() {
-                                Text("Ready to play!")
-                                    .font(.caption)
-                                    .foregroundStyle(.green)
-                            }
-                        }
-                    }
-                    
-                    LazyVStack(spacing: 12) {
-                        ForEach(gameService.availableRoles.filter { $0.id != RoleID.jester.rawValue }, id: \.id) { role in
-                            RoleSelectionRow(
-                                role: role,
-                                count: gameService.getRoleCount(roleID: role.id),
-                                onCountChanged: { count in
-                                    gameService.updateRoleCount(roleID: role.id, count: count)
-                                }
-                            )
-                        }
-                    }
-                }
-                .padding()
-                .background(.ultraThinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                
                 // Start button
                 Button {
                     if gameService.isSetupValid() {
@@ -229,7 +236,7 @@ struct GameSetupView: View {
                 .disabled(!gameService.isSetupValid())
                 .padding(.horizontal, 24)
             }
-            .padding(.horizontal, 24)
+            .padding(.horizontal)
             .padding(.bottom, 40)
         }
         .navigationTitle("Game Setup")
@@ -287,14 +294,44 @@ struct PresetCard: View {
     }
 }
 
+struct RoleRow: View {
+    let role: Role
+    
+    var body: some View {
+        Text(role.emoji)
+            .font(.title2)
+        
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 8) {
+                Text(role.name)
+                    .font(.headline)
+                
+                if role.roleAlignment == .werewolf {
+                    Text("REQUIRED")
+                        .font(.caption2)
+                        .fontWeight(.bold)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(.red)
+                        .foregroundStyle(.white)
+                        .clipShape(Capsule())
+                }
+            }
+            
+            Text(role.notes)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(2)
+        }
+            
+        Spacer()
+    }
+}
+
 struct RoleSelectionRow: View {
     let role: Role
     let count: Int
     let onCountChanged: (Int) -> Void
-    
-    var isWerewolf: Bool {
-        role.roleAlignment == .werewolf
-    }
     
     var isSpecialRole: Bool {
         false // No special roles in the regular selection now
@@ -302,50 +339,37 @@ struct RoleSelectionRow: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            Text(role.emoji)
-                .font(.title2)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 8) {
-                    Text(role.name)
-                        .font(.headline)
-                    
-                    if isWerewolf {
-                        Text("REQUIRED")
-                            .font(.caption2)
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(.red)
-                            .foregroundStyle(.white)
-                            .clipShape(Capsule())
+            if role.isUnique {
+                Toggle(isOn: .init(get: {
+                    count == 1
+                }, set: { value in
+                    onCountChanged(value ? 1 : 0)
+                })) {
+                    HStack(spacing: 12) {
+                        RoleRow(role: role)
                     }
                 }
+            } else {
+                RoleRow(role: role)
                 
-                Text(role.notes)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-                
-            Spacer()
-            
-            HStack(spacing: 8) {
-                Button(action: { if count > 0 { onCountChanged(count - 1) } }) {
-                    Image(systemName: "minus.circle.fill")
-                        .font(.title3)
+                HStack(spacing: 8) {
+                    Button(action: { if count > 0 { onCountChanged(count - 1) } }) {
+                        Image(systemName: "minus.circle.fill")
+                            .font(.title3)
+                    }
+                    .disabled(count <= 0)
+                    
+                    Text("\(count)")
+                        .font(.headline)
+                        .frame(minWidth: 20)
+                    
+                    Button(action: { onCountChanged(count + 1) }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3)
+                    }
                 }
-                .disabled(count <= 0)
-                
-                Text("\(count)")
-                    .font(.headline)
-                    .frame(minWidth: 20)
-                
-                Button(action: { onCountChanged(count + 1) }) {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.title3)
-                }
+                .foregroundStyle(.blue)
             }
-            .foregroundStyle(.blue)
         }
         .padding(.vertical, 4)
     }

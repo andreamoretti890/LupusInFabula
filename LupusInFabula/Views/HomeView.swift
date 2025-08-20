@@ -35,9 +35,9 @@ struct HomeView: View {
                 
                 // Action buttons
                 VStack(spacing: 16) {
-                    Button(action: {
+                    Button {
                         gameService.navigateToSetup()
-                    }) {
+                    } label: {
                         HStack {
                             Image(systemName: "play.fill")
                             Text("Start New Game")
@@ -89,9 +89,9 @@ struct HomeView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
+                Button {
                     showingSettings = true
-                }) {
+                } label: {
                     Image(systemName: "gearshape.fill")
                         .foregroundStyle(.orange)
                 }

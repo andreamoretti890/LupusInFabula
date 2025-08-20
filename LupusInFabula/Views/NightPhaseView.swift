@@ -11,7 +11,6 @@ import SwiftUI
 struct NightPhaseView: View {
     @Environment(GameService.self) private var gameService: GameService
     @State private var currentActionIndex = 0
-    @State private var showingDayPhase = false
     @State private var showingHunterRevenge = false
     
     private var nightActions: [NightAction] {
@@ -94,12 +93,6 @@ struct NightPhaseView: View {
             
             ScrollView {
                 VStack(spacing: 32) {
-                    // Round info
-//                    Text("Round \(gameService.currentSession?.currentRound ?? 1)")
-//                        .font(.title3)
-//                        .foregroundStyle(.secondary)
-//                        .padding(.top, 20)
-                    
                     // Phase Timer
                     if let settings = gameService.gameSettings, settings.phaseTimer > 0 {
                         PhaseTimerView(totalSeconds: settings.phaseTimer) {
@@ -169,6 +162,9 @@ struct NightPhaseView: View {
                 HunterRevengeView(hunter: hunter)
             }
         }
+        .sheet(isPresented: Bindable(gameService).showingAutoGameEnd) {
+            GameEndView(message: gameService.autoGameEndMessage ?? "Game ended")
+        }
     }
     
     private func completeAction(action: NightAction, targetPlayer: Player?) {
@@ -218,9 +214,9 @@ struct NightPhaseView: View {
             // Show Hunter revenge immediately
             showingHunterRevenge = true
         } else {
-            // Show day phase after a brief delay
+            // Navigate to day phase after a brief delay
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                showingDayPhase = true
+                gameService.navigateToDay()
             }
         }
     }
@@ -232,7 +228,7 @@ struct NightPhaseView: View {
     }
     
     private func showMediumResult(_ player: Player) {
-        guard let session = gameService.currentSession else { return }
+        guard let _ = gameService.currentSession else { return }
         
         let isWerewolf = player.roleID == RoleID.werewolf.rawValue
         let resultMessage = "\(player.displayName) \(isWerewolf ? "was a werewolf" : "was not a werewolf")"

@@ -33,6 +33,10 @@ class GameService {
     // Navigation state
     var navigationPath = NavigationPath()
     
+    // Game end state
+    var autoGameEndMessage: String?
+    var showingAutoGameEnd: Bool = false
+    
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
         loadData()
@@ -524,11 +528,42 @@ class GameService {
     }
     
     func navigateToNight() {
+        guard let session = currentSession else { return }
+        
+        // Update phase to night (round stays the same)
+        session.currentPhase = GamePhase.night.rawValue
+        
+        do {
+            try modelContext.save()
+            print("Advanced to night phase - Round \(session.currentRound)")
+        } catch {
+            print("Error saving night phase transition: \(error)")
+        }
+        
         navigationPath.append(GamePhase.night)
     }
     
     func navigateToDay() {
+        guard let session = currentSession else { return }
+        
+        // Increment round when transitioning from night to day
+        session.currentRound += 1
+        session.currentPhase = GamePhase.day.rawValue
+        
+        do {
+            try modelContext.save()
+            print("Advanced to day phase - Round \(session.currentRound)")
+        } catch {
+            print("Error saving day phase transition: \(error)")
+        }
+        
         navigationPath.append(GamePhase.day)
+    }
+    
+    func navigateToGameEnd(message: String) {
+        // Set the auto game end state to trigger the GameEndView
+        autoGameEndMessage = message
+        showingAutoGameEnd = true
     }
     
     func resetNavigation() {
@@ -630,6 +665,9 @@ class GameService {
         } catch {
             print("Error saving player elimination: \(error)")
         }
+        
+        // Check for automatic game end after elimination
+        checkAndHandleGameEnd()
     }
     
     // MARK: - Hunter Functions
@@ -816,6 +854,32 @@ class GameService {
         }
         
         return nil
+    }
+    
+    func checkAndHandleGameEnd() {
+        // Don't auto-end if there's a pending hunter revenge - wait for that to complete
+        if hasPendingHunterRevenge() {
+            return
+        }
+        
+        if let winMessage = checkWinCondition() {
+            guard let session = currentSession else { return }
+            
+            // Update session to ended state
+            session.currentPhase = "ended"
+            
+            do {
+                try modelContext.save()
+                print("Game automatically ended: \(winMessage)")
+            } catch {
+                print("Error saving game end: \(error)")
+            }
+            
+            // Navigate to game end screen with a slight delay to allow UI updates
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.navigateToGameEnd(message: winMessage)
+            }
+        }
     }
     
     func endGameAndReturnHome() {

@@ -27,23 +27,6 @@ struct DayPhaseView: View {
                 .ignoresSafeArea()
                 
                 VStack(spacing: 32) {
-                    // Header
-                    VStack(spacing: 16) {
-                        HStack {
-                            Image(systemName: "sun.max.fill")
-                                .font(.title)
-                                .foregroundStyle(.orange)
-                            Text("Day Phase")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                        }
-                        
-                        Text("Round \(gameService.currentSession?.currentRound ?? 1)")
-                            .font(.title3)
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.top, 40)
-                    
                     // Phase Timer
                     if let settings = gameService.gameSettings, settings.phaseTimer > 0 {
                         PhaseTimerView(totalSeconds: settings.phaseTimer) {
@@ -155,6 +138,19 @@ struct DayPhaseView: View {
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
+                        
+                        Button {
+                            gameService.printGameState()
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "info.circle")
+                                Text("Debug")
+                            }
+                            .font(.caption)
+                            .padding()
+                            .foregroundStyle(.white)
+                            .clipShape(Capsule())
+                        }
                     }
                     .padding(.horizontal, 24)
                     
@@ -163,7 +159,18 @@ struct DayPhaseView: View {
                 .padding(.horizontal, 24)
             }
         }
-        .navigationBarHidden(true)
+        .navigationTitle("Day Phase ☀️")
+        .toolbarTitleDisplayMode(.inline)
+        .navigationSubtitle("Round \(gameService.currentSession?.currentRound ?? 1)")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Restart") {
+                    gameService.quickRestartGame()
+                }
+                .foregroundStyle(.orange)
+                .font(.caption)
+            }
+        }
         .onAppear {
             checkForHunterRevenge()
         }
@@ -172,48 +179,14 @@ struct DayPhaseView: View {
                 HunterRevengeView(hunter: hunter)
             }
         }
-        .overlay(alignment: .topLeading) {
-            VStack(spacing: 8) {
-                // Development restart button
-                Button {
-                    gameService.quickRestartGame()
-                } label: {
-                    HStack(spacing: 4) {
-                        Image(systemName: "arrow.clockwise")
-                        Text("Restart")
-                    }
-                    .font(.caption)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(.orange.opacity(0.8))
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
-                }
-                
-                // Debug button
-                Button {
-                    gameService.printGameState()
-                } label: {
-                    HStack(spacing: 4) {
-                        Image(systemName: "info.circle")
-                        Text("Debug")
-                    }
-                    .font(.caption)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(.purple.opacity(0.8))
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
-                }
-            }
-            .padding(.top, 50)
-            .padding(.leading, 20)
-        }
         .sheet(isPresented: $showingVoting) {
             VotingView(showingHunterRevenge: $showingHunterRevenge)
         }
         .sheet(isPresented: $showingGameEnd) {
             GameEndView(message: winMessage ?? "Game ended")
+        }
+        .sheet(isPresented: Bindable(gameService).showingAutoGameEnd) {
+            GameEndView(message: gameService.autoGameEndMessage ?? "Game ended")
         }
         .onAppear {
             checkWinCondition()
@@ -289,6 +262,7 @@ struct VotingView: View {
     @Environment(GameService.self) private var gameService: GameService
     @State private var selectedPlayer: Player?
     @State private var showingResults = false
+    @State private var votingComplete = false
     @Binding var showingHunterRevenge: Bool
     
     var body: some View {
@@ -358,8 +332,17 @@ struct VotingView: View {
                 }
             }
         }
-        .sheet(isPresented: $showingResults) {
+        .sheet(isPresented: $showingResults, onDismiss: {
+            // When results view is dismissed, mark voting as complete
+            votingComplete = true
+        }) {
             VotingResultsView(eliminatedPlayer: selectedPlayer, showingHunterRevenge: $showingHunterRevenge)
+        }
+        .onChange(of: votingComplete) { _, isComplete in
+            if isComplete {
+                // Dismiss the voting view when voting process is complete
+                dismiss()
+            }
         }
     }
     
