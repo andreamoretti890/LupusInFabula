@@ -19,9 +19,15 @@ class GameService {
     var availablePresets: [RolePreset] = []
     var lastSavedConfig: SavedConfig?
     var gameSettings: GameSettings?
+    var frequentPlayers: [FrequentPlayer] = []
     
     // Setup state
-    var playerCount: Int = 8
+    var playerCount: Int = 8 {
+        didSet {
+            syncPlayerNamesCount()
+        }
+    }
+    var playerNames: [String] = []
     var selectedRoles: [RoleCount] = []
     var selectedPreset: RolePreset?
     var includeJester: Bool = false
@@ -53,6 +59,7 @@ class GameService {
         let presetDescriptor = FetchDescriptor<RolePreset>()
         let configDescriptor = FetchDescriptor<SavedConfig>()
         let settingsDescriptor = FetchDescriptor<GameSettings>()
+        let frequentDescriptor = FetchDescriptor<FrequentPlayer>()
         
         do {
             availableRoles = try modelContext.fetch(roleDescriptor)
@@ -62,6 +69,7 @@ class GameService {
             
             let settings = try modelContext.fetch(settingsDescriptor)
             gameSettings = settings.first
+            frequentPlayers = try modelContext.fetch(frequentDescriptor)
             
             print("Loaded \(availableRoles.count) roles from database:")
             for role in availableRoles {
@@ -88,6 +96,9 @@ class GameService {
         if gameSettings == nil {
             seedDefaultSettings()
         }
+
+        // Ensure player names array matches current player count
+        syncPlayerNamesCount()
     }
     
     private func clearAndReseedRoles() {
@@ -263,6 +274,10 @@ class GameService {
         includeJester = preset.roleCounts.contains { $0.roleID == RoleID.jester.rawValue }
     }
     
+    func updateRoleCount(roleID: RoleID, count: Int) {
+        updateRoleCount(roleID: roleID.rawValue, count: count)
+    }
+    
     func updateRoleCount(roleID: String, count: Int) {
         if let index = selectedRoles.firstIndex(where: { $0.roleID == roleID }) {
             selectedRoles[index].count = count
@@ -279,6 +294,10 @@ class GameService {
     
     func getRoleCount(roleID: String) -> Int {
         return selectedRoles.first { $0.roleID == roleID }?.count ?? 0
+    }
+    
+    func getRoleCount(roleID: RoleID) -> Int {
+        return selectedRoles.first { $0.roleID == roleID.rawValue }?.count ?? 0
     }
     
     func getTotalSelectedRoles() -> Int {
@@ -299,40 +318,6 @@ class GameService {
         guard werewolfCount < playerCount / 2 + playerCount % 2 else { return false }
         
         return true
-    }
-    
-    func getSetupValidationMessage() -> String? {
-        let total = getTotalSelectedRoles()
-        let werewolfCount = getRoleCount(roleID: RoleID.werewolf.rawValue)
-        
-        if total != playerCount {
-            let diff = playerCount - total
-            if diff > 0 {
-                return "Add \(diff) more role\(diff == 1 ? "" : "s")"
-            } else {
-                return "Remove \(-diff) role\(-diff == 1 ? "" : "s")"
-            }
-        }
-        
-        if total < 4 {
-            return "Need at least 4 players"
-        }
-        
-        if werewolfCount == 0 {
-            return "Must have at least 1 werewolf"
-        }
-        
-        if werewolfCount >= playerCount / 2 + playerCount % 2 {
-            let maxWerewolves = playerCount / 2 + playerCount % 2 - 1
-            return "Too many werewolves (max \(maxWerewolves) for \(playerCount) players)"
-        }
-        
-        // Check Jester minimum player requirement
-        if includeJester && playerCount < 7 {
-            return "Jester requires at least 7 players"
-        }
-        
-        return nil
     }
     
     func suggestBalancedSetup() {
@@ -411,9 +396,12 @@ class GameService {
         rolePool.shuffle()
         
         for i in 0..<playerCount {
+            // Use provided name if available, else fallback to localized default
+            let providedName = sanitizedPlayerName(at: i)
+            let displayName = providedName.isEmpty ? "player.name_format".localized(i + 1) : providedName
             let player = Player(
                 id: UUID().uuidString,
-                displayName: "Player \(i + 1)",
+                displayName: displayName,
                 roleID: rolePool[i]
             )
             players.append(player)
@@ -456,6 +444,9 @@ class GameService {
             try modelContext.save()
             print("Game saved successfully")
             
+            // Record used player names into frequent players
+            recordPlayersUsed(names: players.map { $0.displayName })
+
             // Navigate to reveal phase
             navigationPath.append(GamePhase.reveal)
         } catch {
@@ -485,14 +476,8 @@ class GameService {
         
         if currentRevealPlayerIndex >= session.players.count {
             // All players have seen their roles, start the game
-            session.currentPhase = GamePhase.night.rawValue
             currentRevealPlayerIndex = 0
-            
-            do {
-                try modelContext.save()
-            } catch {
-                print("Error saving session: \(error)")
-            }
+            navigateToNight()
         }
     }
     
@@ -508,19 +493,9 @@ class GameService {
         // Set reveal as complete
         currentRevealPlayerIndex = session.players.count
         
-        // Update session phase to night
-        session.currentPhase = GamePhase.night.rawValue
-        
-        // Save the changes
-        do {
-            try modelContext.save()
-            print("Skipped reveal phase - moving to night")
-            
-            // Navigate to night phase
-            navigateToNight()
-        } catch {
-            print("Error saving after skipping reveal: \(error)")
-        }
+        // Navigate to night phase
+        navigateToNight()
+        print("Skipped reveal phase - moving to night")
     }
     
     func navigateToSetup() {
@@ -530,7 +505,10 @@ class GameService {
     func navigateToNight() {
         guard let session = currentSession else { return }
         
-        // Update phase to night (round stays the same)
+        // Only increment round when transitioning from day to night (not from reveal to night)
+        if session.currentPhase == GamePhase.day.rawValue {
+            session.currentRound += 1
+        }
         session.currentPhase = GamePhase.night.rawValue
         
         do {
@@ -546,8 +524,7 @@ class GameService {
     func navigateToDay() {
         guard let session = currentSession else { return }
         
-        // Increment round when transitioning from night to day
-        session.currentRound += 1
+        // Update phase to day (round stays the same)
         session.currentPhase = GamePhase.day.rawValue
         
         do {
@@ -842,7 +819,7 @@ class GameService {
         }
         
         let werewolves = getWerewolves()
-        let villagers = getVillagers()
+//        let villagers = getVillagers()
         let allNonWerewolves = getAllNonWerewolves()
         
         if werewolves.isEmpty {
@@ -962,4 +939,115 @@ class GameService {
     func isMayorAlive() -> Bool {
         return getMayor() != nil
     }
+
+    // MARK: - Player Names Management
+    
+    private func syncPlayerNamesCount() {
+        if playerNames.count < playerCount {
+            playerNames.append(contentsOf: Array(repeating: "", count: playerCount - playerNames.count))
+        } else if playerNames.count > playerCount {
+            playerNames = Array(playerNames.prefix(playerCount))
+        }
+    }
+    
+    private func sanitizedPlayerName(at index: Int) -> String {
+        guard index >= 0 && index < playerNames.count else { return "" }
+        return playerNames[index].trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    func setPlayerName(at index: Int, to newName: String) {
+        guard index >= 0 else { return }
+        syncPlayerNamesCount()
+        if index >= playerNames.count {
+            playerNames.append(contentsOf: Array(repeating: "", count: index - playerNames.count + 1))
+        }
+        playerNames[index] = newName
+    }
+    
+    func getNameSuggestions(prefix: String = "", limit: Int = 6, excluding currentNames: [String] = []) -> [String] {
+        let normalizedPrefix = prefix.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let excludeSet = Set(currentNames.map { $0.lowercased() })
+        let sorted = frequentPlayers.sorted { a, b in
+            if a.playCount == b.playCount {
+                return a.lastPlayedAt > b.lastPlayedAt
+            }
+            return a.playCount > b.playCount
+        }
+        let filtered = sorted
+            .map { $0.displayName }
+            .filter { name in
+                let lower = name.lowercased()
+                let matchesPrefix = normalizedPrefix.isEmpty || lower.hasPrefix(normalizedPrefix)
+                let notExcluded = !excludeSet.contains(lower)
+                return matchesPrefix && notExcluded
+            }
+        return Array(LinkedHashSet(filtered)).prefix(limit).map { $0 }
+    }
+    
+    func recordPlayersUsed(names: [String]) {
+        let cleaned = names
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .filter { !isDefaultPlayerName($0) }
+        guard !cleaned.isEmpty else { return }
+        var dirty = false
+        for name in Set(cleaned.map { $0 }) {
+            if let existingIndex = frequentPlayers.firstIndex(where: { $0.displayName.caseInsensitiveCompare(name) == .orderedSame }) {
+                frequentPlayers[existingIndex].lastPlayedAt = Date()
+                frequentPlayers[existingIndex].playCount += 1
+                dirty = true
+            } else {
+                let fp = FrequentPlayer(displayName: name, lastPlayedAt: Date(), playCount: 1)
+                modelContext.insert(fp)
+                frequentPlayers.append(fp)
+                dirty = true
+            }
+        }
+        if dirty {
+            do { try modelContext.save() } catch { print("Error saving frequent players: \(error)") }
+        }
+    }
+    
+    private func isDefaultPlayerName(_ name: String) -> Bool {
+        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Get the localized player name format for the current language
+        let localizedFormat = "player.name_format".localized(1) // Use 1 as placeholder
+        let baseName = localizedFormat.replacingOccurrences(of: "1", with: "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Create a regex pattern that matches the localized format with any number
+        let pattern = #"^\#(baseName)\s*\d+$"#
+        
+        return trimmedName.range(of: pattern, options: .regularExpression) != nil
+    }
+    
+    func deleteFrequentPlayer(name: String) {
+        if let index = frequentPlayers.firstIndex(where: { $0.displayName.caseInsensitiveCompare(name) == .orderedSame }) {
+            let player = frequentPlayers[index]
+            modelContext.delete(player)
+            frequentPlayers.remove(at: index)
+            do {
+                try modelContext.save()
+                print("Deleted frequent player: \(name)")
+            } catch {
+                print("Error deleting frequent player: \(error)")
+            }
+        }
+    }
+}
+
+// Small ordered-set helper to maintain insertion order while removing duplicates
+fileprivate struct LinkedHashSet<Element: Hashable>: Sequence {
+    private var set: Set<Element> = []
+    private var order: [Element] = []
+    init<S: Sequence>(_ seq: S) where S.Element == Element {
+        for e in seq {
+            if !set.contains(e) {
+                set.insert(e)
+                order.append(e)
+            }
+        }
+    }
+    func makeIterator() -> IndexingIterator<[Element]> { order.makeIterator() }
 }

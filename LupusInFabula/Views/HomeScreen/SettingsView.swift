@@ -10,6 +10,7 @@ import SwiftData
 
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
     
     @Query private var settingsQuery: [GameSettings]
@@ -21,20 +22,63 @@ struct SettingsView: View {
         _settings = State(initialValue: GameSettings())
     }
     
+    var userPrimaryLanguage: String {
+        let locale = Locale.autoupdatingCurrent
+        guard let primaryLanguage = locale.language.languageCode?.identifier else {
+            return "Language code not found"
+        }
+        return NSLocale.current.localizedString(forLanguageCode: primaryLanguage) ?? "Language not found"
+    }
+    
     var body: some View {
         NavigationStack {
             Form {
+                Link(destination: URL(string: UIApplication.openSettingsURLString)!, label: {
+                    HStack {
+                        Text("settings.app_language")
+                        Spacer()
+                        Text(userPrimaryLanguage.capitalized)
+                            .foregroundStyle(.secondary)
+                    }
+                })
+                .foregroundStyle(.primary)
+                
+                Section {
+                    Button(action: replayOnboarding) {
+                        HStack {
+                            Image(systemName: "graduationcap.fill")
+                                .foregroundStyle(.orange)
+                            
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("settings.replay_onboarding")
+                                    .foregroundStyle(.primary)
+                                
+                                Text("settings.replay_onboarding_description")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .foregroundStyle(.primary)
+                }
+                
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
                             Image(systemName: "gearshape.fill")
                                 .foregroundStyle(.orange)
                                 .font(.title2)
-                            Text("House Rules")
+                            Text("settings.house_rules.title")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                         }
-                        Text("Configure gameplay options and narrator controls")
+                        Text("settings.house_rules.description")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -43,12 +87,12 @@ struct SettingsView: View {
                     EmptyView()
                 }
                 
-                Section("Phase Controls") {
+                Section("settings.phase_controls.title") {
                     Toggle(isOn: Bindable(settings).allowSkipWerewolfKill) {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Allow Skipping Werewolf Kill Phase")
+                            Text("settings.skip_werewolf_kill.title")
                                 .font(.body)
-                            Text("Shows a 'Skip Kill Phase' button during werewolf turns")
+                            Text("settings.skip_werewolf_kill.description")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -57,9 +101,9 @@ struct SettingsView: View {
                     
                     Toggle(isOn: Bindable(settings).allowSkipDayVoting) {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Allow Skipping Day Voting Phase")
+                            Text("settings.skip_day_voting.title")
                                 .font(.body)
-                            Text("Shows a 'Skip Voting Phase' button during day discussions")
+                            Text("settings.skip_day_voting.description")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -68,9 +112,9 @@ struct SettingsView: View {
                     
                     Toggle(isOn: Bindable(settings).allowSkipHunterRevenge) {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Allow Skipping Hunter Revenge")
+                            Text("settings.skip_hunter_revenge.title")
                                 .font(.body)
-                            Text("Shows a 'Skip Revenge' button when Hunter is eliminated")
+                            Text("settings.skip_hunter_revenge.description")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -78,20 +122,22 @@ struct SettingsView: View {
                     .toggleStyle(SwitchToggleStyle())
                 }
                 
-                Section("Timer Settings") {
+                Section("settings.timer.title") {
                     VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Text("Phase Timer")
-                                .font(.body)
-                            Spacer()
-                            Text(settings.timerDisplayText)
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack {
+                                Text("settings.phase_timer.title")
+                                    .font(.body)
+                                Spacer()
+                                Text(settings.timerDisplayText)
+                                    .foregroundStyle(.secondary)
+                                    .font(.subheadline)
+                            }
+                            
+                            Text("settings.phase_timer.description")
+                                .font(.caption)
                                 .foregroundStyle(.secondary)
-                                .font(.subheadline)
                         }
-                        
-                        Text("Optional countdown timer for each game phase")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
                         
                         HStack {
                             Slider(value: Binding(
@@ -100,12 +146,12 @@ struct SettingsView: View {
                             ), in: 0...180, step: 15) {
                                 Text("\(settings.phaseTimer)")
                             } minimumValueLabel: {
-                                Text("0s")
-                                    .font(.caption)
+                                Text(GameSettings.minPhaseTimerDuration.formatted(.units(width: .narrow)))
+                                    .font(.footnote)
                                     .foregroundStyle(.secondary)
                             } maximumValueLabel: {
-                                Text("3m")
-                                    .font(.caption)
+                                Text(GameSettings.maxPhaseTimerDuration.formatted(.units(width: .narrow)))
+                                    .font(.footnote)
                                     .foregroundStyle(.secondary)
                             }
                             .accentColor(.orange)
@@ -118,7 +164,7 @@ struct SettingsView: View {
                                 
                                 Spacer()
                                 
-                                Text("Exact: \(settings.phaseTimer) seconds")
+                                Text(String(localized: "settings.exact_seconds \(settings.phaseTimer)"))
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
@@ -127,12 +173,12 @@ struct SettingsView: View {
                     .padding(.vertical, 4)
                 }
                 
-                Section("Doctor Rules") {
+                Section("settings.doctor_rules.title") {
                     Toggle(isOn: Bindable(settings).doctorCanSaveHimself) {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Can Save Himself (Once Per Match)")
+                            Text("settings.doctor_save_himself.title")
                                 .font(.body)
-                            Text("Doctor can choose to self-heal one time only")
+                            Text("settings.doctor_save_himself.description")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -141,9 +187,9 @@ struct SettingsView: View {
                     
                     Toggle(isOn: Bindable(settings).doctorCanSaveSamePersonTwice) {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Can Save Same Person Twice in a Row")
+                            Text("settings.doctor_save_same_twice.title")
                                 .font(.body)
-                            Text("Allows saving the same target in consecutive nights")
+                            Text("settings.doctor_save_same_twice.description")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -157,29 +203,29 @@ struct SettingsView: View {
                     }) {
                         HStack {
                             Image(systemName: "arrow.counterclockwise")
-                            Text("Reset to Defaults")
+                            Text("settings.reset_to_defaults.title")
                         }
                         .foregroundStyle(.orange)
                         .font(.body)
                         .fontWeight(.medium)
                     }
                 } footer: {
-                    Text("This will reset all settings to their safe default values.")
+                    Text("settings.reset_to_defaults.footer")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle("settings.title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", systemImage: "xmark", role: .cancel) {
                         dismiss()
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save", systemImage: "checkmark", role: .confirm) {
                         saveSettings()
                         dismiss()
                     }
@@ -190,13 +236,13 @@ struct SettingsView: View {
         .onAppear {
             loadOrCreateSettings()
         }
-        .alert("Reset Settings", isPresented: $showingResetAlert) {
+        .alert("settings.reset_confirmation.title", isPresented: $showingResetAlert) {
             Button("Cancel", role: .cancel) { }
             Button("Reset", role: .destructive) {
                 performReset()
             }
         } message: {
-            Text("Are you sure you want to reset all settings to their default values?")
+            Text("settings.reset_confirmation.message")
         }
     }
     
@@ -240,9 +286,39 @@ struct SettingsView: View {
             print("Error resetting settings: \(error)")
         }
     }
+    
+    private func replayOnboarding() {
+        do {
+            let descriptor = FetchDescriptor<OnboardingState>()
+            let states = try modelContext.fetch(descriptor)
+            
+            if let onboardingState = states.first {
+                onboardingState.hasCompletedOnboarding = false
+                onboardingState.currentStep = 0
+                onboardingState.lastUpdated = Date()
+            } else {
+                // Create new onboarding state
+                let newState = OnboardingState()
+                modelContext.insert(newState)
+            }
+            
+            try modelContext.save()
+            
+            // Dismiss settings and trigger onboarding
+            dismiss()
+            
+            // Notify the app to show onboarding
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotificationCenter.default.post(name: .onboardingRequested, object: nil)
+            }
+        } catch {
+            print("Error resetting onboarding state: \(error)")
+        }
+    }
 }
 
 #Preview {
     SettingsView()
         .modelContainer(for: [GameSettings.self], inMemory: true)
+        .environment(\.locale, Locale(identifier: "it_IT"))
 }

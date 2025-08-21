@@ -1,7 +1,4309 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "%@" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
+    "%@ has been eliminated from the village." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ è stato eliminato dal villaggio."
+          }
+        }
+      }
+    },
+    "%@ was eliminated!\nChoose a player to take with you, or skip revenge." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ è stato eliminato! Scegli un giocatore da portare con te, oppure salta la vendetta."
+          }
+        }
+      }
+    },
+    "%@ was eliminated!\nYou must choose a player to take with you." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ è stato eliminato! Devi scegliere un giocatore da portare con te."
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld di %2$lld"
+          }
+        }
+      }
+    },
+    "%lld players" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld giocatori"
+          }
+        }
+      }
+    },
+    "%lld." : {
 
+    },
+    "%lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "• Game configurations are saved using SwiftData\n• No cloud synchronization\n• No third-party analytics\n• No advertising networks\n• No data sharing with external services" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "• Le configurazioni di gioco sono salvate usando SwiftData\n• Nessuna sincronizzazione cloud\n• Nessuna analisi di terze parti\n• Nessuna rete pubblicitaria\n• Nessuna condivisione di dati con servizi esterni"
+          }
+        }
+      }
+    },
+    "^[%@](morphology: { number: \"one\" }, inflect: true)" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%@](morphology: { number: \"one\" }, inflect: true)"
+          }
+        }
+      }
+    },
+    "^[%@](morphology: { number: \"other\" }, inflect: true)" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%@](morphology: { number: \"other\" }, inflect: true)"
+          }
+        }
+      }
+    },
+    "❓" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "❓"
+          }
+        }
+      }
+    },
+    "🃏" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🃏"
+          }
+        }
+      }
+    },
+    "1" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1"
+          }
+        }
+      }
+    },
+    "A respected village leader who votes during the day phase" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un leader rispettato del villaggio che vota durante la fase diurna"
+          }
+        }
+      }
+    },
+    "Alive Players" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori Vivi"
+          }
+        }
+      }
+    },
+    "All Roles Revealed!" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutti i Ruoli Rivelati!"
+          }
+        }
+      }
+    },
+    "Allow Skipping Day Voting Phase" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta votazione giorno"
+          }
+        }
+      }
+    },
+    "Allow Skipping Hunter Revenge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta vendetta Cacciatore"
+          }
+        }
+      }
+    },
+    "Allow Skipping Werewolf Kill Phase" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta uccisione Lupo"
+          }
+        }
+      }
+    },
+    "Allows saving the same target in consecutive nights" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva stesso bersaglio 2x"
+          }
+        }
+      }
+    },
+    "App Language" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Language"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lingua"
+          }
+        }
+      }
+    },
+    "Are you sure you want to eliminate %@?" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sei sicuro di voler eliminare %@?"
+          }
+        }
+      }
+    },
+    "Are you sure you want to reset all settings to their default values?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sei sicuro di voler ripristinare tutte le impostazioni ai valori predefiniti?"
+          }
+        }
+      }
+    },
+    "Auto-Balance" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilanciamento Automatico"
+          }
+        }
+      }
+    },
+    "Autofill from recents" : {
+
+    },
+    "Back" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indietro"
+          }
+        }
+      }
+    },
+    "Back to Home" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Torna alla Home"
+          }
+        }
+      }
+    },
+    "Begin Day Phase" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia la Fase del Giorno"
+          }
+        }
+      }
+    },
+    "Begin Night Phase" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia la Fase della Notte"
+          }
+        }
+      }
+    },
+    "Begin the app introduction" : {
+
+    },
+    "button.close" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi"
+          }
+        }
+      }
+    },
+    "button.continue_last_game" : {
+      "comment" : "Button to continue the last saved game",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue Last Game"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continua Ultima Partita"
+          }
+        }
+      }
+    },
+    "button.done" : {
+      "comment" : "Generic done button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fatto"
+          }
+        }
+      }
+    },
+    "button.start_new_game" : {
+      "comment" : "Button to start a new game",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start New Game"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuova Partita"
+          }
+        }
+      }
+    },
+    "Can Save Himself (Once Per Match)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto-salvataggio (1x)"
+          }
+        }
+      }
+    },
+    "Can Save Same Person Twice in a Row" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva stesso target 2x"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
+          }
+        }
+      }
+    },
+    "Check alignment at night" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla allineamento di notte"
+          }
+        }
+      }
+    },
+    "Check eliminated players at night" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla giocatori eliminati di notte"
+          }
+        }
+      }
+    },
+    "Choose a player to eliminate from the village" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli un giocatore da eliminare dal villaggio"
+          }
+        }
+      }
+    },
+    "Choose a villager to kill each night" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli un villico da uccidere ogni notte"
+          }
+        }
+      }
+    },
+    "Choose Target to Eliminate" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli un bersaglio da eliminare"
+          }
+        }
+      }
+    },
+    "Choose your target:" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli il tuo bersaglio:"
+          }
+        }
+      }
+    },
+    "Clear" : {
+
+    },
+    "Clear All" : {
+
+    },
+    "Complete onboarding and go to the main app" : {
+
+    },
+    "Configure gameplay options and narrator controls" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura opzioni e controlli"
+          }
+        }
+      }
+    },
+    "Confirm" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conferma"
+          }
+        }
+      }
+    },
+    "Confirm Revenge" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conferma Vendetta"
+          }
+        }
+      }
+    },
+    "Continue to Night" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prosegui alla Notte"
+          }
+        }
+      }
+    },
+    "Current Player Index: %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indice Giocatore Attuale: %lld"
+          }
+        }
+      }
+    },
+    "Current Session: %@" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sessione Attuale: %@"
+          }
+        }
+      }
+    },
+    "Day Phase ☀️" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase del giorno ☀️"
+          }
+        }
+      }
+    },
+    "Debug" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        }
+      }
+    },
+    "Debug Info" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informazioni di debug"
+          }
+        }
+      }
+    },
+    "Delete %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina %@"
+          }
+        }
+      }
+    },
+    "Doctor" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dottore"
+          }
+        }
+      }
+    },
+    "Doctor can choose to self-heal one time only" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il dottore può scegliere di auto-curarsi solo una volta"
+          }
+        }
+      }
+    },
+    "Doctor Rules" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regole del dottore"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fatto"
+          }
+        }
+      }
+    },
+    "During night, check if an eliminated player was a werewolf or not" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Di notte, controlla se un giocatore eliminato era un lupo mannaro"
+          }
+        }
+      }
+    },
+    "Eliminate" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina"
+          }
+        }
+      }
+    },
+    "End Game" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fine gioco"
+          }
+        }
+      }
+    },
+    "Exact: %lld seconds" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esatto: %lld secondi"
+          }
+        }
+      }
+    },
+    "Game Over" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fine della partita"
+          }
+        }
+      }
+    },
+    "game_rule.day_phase.description" : {
+      "comment" : "Description of what happens during day phase",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Villagers discuss and vote to eliminate suspects"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I villici discutono e votano per eliminare i sospetti"
+          }
+        }
+      }
+    },
+    "game_rule.day_phase.title" : {
+      "comment" : "Title for day phase rule",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase del giorno"
+          }
+        }
+      }
+    },
+    "game_rule.night_phase.description" : {
+      "comment" : "Description of what happens during night phase",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werewolves choose victims, special roles use abilities"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I lupi mannari scelgono le vittime, i ruoli speciali usano le abilità"
+          }
+        }
+      }
+    },
+    "game_rule.night_phase.title" : {
+      "comment" : "Title for night phase rule",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Night Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase della notte"
+          }
+        }
+      }
+    },
+    "game_rule.win_conditions.description" : {
+      "comment" : "Description of how to win the game",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Villagers eliminate all werewolves, or werewolves outnumber villagers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I villici eliminano tutti i lupi mannari, oppure i lupi mannari superano numericamente i villici"
+          }
+        }
+      }
+    },
+    "game_rule.win_conditions.title" : {
+      "comment" : "Title for win conditions rule",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Win Conditions"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condizioni di Vittoria"
+          }
+        }
+      }
+    },
+    "game.subtitle" : {
+      "comment" : "App tagline describing the game",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The classic party game of deception and deduction"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il classico gioco di gruppo di inganno e deduzione"
+          }
+        }
+      }
+    },
+    "game.title" : {
+      "comment" : "Main app title displayed on home screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lupus in Fabula"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lupus in Fabula"
+          }
+        }
+      }
+    },
+    "Get started with Lupus in Fabula" : {
+
+    },
+    "Hold to reveal" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tieni premuto per rivelare"
+          }
+        }
+      }
+    },
+    "House Rules" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regole della Casa"
+          }
+        }
+      }
+    },
+    "how_to_play.title" : {
+      "comment" : "Section title for game rules",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to Play"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Come Giocare"
+          }
+        }
+      }
+    },
+    "Hunter" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cacciatore"
+          }
+        }
+      }
+    },
+    "Hunter's Revenge" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vendetta del Cacciatore"
+          }
+        }
+      }
+    },
+    "Jester" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giullare"
+          }
+        }
+      }
+    },
+    "Jester requires at least 7 players" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Giullare richiede almeno 7 giocatori"
+          }
+        }
+      }
+    },
+    "Kill at night" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uccide di notte"
+          }
+        }
+      }
+    },
+    "Kill when eliminated" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uccide quando eliminato"
+          }
+        }
+      }
+    },
+    "Learn if a player is a werewolf" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scopri se un giocatore è un lupo mannaro"
+          }
+        }
+      }
+    },
+    "Loading..." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento…"
+          }
+        }
+      }
+    },
+    "Manage Players" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestisci Giocatori"
+          }
+        }
+      }
+    },
+    "Mayor" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sindaco"
+          }
+        }
+      }
+    },
+    "Medium" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        }
+      }
+    },
+    "navigation.privacy" : {
+      "comment" : "Privacy button in navigation",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
+          }
+        }
+      }
+    },
+    "Neutral" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neutrale"
+          }
+        }
+      }
+    },
+    "Next Player" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatore successivo"
+          }
+        }
+      }
+    },
+    "night.action.doctor.description" : {
+      "comment" : "Description for doctor night action",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a player to protect"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli un giocatore da proteggere"
+          }
+        }
+      }
+    },
+    "night.action.doctor.werewolf_targeted" : {
+      "comment" : "Doctor description when werewolf target is known",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The werewolves targeted %@. Choose a player to protect"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I lupi mannari hanno preso di mira %@. Scegli un giocatore da proteggere"
+          }
+        }
+      }
+    },
+    "night.action.medium.description" : {
+      "comment" : "Description for medium night action",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Point to an eliminated player to learn if they were a werewolf"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indica un giocatore eliminato per sapere se era un lupo mannaro"
+          }
+        }
+      }
+    },
+    "night.action.seer.description" : {
+      "comment" : "Description for seer night action",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check if a player is a werewolf"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla se un giocatore è un lupo mannaro"
+          }
+        }
+      }
+    },
+    "night.action.werewolf.description" : {
+      "comment" : "Description for werewolf night action",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a villager to eliminate"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli un villico da eliminare"
+          }
+        }
+      }
+    },
+    "night.complete" : {
+      "comment" : "Night phase complete title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Night Complete"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notte Completata"
+          }
+        }
+      }
+    },
+    "night.complete_description" : {
+      "comment" : "Night phase complete description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All night actions have been taken. The sun rises..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutte le azioni notturne sono state eseguite. Il sole sorge..."
+          }
+        }
+      }
+    },
+    "night.current_player_plural" : {
+      "comment" : "Label for multiple current players",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Players:"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori Attuali:"
+          }
+        }
+      }
+    },
+    "night.current_player_singular" : {
+      "comment" : "Label for single current player",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Player:"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatore Attuale:"
+          }
+        }
+      }
+    },
+    "night.round_subtitle" : {
+      "comment" : "Navigation subtitle showing round number",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round %d"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turno %d"
+          }
+        }
+      }
+    },
+    "night.round_subtitle %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turno %lld"
+          }
+        }
+      }
+    },
+    "night.title" : {
+      "comment" : "Night phase navigation title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Night Phase 🌙"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase della notte 🌙"
+          }
+        }
+      }
+    },
+    "No current player" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun giocatore attuale"
+          }
+        }
+      }
+    },
+    "No player was eliminated." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun giocatore è stato eliminato."
+          }
+        }
+      }
+    },
+    "No recents" : {
+
+    },
+    "onboarding.completion.concept.basics" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Basics"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basi del Gioco"
+          }
+        }
+      }
+    },
+    "onboarding.completion.concept.flow" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Flow"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flusso di Gioco"
+          }
+        }
+      }
+    },
+    "onboarding.completion.concept.roles" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Role Powers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poteri dei Ruoli"
+          }
+        }
+      }
+    },
+    "onboarding.completion.concept.setup" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick Setup"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurazione Rapida"
+          }
+        }
+      }
+    },
+    "onboarding.completion.encouragement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready for Your First Game?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronto per la Tua Prima Partita?"
+          }
+        }
+      }
+    },
+    "onboarding.completion.help" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aiuto"
+          }
+        }
+      }
+    },
+    "onboarding.completion.learned_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What You've Learned"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quello che Hai Imparato"
+          }
+        }
+      }
+    },
+    "onboarding.completion.next_steps" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gather 4-24 friends and start your werewolf adventure!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raduna 4-24 amici e inizia la tua avventura da lupo mannaro!"
+          }
+        }
+      }
+    },
+    "onboarding.completion.settings" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
+          }
+        }
+      }
+    },
+    "onboarding.completion.start_playing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Playing"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia a Giocare"
+          }
+        }
+      }
+    },
+    "onboarding.completion.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're ready to host amazing Lupus in Fabula games"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sei pronto a ospitare fantastiche partite di Lupus in Fabula"
+          }
+        }
+      }
+    },
+    "onboarding.completion.tips" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tips"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consigli"
+          }
+        }
+      }
+    },
+    "onboarding.completion.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to the Village!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benvenuto nel Villaggio!"
+          }
+        }
+      }
+    },
+    "onboarding.demo.continue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready to Play!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronto a Giocare!"
+          }
+        }
+      }
+    },
+    "onboarding.demo.customization_preview" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Example role distribution for 6 players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esempio di distribuzione ruoli per 6 giocatori"
+          }
+        }
+      }
+    },
+    "onboarding.demo.customize_roles" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customize Role Distribution"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalizza la Distribuzione dei Ruoli"
+          }
+        }
+      }
+    },
+    "onboarding.demo.interactive_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setup Procedure"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Procedura di Configurazione"
+          }
+        }
+      }
+    },
+    "onboarding.demo.player_count" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Number of Players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Numero di Giocatori"
+          }
+        }
+      }
+    },
+    "onboarding.demo.ready_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setup is this simple every time you play"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La configurazione è così semplice ogni volta che giochi"
+          }
+        }
+      }
+    },
+    "onboarding.demo.ready_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're Ready!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sei Pronto!"
+          }
+        }
+      }
+    },
+    "onboarding.demo.step1_description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select how many people will play"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona quante persone giocheranno"
+          }
+        }
+      }
+    },
+    "onboarding.demo.step1_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Number of Players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli il Numero di Giocatori"
+          }
+        }
+      }
+    },
+    "onboarding.demo.step2_description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use a balanced role configuration"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa una configurazione di ruoli equilibrata"
+          }
+        }
+      }
+    },
+    "onboarding.demo.step2_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a Preset"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli un Preset"
+          }
+        }
+      }
+    },
+    "onboarding.demo.step3_description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adjust roles for your group"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regola i ruoli per il tuo gruppo"
+          }
+        }
+      }
+    },
+    "onboarding.demo.step3_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customize (Optional)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalizza (Opzionale)"
+          }
+        }
+      }
+    },
+    "onboarding.demo.subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try setting up a game to see how easy it is to get started"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prova a configurare una partita per vedere quanto sia facile iniziare"
+          }
+        }
+      }
+    },
+    "onboarding.demo.tip.customization" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Experiment with role combinations"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sperimenta con le combinazioni di ruoli"
+          }
+        }
+      }
+    },
+    "onboarding.demo.tip.player_count" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More players = more complex strategies"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Più giocatori = strategie più complesse"
+          }
+        }
+      }
+    },
+    "onboarding.demo.tip.presets" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Presets are balanced for optimal gameplay"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I preset sono bilanciati per un gameplay ottimale"
+          }
+        }
+      }
+    },
+    "onboarding.demo.tip.reuse" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save configurations to reuse them"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva le configurazioni per riutilizzarle"
+          }
+        }
+      }
+    },
+    "onboarding.demo.tips_subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Make the most of the setup experience"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sfrutta al meglio l'esperienza di configurazione"
+          }
+        }
+      }
+    },
+    "onboarding.demo.tips_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setup Tips"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consigli per la Configurazione"
+          }
+        }
+      }
+    },
+    "onboarding.demo.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick Setup"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurazione Rapida"
+          }
+        }
+      }
+    },
+    "onboarding.flow.continue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setup Demo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demo di Configurazione"
+          }
+        }
+      }
+    },
+    "onboarding.flow.cycle_current" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attuale"
+          }
+        }
+      }
+    },
+    "onboarding.flow.cycle_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The game continues alternating night and day until victory"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il gioco continua alternando notte e giorno fino alla vittoria"
+          }
+        }
+      }
+    },
+    "onboarding.flow.cycle_subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Night and day phases repeat until one team wins"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le fasi notte e giorno si ripetono finché una squadra vince"
+          }
+        }
+      }
+    },
+    "onboarding.flow.cycle_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Cycle"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ciclo di Gioco"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.day" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase Diurna"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.day.step1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reveal night results"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rivela i risultati della notte"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.day.step2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Village discusses suspicions"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il villaggio discute i sospetti"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.day.step3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vote to eliminate a player"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vota per eliminare un giocatore"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.night" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Night Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase Notturna"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.night.step1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werewolves choose their target"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I lupi mannari scelgono il loro bersaglio"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.night.step2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seer investigates a player"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Veggente investiga un giocatore"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.night.step3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doctor protects someone"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Dottore protegge qualcuno"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.setup" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setup Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase di Configurazione"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.setup.step1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose number of players (4-24)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli il numero di giocatori (4-24)"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.setup.step2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a role distribution preset"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona un preset di distribuzione ruoli"
+          }
+        }
+      }
+    },
+    "onboarding.flow.demo.setup.step3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customize roles if desired"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalizza i ruoli se desiderato"
+          }
+        }
+      }
+    },
+    "onboarding.flow.interactive_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phase by Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase per Fase"
+          }
+        }
+      }
+    },
+    "onboarding.flow.subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discover how phases connect and strategies develop during gameplay"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scopri come le fasi si collegano e le strategie si sviluppano durante il gioco"
+          }
+        }
+      }
+    },
+    "onboarding.flow.tip.deception" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werewolves must blend in and appear innocent"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I lupi mannari devono mimetizzarsi e apparire innocenti"
+          }
+        }
+      }
+    },
+    "onboarding.flow.tip.discussion" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pay attention to voting patterns and player behavior"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Presta attenzione ai modelli di voto e al comportamento dei giocatori"
+          }
+        }
+      }
+    },
+    "onboarding.flow.tip.observation" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Observe contradictions in player statements"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Osserva le contraddizioni nelle dichiarazioni dei giocatori"
+          }
+        }
+      }
+    },
+    "onboarding.flow.tip.teamwork" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coordinate with your team without revealing roles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coordinati con la tua squadra senza rivelare i ruoli"
+          }
+        }
+      }
+    },
+    "onboarding.flow.tips_subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Master these concepts to improve your gameplay"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padroneggia questi concetti per migliorare il tuo gioco"
+          }
+        }
+      }
+    },
+    "onboarding.flow.tips_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strategic Tips"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consigli Strategici"
+          }
+        }
+      }
+    },
+    "onboarding.flow.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Flow"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flusso di Gioco"
+          }
+        }
+      }
+    },
+    "onboarding.overview.auto_advance" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phases advance automatically for demonstration"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le fasi avanzano automaticamente per dimostrazione"
+          }
+        }
+      }
+    },
+    "onboarding.overview.concept.phases" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day and Night Cycles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cicli Giorno e Notte"
+          }
+        }
+      }
+    },
+    "onboarding.overview.concept.phases_desc" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Different actions happen during day and night"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azioni diverse accadono durante il giorno e la notte"
+          }
+        }
+      }
+    },
+    "onboarding.overview.concept.teams" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two Teams"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Due Squadre"
+          }
+        }
+      }
+    },
+    "onboarding.overview.concept.teams_desc" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Villagers vs Werewolves in a battle of wits"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paesani vs Lupi Mannari in una battaglia di ingegno"
+          }
+        }
+      }
+    },
+    "onboarding.overview.concept.victory" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Victory Conditions"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condizioni di Vittoria"
+          }
+        }
+      }
+    },
+    "onboarding.overview.concept.victory_desc" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminate the opposing team to win"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina la squadra avversaria per vincere"
+          }
+        }
+      }
+    },
+    "onboarding.overview.continue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discover Roles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scopri i Ruoli"
+          }
+        }
+      }
+    },
+    "onboarding.overview.day.description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The village discusses and votes to eliminate suspected werewolves"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il villaggio discute e vota per eliminare i lupi mannari sospetti"
+          }
+        }
+      }
+    },
+    "onboarding.overview.day.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase Diurna"
+          }
+        }
+      }
+    },
+    "onboarding.overview.flow_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Phases"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fasi del Gioco"
+          }
+        }
+      }
+    },
+    "onboarding.overview.key_concepts" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Concepts"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Concetti Chiave"
+          }
+        }
+      }
+    },
+    "onboarding.overview.night.description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special roles perform their actions under the cover of darkness"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I ruoli speciali compiono le loro azioni sotto il manto dell'oscurità"
+          }
+        }
+      }
+    },
+    "onboarding.overview.night.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Night Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fase Notturna"
+          }
+        }
+      }
+    },
+    "onboarding.overview.reveal.description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pass the device to privately reveal each player's secret role"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passa il dispositivo per rivelare privatamente il ruolo segreto di ogni giocatore"
+          }
+        }
+      }
+    },
+    "onboarding.overview.reveal.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Role Reveal"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rivelazione Ruoli"
+          }
+        }
+      }
+    },
+    "onboarding.overview.setup.description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose the number of players and role distribution for a balanced game"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli il numero di giocatori e la distribuzione dei ruoli per un gioco equilibrato"
+          }
+        }
+      }
+    },
+    "onboarding.overview.setup.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setup"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurazione"
+          }
+        }
+      }
+    },
+    "onboarding.overview.subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learn the basic game flow and discover what makes Lupus in Fabula exciting"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impara il flusso di gioco di base e scopri cosa rende Lupus in Fabula emozionante"
+          }
+        }
+      }
+    },
+    "onboarding.overview.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to Play"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Come Giocare"
+          }
+        }
+      }
+    },
+    "onboarding.roles.abilities" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abilities"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abilità"
+          }
+        }
+      }
+    },
+    "onboarding.roles.advanced_subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add complexity and strategy for experienced players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungono complessità e strategia per giocatori esperti"
+          }
+        }
+      }
+    },
+    "onboarding.roles.advanced_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advanced Roles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ruoli Avanzati"
+          }
+        }
+      }
+    },
+    "onboarding.roles.continue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Flow"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flusso di Gioco"
+          }
+        }
+      }
+    },
+    "onboarding.roles.core_subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These essential roles form the foundation of every game"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questi ruoli essenziali formano la base di ogni partita"
+          }
+        }
+      }
+    },
+    "onboarding.roles.core_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Core Roles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruoli Principali"
+          }
+        }
+      }
+    },
+    "onboarding.roles.interactive_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explore Each Role"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esplora Ogni Ruolo"
+          }
+        }
+      }
+    },
+    "onboarding.roles.neutral_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Jester has their own unique victory condition"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Giullare ha la sua condizione di vittoria unica"
+          }
+        }
+      }
+    },
+    "onboarding.roles.neutral_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neutral Roles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruoli Neutrali"
+          }
+        }
+      }
+    },
+    "onboarding.roles.subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each role has unique abilities that shape game strategy"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ogni ruolo ha abilità uniche che modellano la strategia di gioco"
+          }
+        }
+      }
+    },
+    "onboarding.roles.team.villager_goal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Goal: Eliminate all werewolves"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo: Elimina tutti i lupi mannari"
+          }
+        }
+      }
+    },
+    "onboarding.roles.team.werewolf_goal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Goal: Eliminate all villagers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo: Elimina tutti i paesani"
+          }
+        }
+      }
+    },
+    "onboarding.roles.teams_subtitle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Understanding which roles belong to which team"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capire quali ruoli appartengono a quale squadra"
+          }
+        }
+      }
+    },
+    "onboarding.roles.teams_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team Alignments"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allineamenti delle Squadre"
+          }
+        }
+      }
+    },
+    "onboarding.roles.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Know the Roles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conosci i Ruoli"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.feature.fun" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Infinite Fun"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Divertimento Infinito"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.feature.multiplayer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4-24 Players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "4-24 Giocatori"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.feature.private" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completely Private"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Completamente Privato"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.get_started" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The classic party game Lupus in Fabula, reimagined for your iPhone"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il classico gioco di società Lupus in Fabula, ripensato per il tuo iPhone"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to Lupus in Fabula"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benvenuto in Lupus in Fabula"
+          }
+        }
+      }
+    },
+    "Optional countdown timer for each game phase" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timer conto alla rovescia opzionale per ogni fase di gioco"
+          }
+        }
+      }
+    },
+    "Pause" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pausa"
+          }
+        }
+      }
+    },
+    "player.name_format" : {
+      "comment" : "Format for player names with number",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Player %d"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatore %d"
+          }
+        }
+      }
+    },
+    "Players" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori"
+          }
+        }
+      }
+    },
+    "preset.players_count" : {
+      "comment" : "Number of players in preset with proper pluralization",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d player"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d players"
+                }
+              }
+            }
+          }
+        },
+        "it" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d giocatore"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d giocatori"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Privacy & Data" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy e Dati"
+          }
+        }
+      }
+    },
+    "privacy.data_control.description" : {
+      "comment" : "Data control privacy description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can delete all app data at any time by removing the app from your device. No data persists beyond your control."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi eliminare tutti i dati dell'app in qualsiasi momento rimuovendo l'app dal tuo dispositivo. Nessun dato persiste oltre il tuo controllo."
+          }
+        }
+      }
+    },
+    "privacy.data_control.title" : {
+      "comment" : "Data control privacy section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Control"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controllo dei Dati"
+          }
+        }
+      }
+    },
+    "privacy.local_storage.description" : {
+      "comment" : "Local storage privacy description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All game data, including saved configurations and game history, is stored locally on your device using Apple's SwiftData framework."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutti i dati di gioco, incluse le configurazioni salvate e la cronologia delle partite, sono archiviati localmente sul tuo dispositivo usando il framework SwiftData di Apple."
+          }
+        }
+      }
+    },
+    "privacy.local_storage.title" : {
+      "comment" : "Local storage privacy section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local Storage"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiviazione Locale"
+          }
+        }
+      }
+    },
+    "privacy.no_tracking.description" : {
+      "comment" : "No tracking privacy description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We don't collect any personal information, analytics, or usage data. Your game sessions remain private."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non raccogliamo informazioni personali, analisi o dati di utilizzo. Le tue sessioni di gioco rimangono private."
+          }
+        }
+      }
+    },
+    "privacy.no_tracking.title" : {
+      "comment" : "No tracking privacy section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Tracking"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun Tracciamento"
+          }
+        }
+      }
+    },
+    "privacy.offline_only.description" : {
+      "comment" : "Offline only privacy description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This app works completely offline. No internet connection is required, and no data is sent to external servers."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questa app funziona completamente offline. Non è richiesta alcuna connessione internet e nessun dato viene inviato a server esterni."
+          }
+        }
+      }
+    },
+    "privacy.offline_only.title" : {
+      "comment" : "Offline only privacy section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offline Only"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo Offline"
+          }
+        }
+      }
+    },
+    "privacy.subtitle" : {
+      "comment" : "Privacy screen subtitle",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your privacy is important to us"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La tua privacy è importante per noi"
+          }
+        }
+      }
+    },
+    "privacy.technical_details" : {
+      "comment" : "Technical details section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Technical Details"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dettagli Tecnici"
+          }
+        }
+      }
+    },
+    "privacy.technical_details_list" : {
+      "comment" : "Technical details list",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "• Game configurations are saved using SwiftData\n• No cloud synchronization\n• No third-party analytics\n• No advertising networks\n• No data sharing with external services"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "• Le configurazioni di gioco sono salvate usando SwiftData\n• Nessuna sincronizzazione cloud\n• Nessuna analisi di terze parti\n• Nessuna rete pubblicitaria\n• Nessuna condivisione di dati con servizi esterni"
+          }
+        }
+      }
+    },
+    "privacy.title" : {
+      "comment" : "Privacy screen title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy & Data"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy e Dati"
+          }
+        }
+      }
+    },
+    "Protect at night" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protegge di notte"
+          }
+        }
+      }
+    },
+    "Quick Presets" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preimpostazioni Rapide"
+          }
+        }
+      }
+    },
+    "Quick Start" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvio Rapido"
+          }
+        }
+      }
+    },
+    "Ready to play!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronto per giocare!"
+          }
+        }
+      }
+    },
+    "Recents" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recenti"
+          }
+        }
+      }
+    },
+    "REQUIRED" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RICHIESTO"
+          }
+        }
+      }
+    },
+    "Reset" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset"
+          }
+        }
+      }
+    },
+    "Restart" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riavvia"
+          }
+        }
+      }
+    },
+    "Resume" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riprendi"
+          }
+        }
+      }
+    },
+    "Role Reveal" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rivelazione Ruolo"
+          }
+        }
+      }
+    },
+    "Role revealed!" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruolo rivelato!"
+          }
+        }
+      }
+    },
+    "Role Selection" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selezione Ruoli"
+          }
+        }
+      }
+    },
+    "Round %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turno %lld"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva"
+          }
+        }
+      }
+    },
+    "Save a player from werewolf attack" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva un giocatore dall'attacco dei lupi"
+          }
+        }
+      }
+    },
+    "Seer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veggente"
+          }
+        }
+      }
+    },
+    "Select Target:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli Bersaglio:"
+          }
+        }
+      }
+    },
+    "Selected (%lld)" : {
+
+    },
+    "Selected for elimination" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selezionato per l'eliminazione"
+          }
+        }
+      }
+    },
+    "Session Players: %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori Sessione: %lld"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
+          }
+        }
+      }
+    },
+    "settings.app_language" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Language"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lingua"
+          }
+        }
+      }
+    },
+    "settings.doctor_rules.title" : {
+      "comment" : "Doctor Rules section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doctor Rules"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regole del Dottore"
+          }
+        }
+      }
+    },
+    "settings.doctor_save_himself.description" : {
+      "comment" : "Doctor can save himself toggle description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doctor can choose to self-heal one time only"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permette al Dottore di salvarsi una sola volta durante la partita"
+          }
+        }
+      }
+    },
+    "settings.doctor_save_himself.title" : {
+      "comment" : "Doctor can save himself toggle title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can Save Himself (Once Per Match)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto-salvataggio"
+          }
+        }
+      }
+    },
+    "settings.doctor_save_same_twice.description" : {
+      "comment" : "Doctor can save same person twice toggle description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allows saving the same target in consecutive nights"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permette di salvare lo stesso bersaglio in notti consecutive"
+          }
+        }
+      }
+    },
+    "settings.doctor_save_same_twice.title" : {
+      "comment" : "Doctor can save same person twice toggle title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can Save Same Person Twice in a Row"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvataggio consecutivo"
+          }
+        }
+      }
+    },
+    "settings.exact_seconds" : {
+      "comment" : "Exact seconds display text",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exact: %lld seconds"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esatto: %lld secondi"
+          }
+        }
+      }
+    },
+    "settings.exact_seconds %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esatto: %lld secondi"
+          }
+        }
+      }
+    },
+    "settings.house_rules.description" : {
+      "comment" : "House Rules section description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configure gameplay options and narrator controls"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura opzioni e controlli"
+          }
+        }
+      }
+    },
+    "settings.house_rules.title" : {
+      "comment" : "House Rules section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "House Rules"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regole della Casa"
+          }
+        }
+      }
+    },
+    "settings.phase_controls.title" : {
+      "comment" : "Phase Controls section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phase Controls"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlli delle Fasi"
+          }
+        }
+      }
+    },
+    "settings.phase_timer.description" : {
+      "comment" : "Phase Timer setting description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional countdown timer for each game phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timer opzionale per le fasi"
+          }
+        }
+      }
+    },
+    "settings.phase_timer.title" : {
+      "comment" : "Phase Timer setting title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phase Timer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timer delle Fasi"
+          }
+        }
+      }
+    },
+    "settings.replay_onboarding" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replay Introduction"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rivedi l'Introduzione"
+          }
+        }
+      }
+    },
+    "settings.replay_onboarding_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Review how the app works and how to play"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rivedi come funziona l'app e come giocare"
+          }
+        }
+      }
+    },
+    "settings.reset_confirmation.message" : {
+      "comment" : "Reset settings confirmation alert message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to reset all settings to their default values?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sei sicuro di voler ripristinare tutte le impostazioni ai valori predefiniti?"
+          }
+        }
+      }
+    },
+    "settings.reset_confirmation.title" : {
+      "comment" : "Reset settings confirmation alert title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset Settings"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ripristina Impostazioni"
+          }
+        }
+      }
+    },
+    "settings.reset_to_defaults.footer" : {
+      "comment" : "Reset to defaults footer text",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This will reset all settings to their default values."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Questo ripristinerà tutte le impostazioni ai loro valori predefiniti."
+          }
+        }
+      }
+    },
+    "settings.reset_to_defaults.title" : {
+      "comment" : "Reset to defaults button text",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset to Defaults"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ripristina Predefiniti"
+          }
+        }
+      }
+    },
+    "settings.skip_day_voting.description" : {
+      "comment" : "Allow skipping day voting phase toggle description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The village can decide not to eliminate anyone during the vote"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il villaggio può decidere di non eliminare nessuno durante la votazione"
+          }
+        }
+      }
+    },
+    "settings.skip_day_voting.title" : {
+      "comment" : "Allow skipping day voting phase toggle title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip Day Vote"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Salta votazione giorno"
+          }
+        }
+      }
+    },
+    "settings.skip_hunter_revenge.description" : {
+      "comment" : "Allow skipping hunter revenge toggle description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Hunter can choose not to shoot when they die"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il Cacciatore può scegliere di non sparare alla sua morte"
+          }
+        }
+      }
+    },
+    "settings.skip_hunter_revenge.title" : {
+      "comment" : "Allow skipping hunter revenge toggle title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip Hunter’s Revenge"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Salta vendetta Cacciatore"
+          }
+        }
+      }
+    },
+    "settings.skip_werewolf_kill.description" : {
+      "comment" : "Allow skipping werewolf kill phase toggle description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werewolves can choose not to kill at night"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "I lupi possono scegliere di non uccidere durante la notte"
+          }
+        }
+      }
+    },
+    "settings.skip_werewolf_kill.title" : {
+      "comment" : "Allow skipping werewolf kill phase toggle title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip Werewolf Kill"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Salta uccisione Lupo"
+          }
+        }
+      }
+    },
+    "settings.timer.title" : {
+      "comment" : "Timer Settings section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timer Settings"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni Timer"
+          }
+        }
+      }
+    },
+    "settings.title" : {
+      "comment" : "Settings page title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
+          }
+        }
+      }
+    },
+    "setup.number_of_players" : {
+      "comment" : "Label for player count setting",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Number of Players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Numero di Giocatori"
+          }
+        }
+      }
+    },
+    "setup.subtitle" : {
+      "comment" : "Game setup navigation subtitle",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configure your game"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura la tua partita"
+          }
+        }
+      }
+    },
+    "setup.title" : {
+      "comment" : "Game setup navigation title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Setup"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurazione Partita"
+          }
+        }
+      }
+    },
+    "Skip" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta"
+          }
+        }
+      }
+    },
+    "Skip All" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta Tutto"
+          }
+        }
+      }
+    },
+    "Skip Phase" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta Fase"
+          }
+        }
+      }
+    },
+    "Skip Revenge" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta Vendetta"
+          }
+        }
+      }
+    },
+    "Skip Voting Phase" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta Fase Votazione"
+          }
+        }
+      }
+    },
+    "Special Roles" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruoli Speciali"
+          }
+        }
+      }
+    },
+    "Start Game" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia Partita"
+          }
+        }
+      }
+    },
+    "Start playing Lupus in Fabula" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia a giocare a Lupus in Fabula"
+          }
+        }
+      }
+    },
+    "Start Timer" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvia Timer"
+          }
+        }
+      }
+    },
+    "Start Voting" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia Votazione"
+          }
+        }
+      }
+    },
+    "Submit Vote" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia Voto"
+          }
+        }
+      }
+    },
+    "Take Revenge" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prendi Vendetta"
+          }
+        }
+      }
+    },
+    "Take revenge when eliminated" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prendi vendetta quando eliminato"
+          }
+        }
+      }
+    },
+    "Tap and hold to reveal your role" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tocca e tieni premuto per rivelare il tuo ruolo"
+          }
+        }
+      }
+    },
+    "Technical Details" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dettagli Tecnici"
+          }
+        }
+      }
+    },
+    "The game is about to begin. Pass the device to the first player for the night phase." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La partita sta per iniziare. Passa il dispositivo al primo giocatore per la fase notturna."
+          }
+        }
+      }
+    },
+    "Village leadership" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guida del villaggio"
+          }
+        }
+      }
+    },
+    "Villager" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Villico"
+          }
+        }
+      }
+    },
+    "Villagers" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contadini"
+          }
+        }
+      }
+    },
+    "Vote Complete" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votazione Completata"
+          }
+        }
+      }
+    },
+    "Vote during day" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vota di giorno"
+          }
+        }
+      }
+    },
+    "Vote to Eliminate" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vota per Eliminare"
+          }
+        }
+      }
+    },
+    "Vote to eliminate suspected werewolves" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vota per eliminare i sospetti lupi mannari"
+          }
+        }
+      }
+    },
+    "Werewolf" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lupo Mannaro"
+          }
+        }
+      }
+    },
+    "Werewolves" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lupi"
+          }
+        }
+      }
+    },
+    "Win by being voted out" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vince venendo votato"
+          }
+        }
+      }
+    },
+    "Wins the game by being voted out during the day phase" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vince la partita venendo votato durante la fase diurna"
+          }
+        }
+      }
+    },
+    "Your privacy is important to us" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La tua privacy è importante per noi"
+          }
+        }
+      }
+    }
   },
   "version" : "1.1"
 }

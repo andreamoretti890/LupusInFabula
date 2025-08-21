@@ -16,7 +16,9 @@ struct LupusInFabulaApp: App {
             RolePreset.self,
             SavedConfig.self,
             GameSession.self,
-            GameSettings.self
+            GameSettings.self,
+            FrequentPlayer.self,
+            OnboardingState.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

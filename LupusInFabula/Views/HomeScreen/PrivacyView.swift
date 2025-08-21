@@ -20,11 +20,11 @@ struct PrivacyView: View {
                             .font(.system(size: 60))
                             .foregroundStyle(.blue)
                         
-                        Text("Privacy & Data")
+                        Text("privacy.title")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         
-                        Text("Your privacy is important to us")
+                        Text("privacy.subtitle")
                             .font(.title3)
                             .foregroundStyle(.secondary)
                     }
@@ -35,35 +35,35 @@ struct PrivacyView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         PrivacySection(
                             icon: "wifi.slash",
-                            title: "Offline Only",
-                            description: "This app works completely offline. No internet connection is required, and no data is sent to external servers."
+                            title: "privacy.offline_only.title".localized,
+                            description: "privacy.offline_only.description".localized
                         )
                         
                         PrivacySection(
                             icon: "iphone",
-                            title: "Local Storage",
-                            description: "All game data, including saved configurations and game history, is stored locally on your device using Apple's SwiftData framework."
+                            title: "privacy.local_storage.title".localized,
+                            description: "privacy.local_storage.description".localized
                         )
                         
                         PrivacySection(
                             icon: "eye.slash",
-                            title: "No Tracking",
-                            description: "We don't collect any personal information, analytics, or usage data. Your game sessions remain private."
+                            title: "privacy.no_tracking.title".localized,
+                            description: "privacy.no_tracking.description".localized
                         )
                         
                         PrivacySection(
                             icon: "trash",
-                            title: "Data Control",
-                            description: "You can delete all app data at any time by removing the app from your device. No data persists beyond your control."
+                            title: "privacy.data_control.title".localized,
+                            description: "privacy.data_control.description".localized
                         )
                     }
                     
                     // Additional info
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Technical Details")
+                        Text("privacy.technical_details")
                             .font(.headline)
                         
-                        Text("• Game configurations are saved using SwiftData\n• No cloud synchronization\n• No third-party analytics\n• No advertising networks\n• No data sharing with external services")
+                        Text("privacy.technical_details_list")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -76,8 +76,8 @@ struct PrivacyView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("button.close", systemImage: "xmark") {
                         dismiss()
                     }
                 }

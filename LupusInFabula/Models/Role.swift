@@ -20,13 +20,13 @@ final class Role {
     var emoji: String
     
     // Computed properties for type-safe access
-    var roleID: RoleID? {
-        get { RoleID(rawValue: id) }
+    var roleID: RoleID {
+        get { RoleID(rawValue: id) ?? .villager }
     }
     
-    var roleAlignment: RoleAlignment? {
-        get { RoleAlignment(rawValue: alignment) }
-        set { alignment = newValue?.rawValue ?? alignment }
+    var roleAlignment: RoleAlignment {
+        get { RoleAlignment(rawValue: alignment) ?? .villager }
+        set { alignment = newValue.rawValue }
     }
     
     init(id: String, name: String, alignment: String, abilities: [String], isUnique: Bool, minPlayers: Int, notes: String, emoji: String) {

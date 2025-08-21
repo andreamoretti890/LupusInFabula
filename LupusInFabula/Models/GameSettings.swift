@@ -14,12 +14,16 @@ final class GameSettings {
     var allowSkipWerewolfKill: Bool
     var allowSkipDayVoting: Bool
     var allowSkipHunterRevenge: Bool
-    var phaseTimer: Int // 0 = disabled, else seconds (30-180)
     var lastUpdated: Date
     
     // Doctor house rules
     var doctorCanSaveHimself: Bool // Can save himself once per match
     var doctorCanSaveSamePersonTwice: Bool // Can save same person in consecutive nights
+    
+    // Phase Timer
+    var phaseTimer: Int
+    static let minPhaseTimerDuration: Duration = .seconds(0)
+    static let maxPhaseTimerDuration: Duration = .seconds(180)
     
     init(
         id: String = "default",
@@ -55,7 +59,7 @@ final class GameSettings {
     /// Get formatted timer text for display
     var timerDisplayText: String {
         if phaseTimer == 0 {
-            return "Disabled"
+            return ""
         } else {
             let minutes = phaseTimer / 60
             let seconds = phaseTimer % 60

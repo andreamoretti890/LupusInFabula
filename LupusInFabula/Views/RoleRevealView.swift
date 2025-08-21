@@ -5,6 +5,7 @@
 //  Created by Andrea Moretti on 18/08/25.
 //
 
+import SwiftData
 import SwiftUI
 
 struct RoleRevealView: View {
@@ -23,17 +24,13 @@ struct RoleRevealView: View {
                 )
                 .ignoresSafeArea()
                 
-                VStack(spacing: 40) {
+                VStack(spacing: 20) {
                     // Header
                     VStack(spacing: 16) {
-                        Text("Role Reveal")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                        
                         if let player = gameService.getCurrentPlayer() {
                             Text("\(player.displayName)")
                                 .font(.title2)
-                                .foregroundStyle(.secondary)
+                                .bold()
                         } else {
                             Text("No current player")
                                 .font(.title2)
@@ -44,7 +41,7 @@ struct RoleRevealView: View {
                             .font(.headline)
                             .foregroundStyle(.blue)
                     }
-                    .padding(.top, 40)
+                    .padding(.top)
                     
                     Spacer()
                     
@@ -122,7 +119,25 @@ struct RoleRevealView: View {
                 .padding(.vertical, 40)
             }
         }
-        .navigationBarHidden(true)
+        .navigationTitle("Role Reveal")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Skip All") {
+                    gameService.skipRevealPhase()
+                }
+                .foregroundStyle(.red)
+                .font(.caption)
+            }
+            if isRevealed {
+                ToolbarSpacer(placement: .bottomBar)
+                ToolbarItem(placement: .bottomBar) {
+                    Button("Next Player") {
+                        nextPlayer()
+                    }
+                }
+            }
+        }
         .onAppear {
             isRevealed = false
             print("RoleRevealView appeared")
@@ -130,34 +145,6 @@ struct RoleRevealView: View {
             if let session = gameService.currentSession {
                 print("Session players: \(session.players.count)")
                 print("Current player index: \(gameService.currentRevealPlayerIndex)")
-            }
-        }
-        .overlay(alignment: .topTrailing) {
-            // Development/Testing skip button
-            Button(action: {
-                gameService.skipRevealPhase()
-            }) {
-                HStack(spacing: 4) {
-                    Image(systemName: "forward.fill")
-                    Text("Skip")
-                }
-                .font(.caption)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 6)
-                .background(.red.opacity(0.8))
-                .foregroundStyle(.white)
-                .clipShape(Capsule())
-            }
-            .padding(.top, 50)
-            .padding(.trailing, 20)
-        }
-        .overlay(alignment: .bottomTrailing) {
-            if isRevealed {
-                Button("Next Player") {
-                    nextPlayer()
-                }
-                .buttonStyle(.borderedProminent)
-                .padding()
             }
         }
         .sheet(isPresented: $showingNextPlayer) {
@@ -203,19 +190,19 @@ struct RoleCard: View {
                         .transition(.scale.combined(with: .opacity))
                     
                     // Role name
-                    Text(role.name)
+                    Text(role.name.localized)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .transition(.opacity)
                     
                     // Role description
                     VStack(spacing: 12) {
-                        Text(role.alignment)
+                        Text(role.alignment.localized)
                             .font(.headline)
-                            .foregroundStyle(role.roleAlignment?.color ?? .green)
+                            .foregroundStyle(role.roleAlignment.color)
                             .transition(.opacity)
                         
-                        Text(role.notes)
+                        Text(role.notes.localized)
                             .font(.body)
                             .multilineTextAlignment(.center)
                             .transition(.opacity)

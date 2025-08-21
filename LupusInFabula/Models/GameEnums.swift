@@ -23,7 +23,7 @@ enum RoleAlignment: String, CaseIterable, Codable {
     }
     
     var displayName: String {
-        return self.rawValue
+        return self.rawValue.localized
     }
 }
 
@@ -40,14 +40,14 @@ enum RoleID: String, CaseIterable, Codable {
     
     var defaultName: String {
         switch self {
-        case .werewolf: return "Werewolf"
-        case .villager: return "Villager"
-        case .seer: return "Seer"
-        case .doctor: return "Doctor"
-        case .hunter: return "Hunter"
-        case .jester: return "Jester"
-        case .medium: return "Medium"
-        case .mayor: return "Mayor"
+        case .werewolf: return "Werewolf".localized
+        case .villager: return "Villager".localized
+        case .seer: return "Seer".localized
+        case .doctor: return "Doctor".localized
+        case .hunter: return "Hunter".localized
+        case .jester: return "Jester".localized
+        case .medium: return "Medium".localized
+        case .mayor: return "Mayor".localized
         }
     }
     
@@ -74,14 +74,14 @@ enum RoleID: String, CaseIterable, Codable {
     
     var defaultAbilities: [String] {
         switch self {
-        case .werewolf: return ["Kill at night"]
-        case .villager: return ["Vote during day"]
-        case .seer: return ["Check alignment at night"]
-        case .doctor: return ["Protect at night"]
-        case .hunter: return ["Kill when eliminated"]
-        case .jester: return ["Win by being voted out"]
-        case .medium: return ["Check eliminated players at night"]
-        case .mayor: return ["Vote during day", "Village leadership"]
+        case .werewolf: return ["Kill at night".localized]
+        case .villager: return ["Vote during day".localized]
+        case .seer: return ["Check alignment at night".localized]
+        case .doctor: return ["Protect at night".localized]
+        case .hunter: return ["Kill when eliminated".localized]
+        case .jester: return ["Win by being voted out".localized]
+        case .medium: return ["Check eliminated players at night".localized]
+        case .mayor: return ["Vote during day".localized, "Village leadership".localized]
         }
     }
     
@@ -106,14 +106,14 @@ enum RoleID: String, CaseIterable, Codable {
     
     var defaultNotes: String {
         switch self {
-        case .werewolf: return "Choose a villager to kill each night"
-        case .villager: return "Vote to eliminate suspected werewolves"
-        case .seer: return "Learn if a player is a werewolf"
-        case .doctor: return "Save a player from werewolf attack"
-        case .hunter: return "Take revenge when eliminated"
-        case .jester: return "Wins the game by being voted out during the day phase"
-        case .medium: return "During night, check if an eliminated player was a werewolf or not"
-        case .mayor: return "A respected village leader who votes during the day phase"
+        case .werewolf: return "Choose a villager to kill each night".localized
+        case .villager: return "Vote to eliminate suspected werewolves".localized
+        case .seer: return "Learn if a player is a werewolf".localized
+        case .doctor: return "Save a player from werewolf attack".localized
+        case .hunter: return "Take revenge when eliminated".localized
+        case .jester: return "Wins the game by being voted out during the day phase".localized
+        case .medium: return "During night, check if an eliminated player was a werewolf or not".localized
+        case .mayor: return "A respected village leader who votes during the day phase".localized
         }
     }
 }

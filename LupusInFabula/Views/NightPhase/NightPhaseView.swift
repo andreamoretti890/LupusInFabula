@@ -23,8 +23,8 @@ struct NightPhaseView: View {
         if !werewolves.isEmpty {
             actions.append(NightAction(
                 type: .werewolf,
-                title: "Werewolves",
-                description: "Choose a villager to eliminate",
+                title: "Werewolves".localized,
+                description: "night.action.werewolf.description".localized,
                 players: werewolves,
                 targetPlayers: gameService.getAllNonWerewolves()
             ))
@@ -34,8 +34,8 @@ struct NightPhaseView: View {
         if let seer = session.players.first(where: { $0.isAlive && $0.roleID == RoleID.seer.rawValue }) {
             actions.append(NightAction(
                 type: .seer,
-                title: "Seer",
-                description: "Check if a player is a werewolf",
+                title: "Seer".localized,
+                description: "night.action.seer.description".localized,
                 players: [seer],
                 targetPlayers: session.players.filter { $0.isAlive && $0.id != seer.id }
             ))
@@ -43,12 +43,12 @@ struct NightPhaseView: View {
         
         // Doctor action
         if let doctor = session.players.first(where: { $0.isAlive && $0.roleID == RoleID.doctor.rawValue }) {
-            var doctorDescription = "Choose a player to protect"
+            var doctorDescription = "night.action.doctor.description".localized
             
             // If werewolf has already targeted someone, show it to the doctor
             if let werewolfTargetID = session.werewolfTarget,
                let targetedPlayer = session.players.first(where: { $0.id == werewolfTargetID }) {
-                doctorDescription = "The werewolves targeted \(targetedPlayer.displayName). Choose a player to protect"
+                doctorDescription = "night.action.doctor.werewolf_targeted".localized(targetedPlayer.displayName)
             }
             
             // Get valid targets based on house rules
@@ -56,7 +56,7 @@ struct NightPhaseView: View {
             
             actions.append(NightAction(
                 type: .doctor,
-                title: "Doctor",
+                title: "Doctor".localized,
                 description: doctorDescription,
                 players: [doctor],
                 targetPlayers: validTargets
@@ -70,8 +70,8 @@ struct NightPhaseView: View {
             if !eliminatedPlayers.isEmpty {
                 actions.append(NightAction(
                     type: .medium,
-                    title: "Medium",
-                    description: "Point to an eliminated player to learn if they were a werewolf",
+                    title: "Medium".localized,
+                    description: "night.action.medium.description".localized,
                     players: [medium],
                     targetPlayers: eliminatedPlayers
                 ))
@@ -118,21 +118,22 @@ struct NightPhaseView: View {
                                 .font(.system(size: 80))
                                 .foregroundStyle(.orange)
                             
-                            Text("Night Complete")
+                            Text("night.complete")
+                                .lineLimit(1)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                             
-                            Text("All night actions have been taken. The sun rises...")
+                            Text("night.complete_description")
                                 .font(.title3)
                                 .foregroundStyle(.secondary)
                                 .multilineTextAlignment(.center)
                             
-                            NavigationLink(value: GamePhase.day) {
-                                Text("Begin Day Phase")
-                                    .fontWeight(.semibold)
+                            Button("Begin Day Phase") {
+                                gameService.navigateToDay()
                             }
                             .buttonStyle(.borderedProminent)
                             .controlSize(.large)
+                            .fontWeight(.semibold)
                         }
                         .padding(40)
                     }
@@ -142,9 +143,9 @@ struct NightPhaseView: View {
                 .padding(.horizontal, 24)
             }
         }
-        .navigationTitle("Night Phase 🌙")
+        .navigationTitle("night.title")
         .toolbarTitleDisplayMode(.inline)
-        .navigationSubtitle("Round \(gameService.currentSession?.currentRound ?? 1)")
+        .navigationSubtitle(String(localized: "night.round_subtitle \(gameService.currentSession?.currentRound ?? 1)"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Restart") {
@@ -213,11 +214,6 @@ struct NightPhaseView: View {
         if gameService.hasPendingHunterRevenge() {
             // Show Hunter revenge immediately
             showingHunterRevenge = true
-        } else {
-            // Navigate to day phase after a brief delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                gameService.navigateToDay()
-            }
         }
     }
     
@@ -315,7 +311,7 @@ struct NightActionView: View {
             
             // Player info
             VStack(spacing: 8) {
-                Text("Current \(Text("Player", countToInflect: action.players.count)):")
+                Text(action.players.count == 1 ? "night.current_player_singular" : "night.current_player_plural")
                     .font(.headline)
                 
                 ForEach(action.players, id: \.id) { player in
@@ -338,7 +334,7 @@ struct NightActionView: View {
             
             // Target selection
             VStack(spacing: 16) {
-                Text("Select Target:")
+                Text(localized: "Select Target:")
                     .font(.headline)
                 
                 ScrollView {

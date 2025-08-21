@@ -11,57 +11,34 @@ struct GameSetupView: View {
     @Environment(GameService.self) private var gameService: GameService
     @Environment(\.dismiss) private var dismiss
     @State private var showingPresetPicker = false
+    @State private var showingManagePlayers = false
+    
+    private var configuredPlayersCount: Int {
+        gameService.playerNames.prefix(gameService.playerCount)
+            .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            .count
+    }
     
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
-                // Header
-//                VStack(spacing: 16) {
-//                    Text("Game Setup")
-//                        .font(.largeTitle)
-//                        .fontWeight(.bold)
-//                    
-//                    Text("Configure your game")
-//                        .font(.title3)
-//                        .foregroundStyle(.secondary)
-//                }
-//                .padding(.top, 20)
-                
-                // Player count
-                VStack(spacing: 16) {
-                    HStack {
-                        Image(systemName: "person.3.fill")
-                            .foregroundStyle(.blue)
-                        Text("Number of Players")
-                            .font(.headline)
-                        Spacer()
-                    }
+                VStack(alignment: .leading, spacing: 16) {
+                    Label("setup.number_of_players", systemImage: "person.3.fill")
+                        .foregroundStyle(.orange)
                     
                     HStack {
-                        Button(action: { if gameService.playerCount > 4 { gameService.playerCount -= 1 } }) {
-                            Image(systemName: "minus.circle.fill")
-                                .font(.title2)
-                        }
-                        .disabled(gameService.playerCount <= 4)
-                        
-                        Spacer()
+                        Slider(value: Binding(
+                            get: { Double(gameService.playerCount) },
+                            set: { gameService.playerCount = Int($0) }
+                        ), in: 4...24, step: 1)
                         
                         Text("\(gameService.playerCount)")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .frame(minWidth: 80)
-                        
-                        Spacer()
-                        
-                        Button(action: { if gameService.playerCount < 24 { gameService.playerCount += 1 } }) {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.title2)
-                        }
-                        .disabled(gameService.playerCount >= 24)
+                            .foregroundStyle(.secondary)
+                            .bold()
                     }
-                    .foregroundStyle(.blue)
                 }
                 .padding()
+                .tint(.orange)
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
@@ -90,6 +67,35 @@ struct GameSetupView: View {
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
+                // Player management card
+                VStack(spacing: 12) {
+                    HStack {
+                        Image(systemName: "person.3")
+                            .foregroundStyle(.blue)
+                        Text("Players")
+                            .font(.headline)
+                        Spacer()
+                        Text("\(configuredPlayersCount)/\(gameService.playerCount)")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .bold()
+                    }
+                    
+                    HStack {
+                        Button {
+                            showingManagePlayers = true
+                        } label: {
+                            Label("Manage Players", systemImage: "square.and.pencil")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.blue)
+                    }
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+
                 // Role selection
                 VStack(spacing: 16) {
                     HStack {
@@ -100,28 +106,21 @@ struct GameSetupView: View {
                         
                         Spacer()
                         
-                        Button("Auto-Balance") {
+                        Text("\(gameService.getTotalSelectedRoles())/\(gameService.playerCount)")
+                            .font(.subheadline)
+                            .foregroundStyle(gameService.isSetupValid() ? .green : .red)
+                            .fixedSize()
+                            .bold()
+                            .padding(.trailing, 8)
+                        
+                        Button {
                             gameService.suggestBalancedSetup()
+                        } label: {
+                            Label("Auto-Balance", systemImage: "sparkles")
+                                .labelStyle(.iconOnly)
                         }
                         .buttonStyle(.bordered)
-                        .font(.caption)
                         .foregroundStyle(.orange)
-                        
-                        VStack(alignment: .trailing, spacing: 4) {
-                            Text("\(gameService.getTotalSelectedRoles())/\(gameService.playerCount)")
-                                .font(.subheadline)
-                                .foregroundStyle(gameService.isSetupValid() ? .green : .red)
-                            
-                            if let validationMessage = gameService.getSetupValidationMessage() {
-                                Text(validationMessage)
-                                    .font(.caption)
-                                    .foregroundStyle(.red)
-                            } else if gameService.isSetupValid() {
-                                Text("Ready to play!")
-                                    .font(.caption)
-                                    .foregroundStyle(.green)
-                            }
-                        }
                     }
                     
                     LazyVStack(spacing: 16) {
@@ -144,6 +143,13 @@ struct GameSetupView: View {
                                                 role: role,
                                                 count: gameService.getRoleCount(roleID: role.id),
                                                 onCountChanged: { count in
+                                                    // Automatically decrease the number of villagers if another good role is selected
+                                                    if role.roleID != .villager,
+                                                       role.roleAlignment == .villager,
+                                                       count > gameService.getRoleCount(roleID: role.roleID) {
+                                                        let numberOfVillagers = gameService.getRoleCount(roleID: RoleID.villager)
+                                                        gameService.updateRoleCount(roleID: RoleID.villager, count: numberOfVillagers - 1)
+                                                    }
                                                     gameService.updateRoleCount(roleID: role.id, count: count)
                                                 }
                                             )
@@ -237,11 +243,12 @@ struct GameSetupView: View {
                 .padding(.horizontal, 24)
             }
             .padding(.horizontal)
+            .padding(.top)
             .padding(.bottom, 40)
         }
-        .navigationTitle("Game Setup")
+        .navigationTitle("setup.title")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationSubtitle("Configure your game")
+        .navigationSubtitle("setup.subtitle")
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -262,8 +269,16 @@ struct GameSetupView: View {
                 .font(.caption)
             }
         }
+        .sheet(isPresented: $showingManagePlayers) {
+            NavigationStack {
+                ManagePlayersView()
+            }
+            .environment(gameService)
+        }
     }
 }
+
+
 
 struct PresetCard: View {
     let preset: RolePreset
@@ -302,23 +317,10 @@ struct RoleRow: View {
             .font(.title2)
         
         VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 8) {
-                Text(role.name)
-                    .font(.headline)
-                
-                if role.roleAlignment == .werewolf {
-                    Text("REQUIRED")
-                        .font(.caption2)
-                        .fontWeight(.bold)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(.red)
-                        .foregroundStyle(.white)
-                        .clipShape(Capsule())
-                }
-            }
+            Text(role.name.localized)
+                .font(.headline)
             
-            Text(role.notes)
+            Text(role.notes.localized)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(2)

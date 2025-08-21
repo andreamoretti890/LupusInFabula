@@ -22,11 +22,11 @@ struct HomeView: View {
                         .font(.system(size: 80))
                         .foregroundStyle(.orange)
                     
-                    Text("Lupus in Fabula")
+                    Text("game.title".localized)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
-                    Text("The classic party game of deception and deduction")
+                    Text("game.subtitle".localized)
                         .font(.title3)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -38,30 +38,24 @@ struct HomeView: View {
                     Button {
                         gameService.navigateToSetup()
                     } label: {
-                        HStack {
-                            Image(systemName: "play.fill")
-                            Text("Start New Game")
-                                .fontWeight(.semibold)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(.blue)
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        Label("button.start_new_game", systemImage: "play.fill")
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.blue)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     
                     if let _ = gameService.lastSavedConfig {
                         Button(action: continueLastGame) {
-                            HStack {
-                                Image(systemName: "arrow.clockwise")
-                                Text("Continue Last Game")
-                                    .fontWeight(.semibold)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(.green)
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            Label("button.continue_last_game", systemImage: "arrow.clockwise")
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(.green)
+                                .foregroundStyle(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                     }
                 }
@@ -69,14 +63,14 @@ struct HomeView: View {
                 
                 // Game info
                 VStack(spacing: 16) {
-                    Text("How to Play")
+                    Text("how_to_play.title".localized)
                         .font(.title2)
                         .fontWeight(.semibold)
                     
                     VStack(alignment: .leading, spacing: 12) {
-                        GameRuleRow(icon: "moon.fill", title: "Night Phase", description: "Werewolves choose victims, special roles use abilities")
-                        GameRuleRow(icon: "sun.max.fill", title: "Day Phase", description: "Villagers discuss and vote to eliminate suspects")
-                        GameRuleRow(icon: "person.2.fill", title: "Win Conditions", description: "Villagers eliminate all werewolves, or werewolves outnumber villagers")
+                        GameRuleRow(icon: "moon.fill", title: String(localized: "game_rule.night_phase.title"), description: String(localized: "game_rule.night_phase.description"))
+                        GameRuleRow(icon: "sun.max.fill", title: String(localized: "game_rule.day_phase.title"), description: String(localized: "game_rule.day_phase.description"))
+                        GameRuleRow(icon: "person.2.fill", title: String(localized: "game_rule.win_conditions.title"), description: String(localized: "game_rule.win_conditions.description"))
                     }
                     .padding()
                     .background(.ultraThinMaterial)
@@ -98,8 +92,11 @@ struct HomeView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Privacy") {
+                Button {
                     showingPrivacy = true
+                } label: {
+                    Image(systemName: "lock.shield.fill")
+                        .foregroundStyle(.blue)
                 }
             }
         }
@@ -147,12 +144,13 @@ struct GameRuleRow: View {
 }
 
 #Preview {
-    let tempContainer = try! ModelContainer(for: Role.self, RolePreset.self, SavedConfig.self, GameSession.self, GameSettings.self)
+    let tempContainer = try! ModelContainer(for: Role.self, RolePreset.self, SavedConfig.self, GameSession.self, GameSettings.self, FrequentPlayer.self)
     let tempContext = ModelContext(tempContainer)
     let gameService = GameService(modelContext: tempContext)
     
     NavigationStack {
         HomeView()
             .environment(gameService)
+            .environment(\.locale, Locale(identifier: "it_IT"))
     }
 }
