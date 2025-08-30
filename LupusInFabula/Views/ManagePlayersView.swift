@@ -15,7 +15,7 @@ struct ManagePlayersView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Selected (\(gameService.playerCount))")) {
+                            Section(header: Text(String(format: "manage_players.selected".localized, gameService.playerCount))) {
                 ForEach(0..<gameService.playerCount, id: \.self) { index in
                     HStack(spacing: 12) {
                         Text("\(index + 1).")
@@ -48,10 +48,10 @@ struct ManagePlayersView: View {
                 }
             }
             
-            Section(header: Text("Recents")) {
+                            Section(header: Text("manage_players.recents".localized)) {
                 let suggestions = gameService.getNameSuggestions(prefix: searchText, limit: 50, excluding: gameService.playerNames)
                 if suggestions.isEmpty {
-                    Text("No recents").foregroundStyle(.secondary)
+                                            Text("manage_players.no_recents".localized).foregroundStyle(.secondary)
                 } else {
                     ForEach(suggestions, id: \.self) { suggestion in
                         HStack {

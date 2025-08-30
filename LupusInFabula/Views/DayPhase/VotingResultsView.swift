@@ -22,17 +22,17 @@ struct VotingResultsView: View {
                 .foregroundStyle(.red)
             
             VStack(spacing: 16) {
-                Text("Vote Complete")
+                Text("voting_results.title".localized)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
                 if let player = eliminatedPlayer {
-                    Text("\(player.displayName) has been eliminated from the village.")
+                    Text(String(format: "voting_results.player_eliminated".localized, player.displayName))
                         .font(.title3)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                 } else {
-                    Text("No player was eliminated.")
+                    Text("voting_results.no_elimination".localized)
                         .font(.title3)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)

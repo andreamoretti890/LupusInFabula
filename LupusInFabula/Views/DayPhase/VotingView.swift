@@ -21,11 +21,11 @@ struct VotingView: View {
             VStack(spacing: 24) {
                 // Header
                 VStack(spacing: 16) {
-                    Text("Vote to Eliminate")
+                    Text("voting.title".localized)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
-                    Text("Choose a player to eliminate from the village")
+                    Text("voting.description".localized)
                         .font(.title3)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -62,7 +62,7 @@ struct VotingView: View {
                 Button(action: submitVote) {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
-                        Text("Submit Vote")
+                        Text("voting.submit_vote".localized)
                             .fontWeight(.semibold)
                     }
                     .frame(maxWidth: .infinity)

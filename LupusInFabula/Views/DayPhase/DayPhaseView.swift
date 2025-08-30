@@ -45,7 +45,7 @@ struct DayPhaseView: View {
                                     .font(.largeTitle)
                                     .fontWeight(.bold)
                                     .foregroundStyle(.green)
-                                Text("Villagers")
+                                Text("day_phase.villagers".localized)
                                     .font(.headline)
                                     .foregroundStyle(.secondary)
                             }
@@ -55,7 +55,7 @@ struct DayPhaseView: View {
                                     .font(.largeTitle)
                                     .fontWeight(.bold)
                                     .foregroundStyle(.red)
-                                Text("Werewolves")
+                                Text("day_phase.werewolves".localized)
                                     .font(.headline)
                                     .foregroundStyle(.secondary)
                             }
@@ -68,7 +68,7 @@ struct DayPhaseView: View {
                                         .font(.largeTitle)
                                         .fontWeight(.bold)
                                         .foregroundStyle(.purple)
-                                    Text("Jester")
+                                    Text("Jester".localized)
                                         .font(.headline)
                                         .foregroundStyle(.secondary)
                                 }
@@ -77,7 +77,7 @@ struct DayPhaseView: View {
                         
                         // Alive players
                         VStack(spacing: 16) {
-                            Text("Alive Players")
+                            Text("Alive Players".localized)
                                 .font(.headline)
                             
                             LazyVGrid(columns: [
@@ -98,7 +98,7 @@ struct DayPhaseView: View {
                         Button(action: startVoting) {
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
-                                Text("Start Voting")
+                                Text("day_phase.start_voting".localized)
                                     .fontWeight(.semibold)
                             }
                             .frame(maxWidth: .infinity)
@@ -113,7 +113,7 @@ struct DayPhaseView: View {
                             Button(action: skipVoting) {
                                 HStack {
                                     Image(systemName: "forward.fill")
-                                    Text("Skip Voting Phase")
+                                    Text("day_phase.skip_voting".localized)
                                         .fontWeight(.semibold)
                                 }
                                 .frame(maxWidth: .infinity)
@@ -127,7 +127,7 @@ struct DayPhaseView: View {
                         Button(action: endGame) {
                             HStack {
                                 Image(systemName: "flag.fill")
-                                Text("End Game")
+                                Text("day_phase.end_game".localized)
                                     .fontWeight(.semibold)
                             }
                             .frame(maxWidth: .infinity)
@@ -142,7 +142,7 @@ struct DayPhaseView: View {
                         } label: {
                             HStack(spacing: 4) {
                                 Image(systemName: "info.circle")
-                                Text("Debug")
+                                Text("day_phase.debug".localized)
                             }
                             .font(.caption)
                             .padding()

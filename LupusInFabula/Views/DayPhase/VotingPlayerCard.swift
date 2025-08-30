@@ -31,7 +31,7 @@ struct VotingPlayerCard: View {
                     .foregroundStyle(isSelected ? .red : .primary)
                 
                 if isSelected {
-                    Text("Selected for elimination")
+                                            Text("voting.selected_for_elimination".localized)
                         .font(.caption)
                         .foregroundStyle(.red)
                 }

@@ -20,7 +20,7 @@ struct OnboardingNavigationHeader: View {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 16, weight: .semibold))
-                        Text("Back")
+                        Text("onboarding.shared.back".localized)
                             .font(.body)
                             .fontWeight(.medium)
                     }
@@ -62,7 +62,7 @@ struct OnboardingProgressIndicator: View {
             }
             
             // Step indicator text
-            Text("\(currentStep.rawValue + 1) of \(OnboardingStep.allCases.count)")
+                            Text(String(format: "onboarding.shared.progress".localized, currentStep.rawValue + 1, OnboardingStep.allCases.count))
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }

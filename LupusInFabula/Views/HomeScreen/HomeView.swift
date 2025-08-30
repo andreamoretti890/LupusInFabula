@@ -78,7 +78,6 @@ struct HomeView: View {
                 }
                 .padding(.horizontal, 24)
             }
-            .padding(.bottom, 40)
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

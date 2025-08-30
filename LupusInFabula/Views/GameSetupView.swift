@@ -21,87 +21,211 @@ struct GameSetupView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 32) {
-                VStack(alignment: .leading, spacing: 16) {
-                    Label("setup.number_of_players", systemImage: "person.3.fill")
-                        .foregroundStyle(.orange)
+            VStack(spacing: 28) {
+                // Player count section with enhanced design
+                VStack(spacing: 20) {
+                    HStack(spacing: 12) {
+                        Image(systemName: "person.3.fill")
+//                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundStyle(.orange)
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("setup.number_of_players".localized)
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                            Text(String(format: "setup.player_count_range".localized, GameSettings.minPlayers, GameSettings.maxPlayers))
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        Spacer()
+                    }
                     
-                    HStack {
+                    HStack(spacing: 16) {
+                        Text("\(GameSettings.minPlayers)")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.secondary)
+                        
                         Slider(value: Binding(
                             get: { Double(gameService.playerCount) },
                             set: { gameService.playerCount = Int($0) }
-                        ), in: 4...24, step: 1)
+                        ), in: GameSettings.playersRange, step: 1)
+                        .tint(.orange)
                         
-                        Text("\(gameService.playerCount)")
+                        Text("\(GameSettings.maxPlayers)")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
                             .foregroundStyle(.secondary)
-                            .bold()
+                        
+                        // Large, prominent number display
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.orange.opacity(0.15))
+                                .frame(width: 50, height: 36)
+                            
+                            Text("\(gameService.playerCount)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.orange)
+                        }
                     }
                 }
-                .padding()
-                .tint(.orange)
+                .padding(20)
                 .background(.ultraThinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.quaternary, lineWidth: 0.5)
+                )
                 
-                // Presets
-                VStack(spacing: 16) {
-                    HStack {
-                        Image(systemName: "list.bullet")
-                            .foregroundStyle(.green)
-                        Text("Quick Presets")
-                            .font(.headline)
+                // Enhanced presets section
+//                VStack(spacing: 20) {
+//                    HStack(spacing: 12) {
+//                        ZStack {
+//                            Circle()
+//                                .fill(.green.opacity(0.15))
+//                                .frame(width: 40, height: 40)
+//                            Image(systemName: "list.bullet.rectangle.fill")
+//                                .font(.system(size: 18, weight: .semibold))
+//                                .foregroundStyle(.green)
+//                        }
+//                        
+//                        VStack(alignment: .leading, spacing: 2) {
+//                            Text("Quick Presets")
+//                                .font(.headline)
+//                                .fontWeight(.semibold)
+//                            Text("Pre-configured role combinations")
+//                                .font(.subheadline)
+//                                .foregroundStyle(.secondary)
+//                        }
+//                        
+//                        Spacer()
+//                        
+//                        Text("\(gameService.availablePresets.count) available")
+//                            .font(.caption)
+//                            .fontWeight(.medium)
+//                            .foregroundStyle(.secondary)
+//                    }
+//                    
+//                    ScrollView(.horizontal, showsIndicators: false) {
+//                        HStack(spacing: 12) {
+//                            ForEach(gameService.availablePresets, id: \.id) { preset in
+//                                EnhancedPresetCard(preset: preset) {
+//                                    gameService.selectPreset(preset)
+//                                }
+//                            }
+//                        }
+//                        .padding(.horizontal, 4)
+//                    }
+//                }
+//                .padding(20)
+//                .background(.ultraThinMaterial)
+//                .clipShape(RoundedRectangle(cornerRadius: 16))
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 16)
+//                        .stroke(.quaternary, lineWidth: 0.5)
+//                )
+                
+                // Player management card - Enhanced with Apple's latest design guidelines
+                VStack(spacing: 20) {
+                    // Header with status indicator
+                    HStack(spacing: 12) {
+                        Image(systemName: "person.text.rectangle.fill")
+                            .foregroundStyle(.blue)
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("setup.players.title".localized)
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                            Text("setup.players.description".localized)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
+                        }
+                        
                         Spacer()
+                        
+                        // Status badge
+                        HStack(spacing: 4) {
+                            Image(systemName: configuredPlayersCount == gameService.playerCount ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundStyle(configuredPlayersCount == gameService.playerCount ? .green : .orange)
+                            
+                            Text("\(configuredPlayersCount)/\(gameService.playerCount)")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(configuredPlayersCount == gameService.playerCount ? .green : .orange)
+                        }
                     }
                     
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(gameService.availablePresets, id: \.id) { preset in
-                                PresetCard(preset: preset) {
-                                    gameService.selectPreset(preset)
+                    // Player preview section
+                    if configuredPlayersCount > 0 {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("setup.players.configured".localized)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                                .foregroundStyle(.secondary)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 8) {
+                                    ForEach(0..<gameService.playerCount, id: \.self) { index in
+                                        let playerName = gameService.playerNames.indices.contains(index) ? gameService.playerNames[index] : ""
+                                        
+                                        HStack(spacing: 6) {
+                                            Circle()
+                                                .fill(playerName.isEmpty ? .gray.opacity(0.3) : .blue.opacity(0.8))
+                                                .frame(width: 8, height: 8)
+                                            
+                                            Text(playerName.isEmpty ? "player.name_format".localized(index + 1) : playerName)
+                                                .font(.caption)
+                                                .fontWeight(.medium)
+                                                .foregroundStyle(playerName.isEmpty ? .secondary : .primary)
+                                        }
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 6)
+                                        .background(playerName.isEmpty ? .gray.opacity(0.1) : .blue.opacity(0.1))
+                                        .clipShape(Capsule())
+                                    }
                                 }
+                                .padding(.horizontal, 1)
                             }
                         }
-                        .padding(.horizontal, 4)
-                    }
-                }
-                .padding()
-                .background(.ultraThinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                
-                // Player management card
-                VStack(spacing: 12) {
-                    HStack {
-                        Image(systemName: "person.3")
-                            .foregroundStyle(.blue)
-                        Text("Players")
-                            .font(.headline)
-                        Spacer()
-                        Text("\(configuredPlayersCount)/\(gameService.playerCount)")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .bold()
                     }
                     
-                    HStack {
-                        Button {
-                            showingManagePlayers = true
-                        } label: {
-                            Label("Manage Players", systemImage: "square.and.pencil")
-                                .frame(maxWidth: .infinity)
+                    // Action buttons with modern design
+                    Button {
+                        showingManagePlayers = true
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 14))
+                            Text("setup.add_names".localized)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.blue)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(.green.opacity(0.1))
+                        .foregroundStyle(.green)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
+                    .buttonStyle(.plain)
                 }
-                .padding()
+                .padding(20)
                 .background(.ultraThinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.quaternary, lineWidth: 0.5)
+                )
 
                 // Role selection
                 VStack(spacing: 16) {
                     HStack {
                         Image(systemName: "person.badge.key")
                             .foregroundStyle(.orange)
-                        Text("Role Selection")
+                        Text("setup.role_selection".localized)
                             .font(.headline)
                         
                         Spacer()
@@ -143,9 +267,11 @@ struct GameSetupView: View {
                                                 role: role,
                                                 count: gameService.getRoleCount(roleID: role.id),
                                                 onCountChanged: { count in
-                                                    // Automatically decrease the number of villagers if another good role is selected
+                                                    /// Automatically decrease the number of villagers if another good role is selected
+                                                    /// and the amount of selected roles is equal or exceeds the player count
                                                     if role.roleID != .villager,
                                                        role.roleAlignment == .villager,
+                                                       gameService.getTotalSelectedRoles() >= gameService.playerCount,
                                                        count > gameService.getRoleCount(roleID: role.roleID) {
                                                         let numberOfVillagers = gameService.getRoleCount(roleID: RoleID.villager)
                                                         gameService.updateRoleCount(roleID: RoleID.villager, count: numberOfVillagers - 1)
@@ -169,7 +295,7 @@ struct GameSetupView: View {
                     HStack {
                         Image(systemName: "star.fill")
                             .foregroundStyle(.purple)
-                        Text("Special Roles")
+                        Text("setup.special_roles".localized)
                             .font(.headline)
                         Spacer()
                     }
@@ -181,10 +307,10 @@ struct GameSetupView: View {
                                     .font(.title2)
                                 
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text("Jester")
+                                    Text("Jester".localized)
                                         .font(.headline)
                                     
-                                    Text("Wins the game by being voted out during the day phase")
+                                    Text("setup.jester.description".localized)
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                 }
@@ -210,7 +336,7 @@ struct GameSetupView: View {
                             HStack {
                                 Image(systemName: "exclamationmark.triangle.fill")
                                     .foregroundStyle(.orange)
-                                Text("Jester requires at least 7 players")
+                                Text("setup.jester.requirement".localized)
                                     .font(.caption)
                                     .foregroundStyle(.orange)
                                 Spacer()
@@ -222,41 +348,71 @@ struct GameSetupView: View {
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
-                // Start button
-                Button {
-                    if gameService.isSetupValid() {
-                        gameService.startGame()
+                // Enhanced start button with better visual feedback
+                VStack(spacing: 16) {
+                    if !gameService.isSetupValid() {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundStyle(.orange)
+                            Text("setup.complete_setup".localized)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding(.horizontal)
                     }
-                } label: {
-                    HStack {
-                        Image(systemName: "play.fill")
-                        Text("Start Game")
-                            .fontWeight(.semibold)
+                    
+                    Button {
+                        if gameService.isSetupValid() {
+                            gameService.startGame()
+                        }
+                    } label: {
+                        HStack(spacing: 12) {
+                            if gameService.isSetupValid() {
+                                Image(systemName: "play.fill")
+                                    .font(.system(size: 18, weight: .semibold))
+                            } else {
+                                Image(systemName: "exclamationmark.circle.fill")
+                                    .font(.system(size: 18, weight: .semibold))
+                            }
+                            
+                            Text(gameService.isSetupValid() ? "Start Game" : "Complete Setup")
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(gameService.isSetupValid() ? .blue : .gray.opacity(0.3))
+                        )
+                        .foregroundStyle(gameService.isSetupValid() ? .white : .secondary)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(gameService.isSetupValid() ? .clear : .gray.opacity(0.3), lineWidth: 1)
+                        )
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(gameService.isSetupValid() ? .blue : .gray)
-                    .foregroundStyle(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .buttonStyle(.plain)
+                    .disabled(!gameService.isSetupValid())
+                    .scaleEffect(gameService.isSetupValid() ? 1.0 : 0.98)
+                    .animation(.easeInOut(duration: 0.2), value: gameService.isSetupValid())
                 }
-                .disabled(!gameService.isSetupValid())
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 20)
             }
             .padding(.horizontal)
             .padding(.top)
-            .padding(.bottom, 40)
+            .padding(.bottom, 50)
         }
         .navigationTitle("setup.title")
         .navigationBarTitleDisplayMode(.inline)
         .navigationSubtitle("setup.subtitle")
         .navigationBarBackButtonHidden()
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel", systemImage: "xmark") {
                     dismiss()
                 }
             }
-            
+            #if DEBUG
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Quick Start") {
                     if gameService.isSetupValid() {
@@ -268,6 +424,18 @@ struct GameSetupView: View {
                 .foregroundStyle(.red)
                 .font(.caption)
             }
+            #endif
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    if gameService.isSetupValid() {
+                        gameService.startGame()
+                    }
+                } label: {
+                    Image(systemName: "play.fill")
+                        .foregroundStyle(.blue)
+                }
+                .disabled(!gameService.isSetupValid())
+            }
         }
         .sheet(isPresented: $showingManagePlayers) {
             NavigationStack {
@@ -278,32 +446,65 @@ struct GameSetupView: View {
     }
 }
 
-
-
-struct PresetCard: View {
+struct EnhancedPresetCard: View {
     let preset: RolePreset
     let onSelect: () -> Void
     
     var body: some View {
         Button(action: onSelect) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(preset.name)
-                    .font(.headline)
-                    .foregroundStyle(.primary)
+            VStack(alignment: .leading, spacing: 12) {
+                // Header with icon and name
+                HStack(spacing: 8) {
+                    Circle()
+                        .fill(.green.opacity(0.2))
+                        .frame(width: 24, height: 24)
+                        .overlay(
+                            Text("\(preset.minPlayers)")
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.green)
+                        )
+                    
+                    Text(preset.name)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.primary)
+                    
+                    Spacer()
+                }
                 
+                // Description
                 Text(preset.presetDescription)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.leading)
+                    .lineLimit(2)
                 
-                Text("\(preset.minPlayers) players")
-                    .font(.caption)
+                // Players count badge
+                HStack {
+                    Spacer()
+                    HStack(spacing: 4) {
+                        Image(systemName: "person.2.fill")
+                            .font(.system(size: 10))
+                        Text(String(format: "preset.players".localized, preset.minPlayers))
+                            .font(.caption2)
+                            .fontWeight(.medium)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(.blue.opacity(0.1))
                     .foregroundStyle(.blue)
+                    .clipShape(Capsule())
+                }
             }
-            .frame(width: 140, alignment: .leading)
-            .padding()
+            .frame(width: 160, alignment: .leading)
+            .padding(16)
             .background(.regularMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(.quaternary, lineWidth: 0.5)
+            )
         }
         .buttonStyle(.plain)
     }

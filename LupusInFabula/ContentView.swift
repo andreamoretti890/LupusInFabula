@@ -31,7 +31,7 @@ struct ContentView: View {
                         .font(.system(size: 80))
                         .foregroundStyle(.orange)
                     
-                    Text("Loading...")
+                    Text("loading".localized)
                         .font(.title3)
                         .foregroundStyle(.secondary)
                 }

@@ -39,7 +39,7 @@ struct HunterRevengeView: View {
                                 .font(.system(size: 80))
                                 .foregroundStyle(.red)
                             
-                            Text("Hunter's Revenge")
+                            Text("hunter_revenge.title".localized)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.white)
@@ -55,7 +55,7 @@ struct HunterRevengeView: View {
                         
                         // Target selection
                         VStack(spacing: 20) {
-                            Text("Choose your target:")
+                            Text("hunter_revenge.choose_target".localized)
                                 .font(.headline)
                                 .foregroundStyle(.white)
                             
@@ -111,7 +111,7 @@ struct HunterRevengeView: View {
             }
         } message: {
             if let target = selectedTarget {
-                Text("Are you sure you want to eliminate \(target.displayName)?")
+                Text(String(format: "hunter_revenge.confirm_elimination".localized, target.displayName))
             }
         }
     }

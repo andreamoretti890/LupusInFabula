@@ -22,6 +22,7 @@
       }
     },
     "%@ has been eliminated from the village." : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -62,6 +63,7 @@
       }
     },
     "%lld of %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -78,6 +80,7 @@
       }
     },
     "%lld players" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -167,18 +170,8 @@
         }
       }
     },
-    "A respected village leader who votes during the day phase" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un leader rispettato del villaggio che vota durante la fase diurna"
-          }
-        }
-      }
-    },
     "Alive Players" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -189,6 +182,7 @@
       }
     },
     "All Roles Revealed!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -260,6 +254,7 @@
       }
     },
     "Are you sure you want to eliminate %@?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -294,6 +289,7 @@
 
     },
     "Back" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -455,6 +451,7 @@
       }
     },
     "Choose a player to eliminate from the village" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -486,6 +483,7 @@
       }
     },
     "Choose your target:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -502,6 +500,9 @@
 
     },
     "Complete onboarding and go to the main app" : {
+
+    },
+    "Complete Setup" : {
 
     },
     "Configure gameplay options and narrator controls" : {
@@ -546,6 +547,7 @@
       }
     },
     "Current Player Index: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -556,6 +558,7 @@
       }
     },
     "Current Session: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -575,7 +578,116 @@
         }
       }
     },
+    "day_phase.debug" : {
+      "comment" : "Debug section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        }
+      }
+    },
+    "day_phase.end_game" : {
+      "comment" : "End game button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End Game"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fine Partita"
+          }
+        }
+      }
+    },
+    "day_phase.skip_voting" : {
+      "comment" : "Skip voting phase button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip Voting Phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salta Fase Votazione"
+          }
+        }
+      }
+    },
+    "day_phase.start_voting" : {
+      "comment" : "Start voting button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Voting"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia Votazione"
+          }
+        }
+      }
+    },
+    "day_phase.villagers" : {
+      "comment" : "Villagers team label",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Villagers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contadini"
+          }
+        }
+      }
+    },
+    "day_phase.werewolves" : {
+      "comment" : "Werewolves team label",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werewolves"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lupi Mannari"
+          }
+        }
+      }
+    },
     "Debug" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -586,6 +698,7 @@
       }
     },
     "Debug Info" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -671,6 +784,7 @@
       }
     },
     "End Game" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -692,7 +806,26 @@
       }
     },
     "Game Over" : {
+      "extractionState" : "stale",
       "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fine della partita"
+          }
+        }
+      }
+    },
+    "game_end.title" : {
+      "comment" : "Game end screen title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Over"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -849,6 +982,7 @@
 
     },
     "Hold to reveal" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -898,7 +1032,62 @@
         }
       }
     },
+    "hunter_revenge.choose_target" : {
+      "comment" : "Choose target instruction",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose your target:"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli il tuo bersaglio:"
+          }
+        }
+      }
+    },
+    "hunter_revenge.confirm_elimination" : {
+      "comment" : "Confirm elimination message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to eliminate %@?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sei sicuro di voler eliminare %@?"
+          }
+        }
+      }
+    },
+    "hunter_revenge.title" : {
+      "comment" : "Hunter revenge screen title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hunter's Revenge"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vendetta del Cacciatore"
+          }
+        }
+      }
+    },
     "Hunter's Revenge" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -909,6 +1098,7 @@
       }
     },
     "Jester" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -919,6 +1109,7 @@
       }
     },
     "Jester requires at least 7 players" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -961,7 +1152,26 @@
         }
       }
     },
+    "loading" : {
+      "comment" : "Loading message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento..."
+          }
+        }
+      }
+    },
     "Loading..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -977,6 +1187,96 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gestisci Giocatori"
+          }
+        }
+      }
+    },
+    "manage_players.autofill" : {
+      "comment" : "Autofill from recents button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autofill from recents"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compila dai recenti"
+          }
+        }
+      }
+    },
+    "manage_players.clear_all" : {
+      "comment" : "Clear all button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear All"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancella Tutto"
+          }
+        }
+      }
+    },
+    "manage_players.no_recents" : {
+      "comment" : "No recent players message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No recents"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun recente"
+          }
+        }
+      }
+    },
+    "manage_players.recents" : {
+      "comment" : "Recent players section header",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recents"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recenti"
+          }
+        }
+      }
+    },
+    "manage_players.selected" : {
+      "comment" : "Selected players section header",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected (%d)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selezionati (%d)"
           }
         }
       }
@@ -1251,6 +1551,7 @@
       }
     },
     "No current player" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -1261,6 +1562,7 @@
       }
     },
     "No player was eliminated." : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -1269,9 +1571,6 @@
           }
         }
       }
-    },
-    "No recents" : {
-
     },
     "onboarding.completion.concept.basics" : {
       "extractionState" : "stale",
@@ -2864,6 +3163,42 @@
         }
       }
     },
+    "onboarding.shared.back" : {
+      "comment" : "Back button in onboarding",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indietro"
+          }
+        }
+      }
+    },
+    "onboarding.shared.progress" : {
+      "comment" : "Progress indicator in onboarding",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d of %d"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d di %d"
+          }
+        }
+      }
+    },
     "onboarding.welcome.feature.fun" : {
       "localizations" : {
         "en" : {
@@ -3000,11 +3335,30 @@
       }
     },
     "Players" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Giocatori"
+          }
+        }
+      }
+    },
+    "preset.players" : {
+      "comment" : "Players count in preset cards",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d giocatori"
           }
         }
       }
@@ -3290,6 +3644,7 @@
       }
     },
     "Quick Presets" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -3321,6 +3676,7 @@
       }
     },
     "Recents" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -3382,6 +3738,7 @@
       }
     },
     "Role revealed!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -3392,11 +3749,210 @@
       }
     },
     "Role Selection" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selezione Ruoli"
+          }
+        }
+      }
+    },
+    "role_reveal.all_roles_revealed" : {
+      "comment" : "All roles revealed message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Roles Revealed!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutti i Ruoli Rivelati!"
+          }
+        }
+      }
+    },
+    "role_reveal.current_player_index" : {
+      "comment" : "Current player index debug info",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Player Index: %d"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indice Giocatore Attuale: %d"
+          }
+        }
+      }
+    },
+    "role_reveal.current_session" : {
+      "comment" : "Current session debug info",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Session: %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sessione Attuale: %@"
+          }
+        }
+      }
+    },
+    "role_reveal.debug_info" : {
+      "comment" : "Debug info section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug Info"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informazioni di debug"
+          }
+        }
+      }
+    },
+    "role_reveal.game_beginning" : {
+      "comment" : "Game beginning message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The game is about to begin. Pass the device to the first player for the night phase."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La partita sta per iniziare. Passa il dispositivo al primo giocatore per la fase notturna."
+          }
+        }
+      }
+    },
+    "role_reveal.hold_reveal" : {
+      "comment" : "Hold to reveal instruction",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hold to reveal"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tieni premuto per rivelare"
+          }
+        }
+      }
+    },
+    "role_reveal.no_current_player" : {
+      "comment" : "No current player message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No current player"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun giocatore attuale"
+          }
+        }
+      }
+    },
+    "role_reveal.player_progress" : {
+      "comment" : "Player progress indicator",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d of %d"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d di %d"
+          }
+        }
+      }
+    },
+    "role_reveal.role_revealed" : {
+      "comment" : "Role revealed message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Role revealed!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruolo rivelato!"
+          }
+        }
+      }
+    },
+    "role_reveal.session_players" : {
+      "comment" : "Session players count debug info",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session Players: %d"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori Sessione: %d"
+          }
+        }
+      }
+    },
+    "role_reveal.tap_hold_reveal" : {
+      "comment" : "Tap and hold to reveal instruction",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap and hold to reveal your role"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tocca e tieni premuto per rivelare il tuo ruolo"
           }
         }
       }
@@ -3454,10 +4010,8 @@
         }
       }
     },
-    "Selected (%lld)" : {
-
-    },
     "Selected for elimination" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -3468,6 +4022,7 @@
       }
     },
     "Session Players: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -3960,6 +4515,78 @@
         }
       }
     },
+    "setup.add_names" : {
+      "comment" : "Add names button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Names"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi Nomi"
+          }
+        }
+      }
+    },
+    "setup.complete_setup" : {
+      "comment" : "Complete setup message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete setup to start the game"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completa la configurazione per iniziare la partita"
+          }
+        }
+      }
+    },
+    "setup.jester.description" : {
+      "comment" : "Jester role description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wins the game by being voted out during the day phase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vince la partita venendo votato durante la fase diurna"
+          }
+        }
+      }
+    },
+    "setup.jester.requirement" : {
+      "comment" : "Jester minimum players requirement",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jester requires at least 7 players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Giullare richiede almeno 7 giocatori"
+          }
+        }
+      }
+    },
     "setup.number_of_players" : {
       "comment" : "Label for player count setting",
       "extractionState" : "manual",
@@ -3974,6 +4601,114 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Numero di Giocatori"
+          }
+        }
+      }
+    },
+    "setup.player_count_range" : {
+      "comment" : "Description for player count range",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose between %d-%d players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli tra %d-%d giocatori"
+          }
+        }
+      }
+    },
+    "setup.players.configured" : {
+      "comment" : "Configured players label",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configured Players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori Configurati"
+          }
+        }
+      }
+    },
+    "setup.players.description" : {
+      "comment" : "Players section description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configure your game participants"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura i partecipanti della partita"
+          }
+        }
+      }
+    },
+    "setup.players.title" : {
+      "comment" : "Players section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Players"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori"
+          }
+        }
+      }
+    },
+    "setup.role_selection" : {
+      "comment" : "Role selection section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Role Selection"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selezione Ruoli"
+          }
+        }
+      }
+    },
+    "setup.special_roles" : {
+      "comment" : "Special roles section title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special Roles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruoli Speciali"
           }
         }
       }
@@ -4056,6 +4791,7 @@
       }
     },
     "Skip Voting Phase" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4066,6 +4802,7 @@
       }
     },
     "Special Roles" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4106,6 +4843,7 @@
       }
     },
     "Start Voting" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4116,6 +4854,7 @@
       }
     },
     "Submit Vote" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4147,6 +4886,7 @@
       }
     },
     "Tap and hold to reveal your role" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4168,6 +4908,7 @@
       }
     },
     "The game is about to begin. Pass the device to the first player for the night phase." : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4188,6 +4929,17 @@
         }
       }
     },
+    "A respected village leader who votes during the day phase" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un rispettato leader del villaggio che vota durante la fase diurna"
+          }
+        }
+      }
+    },
     "Villager" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -4200,6 +4952,7 @@
       }
     },
     "Villagers" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4210,6 +4963,7 @@
       }
     },
     "Vote Complete" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4231,6 +4985,7 @@
       }
     },
     "Vote to Eliminate" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4251,6 +5006,132 @@
         }
       }
     },
+    "voting_results.no_elimination" : {
+      "comment" : "No player eliminated message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No player was eliminated."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun giocatore è stato eliminato."
+          }
+        }
+      }
+    },
+    "voting_results.player_eliminated" : {
+      "comment" : "Player eliminated message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ has been eliminated from the village."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ è stato eliminato dal villaggio."
+          }
+        }
+      }
+    },
+    "voting_results.title" : {
+      "comment" : "Voting results screen title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vote Complete"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votazione Completata"
+          }
+        }
+      }
+    },
+    "voting.description" : {
+      "comment" : "Voting screen description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a player to eliminate from the village"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli un giocatore da eliminare dal villaggio"
+          }
+        }
+      }
+    },
+    "voting.selected_for_elimination" : {
+      "comment" : "Selected for elimination message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected for elimination"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selezionato per l'eliminazione"
+          }
+        }
+      }
+    },
+    "voting.submit_vote" : {
+      "comment" : "Submit vote button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Submit Vote"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia Voto"
+          }
+        }
+      }
+    },
+    "voting.title" : {
+      "comment" : "Voting screen title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vote to Eliminate"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vota per Eliminare"
+          }
+        }
+      }
+    },
     "Werewolf" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -4263,6 +5144,7 @@
       }
     },
     "Werewolves" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -4284,6 +5166,7 @@
       }
     },
     "Wins the game by being voted out during the day phase" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {

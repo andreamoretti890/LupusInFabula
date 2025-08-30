@@ -25,6 +25,11 @@ final class GameSettings {
     static let minPhaseTimerDuration: Duration = .seconds(0)
     static let maxPhaseTimerDuration: Duration = .seconds(180)
     
+    // Players
+    static let minPlayers: Int = 4
+    static let maxPlayers: Int = 24
+    static let playersRange: ClosedRange<Double> = Double(minPlayers)...Double(maxPlayers)
+    
     init(
         id: String = "default",
         allowSkipWerewolfKill: Bool = false,

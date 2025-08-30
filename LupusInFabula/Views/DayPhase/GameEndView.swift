@@ -19,7 +19,7 @@ struct GameEndView: View {
                 .foregroundStyle(.yellow)
             
             VStack(spacing: 16) {
-                Text("Game Over")
+                Text("game_end.title".localized)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 

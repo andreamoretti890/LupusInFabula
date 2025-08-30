@@ -32,12 +32,12 @@ struct RoleRevealView: View {
                                 .font(.title2)
                                 .bold()
                         } else {
-                            Text("No current player")
+                            Text("role_reveal.no_current_player".localized)
                                 .font(.title2)
                                 .foregroundStyle(.red)
                         }
                         
-                        Text("\(gameService.currentRevealPlayerIndex + 1) of \(gameService.currentSession?.players.count ?? 0)")
+                        Text(String(format: "role_reveal.player_progress".localized, gameService.currentRevealPlayerIndex + 1, gameService.currentSession?.players.count ?? 0))
                             .font(.headline)
                             .foregroundStyle(.blue)
                     }
@@ -65,18 +65,18 @@ struct RoleRevealView: View {
                     } else {
                         // Debug info
                         VStack(spacing: 16) {
-                            Text("Debug Info")
+                            Text("role_reveal.debug_info".localized)
                                 .font(.headline)
                                 .foregroundStyle(.red)
                             
-                            Text("Current Session: \(gameService.currentSession != nil ? "Exists" : "Nil")")
+                            Text(String(format: "role_reveal.current_session".localized, gameService.currentSession != nil ? "Exists" : "Nil"))
                                 .font(.caption)
                             
-                            Text("Current Player Index: \(gameService.currentRevealPlayerIndex)")
+                            Text(String(format: "role_reveal.current_player_index".localized, gameService.currentRevealPlayerIndex))
                                 .font(.caption)
                             
                             if let session = gameService.currentSession {
-                                Text("Session Players: \(session.players.count)")
+                                Text(String(format: "role_reveal.session_players".localized, session.players.count))
                                     .font(.caption)
                             }
                         }
@@ -95,7 +95,7 @@ struct RoleRevealView: View {
                                     .font(.title)
                                     .foregroundStyle(.blue)
                                 
-                                Text("Tap and hold to reveal your role")
+                                Text("role_reveal.tap_hold_reveal".localized)
                                     .font(.headline)
                                     .multilineTextAlignment(.center)
                             }
@@ -105,7 +105,7 @@ struct RoleRevealView: View {
                                     .font(.title)
                                     .foregroundStyle(.green)
                                 
-                                Text("Role revealed!")
+                                Text("role_reveal.role_revealed".localized)
                                     .font(.headline)
                                     .foregroundStyle(.green)
                             }
@@ -246,7 +246,7 @@ struct RoleCard: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Text("Hold to reveal")
+                        Text("role_reveal.hold_reveal".localized)
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .padding(.horizontal, 12)
@@ -287,11 +287,11 @@ struct NextPlayerView: View {
                 .foregroundStyle(.orange)
             
             VStack(spacing: 16) {
-                Text("All Roles Revealed!")
+                                        Text("role_reveal.all_roles_revealed".localized)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
-                Text("The game is about to begin. Pass the device to the first player for the night phase.")
+                                        Text("role_reveal.game_beginning".localized)
                     .font(.title3)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
