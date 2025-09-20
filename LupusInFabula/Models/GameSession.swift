@@ -18,6 +18,7 @@ final class GameSession {
     var currentPlayerIndex: Int
     var eliminatedPlayers: [String] // player IDs
     var gameHistory: [GameEvent]
+    var revealMode: String // "phone_pass" or "sms_bulk"
     
     // Night action tracking
     var werewolfTarget: String? // player ID targeted by werewolves
@@ -29,7 +30,7 @@ final class GameSession {
     var doctorSelfSaveUsed: Bool // Track if doctor has used self-save
     var lastDoctorProtection: String? // player ID of last protection (for consecutive saves rule)
     
-    init(id: String, startDate: Date, players: [Player], currentPhase: String = "setup", currentRound: Int = 1, currentPlayerIndex: Int = 0, eliminatedPlayers: [String] = [], gameHistory: [GameEvent] = [], werewolfTarget: String? = nil, doctorProtection: String? = nil, hunterTarget: String? = nil, pendingHunterRevenge: String? = nil, doctorSelfSaveUsed: Bool = false, lastDoctorProtection: String? = nil) {
+    init(id: String, startDate: Date, players: [Player], currentPhase: String = "setup", currentRound: Int = 1, currentPlayerIndex: Int = 0, eliminatedPlayers: [String] = [], gameHistory: [GameEvent] = [], werewolfTarget: String? = nil, doctorProtection: String? = nil, hunterTarget: String? = nil, pendingHunterRevenge: String? = nil, doctorSelfSaveUsed: Bool = false, lastDoctorProtection: String? = nil, revealMode: String = "phone_pass") {
         self.id = id
         self.startDate = startDate
         self.players = players
@@ -44,6 +45,7 @@ final class GameSession {
         self.pendingHunterRevenge = pendingHunterRevenge
         self.doctorSelfSaveUsed = doctorSelfSaveUsed
         self.lastDoctorProtection = lastDoctorProtection
+        self.revealMode = revealMode
     }
 }
 
@@ -52,12 +54,14 @@ struct Player: Codable {
     var displayName: String
     var roleID: String
     var isAlive: Bool
+    var phoneNumber: String?
     
-    init(id: String, displayName: String, roleID: String, isAlive: Bool = true) {
+    init(id: String, displayName: String, roleID: String, isAlive: Bool = true, phoneNumber: String? = nil) {
         self.id = id
         self.displayName = displayName
         self.roleID = roleID
         self.isAlive = isAlive
+        self.phoneNumber = phoneNumber
     }
 }
 

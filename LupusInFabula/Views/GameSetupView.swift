@@ -12,6 +12,7 @@ struct GameSetupView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showingPresetPicker = false
     @State private var showingManagePlayers = false
+    @State private var showingRevealModeSelection = false
     
     private var configuredPlayersCount: Int {
         gameService.playerNames.prefix(gameService.playerCount)
@@ -362,8 +363,9 @@ struct GameSetupView: View {
                     }
                     
                     Button {
+                        // Action handled by tap gesture below
                         if gameService.isSetupValid() {
-                            gameService.startGame()
+                            showingRevealModeSelection = true
                         }
                     } label: {
                         HStack(spacing: 12) {
@@ -395,6 +397,11 @@ struct GameSetupView: View {
                     .disabled(!gameService.isSetupValid())
                     .scaleEffect(gameService.isSetupValid() ? 1.0 : 0.98)
                     .animation(.easeInOut(duration: 0.2), value: gameService.isSetupValid())
+//                    .onTapGesture {
+//                        if gameService.isSetupValid() {
+//                            showingRevealModeSelection = true
+//                        }
+//                    }
                 }
                 .padding(.horizontal, 20)
             }
@@ -442,6 +449,9 @@ struct GameSetupView: View {
                 ManagePlayersView()
             }
             .environment(gameService)
+        }
+        .sheet(isPresented: $showingRevealModeSelection) {
+            RevealModeSelectionView()
         }
     }
 }

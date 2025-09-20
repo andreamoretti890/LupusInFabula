@@ -210,7 +210,7 @@ struct ConfettiPiece: View {
     @State private var scale: CGFloat = 1.0
     
     private let colors: [Color] = [.red, .blue, .green, .yellow, .purple, .orange]
-    
+        
     var body: some View {
         Rectangle()
             .fill(colors[index % colors.count])

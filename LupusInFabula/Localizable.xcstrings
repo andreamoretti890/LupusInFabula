@@ -140,6 +140,9 @@
         }
       }
     },
+    "✓ Sent" : {
+
+    },
     "❓" : {
       "localizations" : {
         "it" : {
@@ -170,6 +173,17 @@
         }
       }
     },
+    "A respected village leader who votes during the day phase" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un rispettato leader del villaggio che vota durante la fase diurna"
+          }
+        }
+      }
+    },
     "Alive Players" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -180,6 +194,15 @@
           }
         }
       }
+    },
+    "All Messages Sent!" : {
+
+    },
+    "All players have received their roles via SMS. The game will start automatically in 3 seconds, or you can start it now." : {
+
+    },
+    "All players will receive their roles via text message" : {
+
     },
     "All Roles Revealed!" : {
       "extractionState" : "stale",
@@ -309,6 +332,9 @@
         }
       }
     },
+    "Back to Setup" : {
+
+    },
     "Begin Day Phase" : {
       "localizations" : {
         "it" : {
@@ -330,6 +356,9 @@
       }
     },
     "Begin the app introduction" : {
+
+    },
+    "Bulk SMS" : {
 
     },
     "button.close" : {
@@ -472,6 +501,9 @@
         }
       }
     },
+    "Choose Role Reveal Method" : {
+
+    },
     "Choose Target to Eliminate" : {
       "localizations" : {
         "it" : {
@@ -497,6 +529,9 @@
 
     },
     "Clear All" : {
+
+    },
+    "Clear phone" : {
 
     },
     "Complete onboarding and go to the main app" : {
@@ -535,6 +570,12 @@
           }
         }
       }
+    },
+    "Contacts Access Denied" : {
+
+    },
+    "Continue to Game" : {
+
     },
     "Continue to Night" : {
       "localizations" : {
@@ -1003,6 +1044,9 @@
         }
       }
     },
+    "How would you like to reveal roles to players?" : {
+
+    },
     "how_to_play.title" : {
       "comment" : "Section title for game rules",
       "extractionState" : "manual",
@@ -1303,6 +1347,9 @@
         }
       }
     },
+    "Messaging Not Available" : {
+
+    },
     "navigation.privacy" : {
       "comment" : "Privacy button in navigation",
       "extractionState" : "manual",
@@ -1561,6 +1608,15 @@
         }
       }
     },
+    "No phone number" : {
+
+    },
+    "No Phone Number" : {
+
+    },
+    "No phone number set for this player." : {
+
+    },
     "No player was eliminated." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1571,6 +1627,9 @@
           }
         }
       }
+    },
+    "OK" : {
+
     },
     "onboarding.completion.concept.basics" : {
       "extractionState" : "stale",
@@ -3316,6 +3375,9 @@
         }
       }
     },
+    "Pick from contacts" : {
+
+    },
     "player.name_format" : {
       "comment" : "Format for player names with number",
       "extractionState" : "manual",
@@ -3344,6 +3406,9 @@
           }
         }
       }
+    },
+    "Please enable Contacts access in Settings to pick players." : {
+
     },
     "preset.players" : {
       "comment" : "Players count in preset cards",
@@ -3727,6 +3792,9 @@
         }
       }
     },
+    "Reveal Method" : {
+
+    },
     "Role Reveal" : {
       "localizations" : {
         "it" : {
@@ -4020,6 +4088,15 @@
           }
         }
       }
+    },
+    "Send Next Message" : {
+
+    },
+    "Send Roles via SMS" : {
+
+    },
+    "Send SMS" : {
+
     },
     "Session Players: %lld" : {
       "extractionState" : "stale",
@@ -4749,6 +4826,9 @@
         }
       }
     },
+    "Simulator Mode - Messages will be simulated" : {
+
+    },
     "Skip" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -4790,6 +4870,9 @@
         }
       }
     },
+    "Skip SMS (Phone Pass Mode)" : {
+
+    },
     "Skip Voting Phase" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -4821,6 +4904,9 @@
           }
         }
       }
+    },
+    "Start Game Now" : {
+
     },
     "Start playing Lupus in Fabula" : {
       "localizations" : {
@@ -4918,6 +5004,9 @@
         }
       }
     },
+    "This device cannot send messages." : {
+
+    },
     "Village leadership" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -4925,17 +5014,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guida del villaggio"
-          }
-        }
-      }
-    },
-    "A respected village leader who votes during the day phase" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un rispettato leader del villaggio che vota durante la fase diurna"
           }
         }
       }
@@ -5131,6 +5209,9 @@
           }
         }
       }
+    },
+    "Wait" : {
+
     },
     "Werewolf" : {
       "extractionState" : "stale",

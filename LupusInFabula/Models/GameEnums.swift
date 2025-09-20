@@ -122,6 +122,7 @@ enum RoleID: String, CaseIterable, Codable {
 enum GamePhase: String, Hashable {
     case setup = "setup"
     case reveal = "reveal"
+    case smsBulk = "sms_bulk"
     case night = "night"
     case day = "day"
 }
@@ -133,4 +134,31 @@ enum NightActionType {
     case doctor
     case medium
     case hunter
+}
+
+// MARK: - Role Reveal Mode
+enum RoleRevealMode: String, CaseIterable, Codable {
+    case phonePass = "phone_pass"
+    case smsBulk = "sms_bulk"
+    
+    var displayName: String {
+        switch self {
+        case .phonePass: return "Pass Phone Around".localized
+        case .smsBulk: return "Send SMS to All Players".localized
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .phonePass: return "Traditional method: pass the phone to each player to reveal their role".localized
+        case .smsBulk: return "Modern method: send each player their role via text message".localized
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .phonePass: return "iphone"
+        case .smsBulk: return "message.fill"
+        }
+    }
 }

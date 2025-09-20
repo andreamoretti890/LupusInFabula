@@ -47,6 +47,8 @@ struct ContentView: View {
                                 GameSetupView()
                             case .reveal:
                                 RoleRevealView()
+                            case .smsBulk:
+                                BulkSMSView()
                             case .night:
                                 NightPhaseView()
                             case .day:

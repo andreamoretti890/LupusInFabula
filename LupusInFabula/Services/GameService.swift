@@ -25,12 +25,15 @@ class GameService {
     var playerCount: Int = 8 {
         didSet {
             syncPlayerNamesCount()
+            syncPlayerPhonesCount()
         }
     }
     var playerNames: [String] = []
+    var playerPhones: [String] = []
     var selectedRoles: [RoleCount] = []
     var selectedPreset: RolePreset?
     var includeJester: Bool = false
+    var selectedRevealMode: RoleRevealMode = .phonePass
     
     // Reveal state
     var currentRevealPlayerIndex: Int = 0
@@ -399,10 +402,13 @@ class GameService {
             // Use provided name if available, else fallback to localized default
             let providedName = sanitizedPlayerName(at: i)
             let displayName = providedName.isEmpty ? "player.name_format".localized(i + 1) : providedName
+            let providedPhone = sanitizedPlayerPhone(at: i)
             let player = Player(
                 id: UUID().uuidString,
                 displayName: displayName,
-                roleID: rolePool[i]
+                roleID: rolePool[i],
+                isAlive: true,
+                phoneNumber: providedPhone.isEmpty ? nil : providedPhone
             )
             players.append(player)
         }
@@ -414,7 +420,8 @@ class GameService {
             id: UUID().uuidString,
             startDate: Date(),
             players: players,
-            currentPhase: GamePhase.reveal.rawValue
+            currentPhase: GamePhase.reveal.rawValue,
+            revealMode: selectedRevealMode.rawValue
         )
         
         currentSession = session
@@ -444,11 +451,15 @@ class GameService {
             try modelContext.save()
             print("Game saved successfully")
             
-            // Record used player names into frequent players
-            recordPlayersUsed(names: players.map { $0.displayName })
+            // Record used player names and phones into frequent players
+            recordPlayersUsed(names: players.map { $0.displayName }, phones: players.compactMap { $0.phoneNumber })
 
-            // Navigate to reveal phase
-            navigationPath.append(GamePhase.reveal)
+            // Navigate to appropriate reveal phase
+            if selectedRevealMode == .smsBulk && canSendBulkSMS() {
+                navigationPath.append(GamePhase.smsBulk)
+            } else {
+                navigationPath.append(GamePhase.reveal)
+            }
         } catch {
             print("Error saving game: \(error)")
         }
@@ -488,14 +499,19 @@ class GameService {
     
     // Development/Testing function to skip reveal phase
     func skipRevealPhase() {
-        guard let session = currentSession else { return }
+        guard let session = currentSession else { 
+            print("❌ No current session in skipRevealPhase")
+            return 
+        }
+        
+        print("🔄 skipRevealPhase: Current phase = \(session.currentPhase)")
         
         // Set reveal as complete
         currentRevealPlayerIndex = session.players.count
         
         // Navigate to night phase
         navigateToNight()
-        print("Skipped reveal phase - moving to night")
+        print("✅ Skipped reveal phase - moving to night")
     }
     
     func navigateToSetup() {
@@ -950,9 +966,24 @@ class GameService {
         }
     }
     
+    private func syncPlayerPhonesCount() {
+        if playerPhones.count < playerCount {
+            playerPhones.append(contentsOf: Array(repeating: "", count: playerCount - playerPhones.count))
+        } else if playerPhones.count > playerCount {
+            playerPhones = Array(playerPhones.prefix(playerCount))
+        }
+    }
+    
     private func sanitizedPlayerName(at index: Int) -> String {
         guard index >= 0 && index < playerNames.count else { return "" }
         return playerNames[index].trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    private func sanitizedPlayerPhone(at index: Int) -> String {
+        guard index >= 0 && index < playerPhones.count else { return "" }
+        return playerPhones[index]
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "\n", with: "")
     }
     
     func setPlayerName(at index: Int, to newName: String) {
@@ -962,6 +993,15 @@ class GameService {
             playerNames.append(contentsOf: Array(repeating: "", count: index - playerNames.count + 1))
         }
         playerNames[index] = newName
+    }
+    
+    func setPlayerPhone(at index: Int, to newPhone: String) {
+        guard index >= 0 else { return }
+        syncPlayerPhonesCount()
+        if index >= playerPhones.count {
+            playerPhones.append(contentsOf: Array(repeating: "", count: index - playerPhones.count + 1))
+        }
+        playerPhones[index] = newPhone
     }
     
     func getNameSuggestions(prefix: String = "", limit: Int = 6, excluding currentNames: [String] = []) -> [String] {
@@ -984,20 +1024,49 @@ class GameService {
         return Array(LinkedHashSet(filtered)).prefix(limit).map { $0 }
     }
     
-    func recordPlayersUsed(names: [String]) {
+    func getPhoneForName(_ name: String) -> String? {
+        return frequentPlayers.first { $0.displayName.caseInsensitiveCompare(name) == .orderedSame }?.phoneNumber
+    }
+    
+    func getFrequentPlayerSuggestions(prefix: String = "", limit: Int = 6, excluding currentNames: [String] = []) -> [FrequentPlayer] {
+        let normalizedPrefix = prefix.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let excludeSet = Set(currentNames.map { $0.lowercased() })
+        let sorted = frequentPlayers.sorted { a, b in
+            if a.playCount == b.playCount {
+                return a.lastPlayedAt > b.lastPlayedAt
+            }
+            return a.playCount > b.playCount
+        }
+        let filtered = sorted.filter { player in
+            let lower = player.displayName.lowercased()
+            let matchesPrefix = normalizedPrefix.isEmpty || lower.hasPrefix(normalizedPrefix)
+            let notExcluded = !excludeSet.contains(lower)
+            return matchesPrefix && notExcluded
+        }
+        return Array(filtered.prefix(limit))
+    }
+    
+    func recordPlayersUsed(names: [String], phones: [String] = []) {
         let cleaned = names
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
             .filter { !isDefaultPlayerName($0) }
         guard !cleaned.isEmpty else { return }
+        
         var dirty = false
-        for name in Set(cleaned.map { $0 }) {
+        for (index, name) in Set(cleaned.map { $0 }).enumerated() {
+            let phone = index < phones.count ? phones[index].trimmingCharacters(in: .whitespacesAndNewlines) : nil
+            
             if let existingIndex = frequentPlayers.firstIndex(where: { $0.displayName.caseInsensitiveCompare(name) == .orderedSame }) {
                 frequentPlayers[existingIndex].lastPlayedAt = Date()
                 frequentPlayers[existingIndex].playCount += 1
+                // Update phone number if provided and different
+                if let phone = phone, !phone.isEmpty {
+                    frequentPlayers[existingIndex].phoneNumber = phone
+                }
                 dirty = true
             } else {
-                let fp = FrequentPlayer(displayName: name, lastPlayedAt: Date(), playCount: 1)
+                let fp = FrequentPlayer(displayName: name, lastPlayedAt: Date(), playCount: 1, phoneNumber: phone)
                 modelContext.insert(fp)
                 frequentPlayers.append(fp)
                 dirty = true
@@ -1034,6 +1103,37 @@ class GameService {
                 print("Error deleting frequent player: \(error)")
             }
         }
+    }
+    
+    // MARK: - Reveal Mode Methods
+    
+    func isSMSBulkMode() -> Bool {
+        guard let session = currentSession else { return false }
+        return session.revealMode == RoleRevealMode.smsBulk.rawValue
+    }
+    
+    func getPlayersWithPhones() -> [Player] {
+        guard let session = currentSession else { return [] }
+        return session.players.filter { $0.phoneNumber != nil && !$0.phoneNumber!.isEmpty }
+    }
+    
+    func getPlayersWithoutPhones() -> [Player] {
+        guard let session = currentSession else { return [] }
+        return session.players.filter { $0.phoneNumber == nil || $0.phoneNumber!.isEmpty }
+    }
+    
+    func canSendBulkSMS() -> Bool {
+        guard let session = currentSession else { return false }
+        let playersWithPhones = getPlayersWithPhones()
+        return session.revealMode == RoleRevealMode.smsBulk.rawValue && 
+               playersWithPhones.count == session.players.count
+    }
+    
+    func generateRoleMessage(for player: Player) -> String? {
+        guard let role = availableRoles.first(where: { $0.id == player.roleID }) else { return nil }
+        let roleName = role.name.localized
+        let roleEmoji = role.emoji
+        return "Your secret role: \(roleName) \(roleEmoji)"
     }
 }
 

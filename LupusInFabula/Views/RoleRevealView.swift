@@ -7,11 +7,17 @@
 
 import SwiftData
 import SwiftUI
+import MessageUI
 
 struct RoleRevealView: View {
     @Environment(GameService.self) private var gameService: GameService
     @State private var isRevealed = false
     @State private var showingNextPlayer = false
+    @State private var showingMessageComposer = false
+    @State private var messageRecipient: String = ""
+    @State private var messageBody: String = ""
+    @State private var showNoMessagingAlert = false
+    @State private var showNoPhoneAlert = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -132,15 +138,22 @@ struct RoleRevealView: View {
             if isRevealed {
                 ToolbarSpacer(placement: .bottomBar)
                 ToolbarItem(placement: .bottomBar) {
-                    Button("Next Player") {
-                        nextPlayer()
+                    HStack(spacing: 16) {
+                        Button {
+                            sendRoleViaSMS()
+                        } label: {
+                            Label("Send SMS", systemImage: "message.fill")
+                        }
+                        Button("Next Player") {
+                            nextPlayer()
+                        }
                     }
                 }
             }
         }
         .onAppear {
             isRevealed = false
-            print("RoleRevealView appeared")
+            print("PhonePassRevealView appeared")
             print("Current session: \(gameService.currentSession != nil ? "exists" : "nil")")
             if let session = gameService.currentSession {
                 print("Session players: \(session.players.count)")
@@ -149,6 +162,19 @@ struct RoleRevealView: View {
         }
         .sheet(isPresented: $showingNextPlayer) {
             NextPlayerView()
+        }
+        .sheet(isPresented: $showingMessageComposer) {
+            MessageComposerView(recipients: [messageRecipient], bodyText: messageBody) { _ in }
+        }
+        .alert("Messaging Not Available", isPresented: $showNoMessagingAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("This device cannot send messages.")
+        }
+        .alert("No Phone Number", isPresented: $showNoPhoneAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("No phone number set for this player.")
         }
     }
     
@@ -163,6 +189,32 @@ struct RoleRevealView: View {
             // Reset for next player
             isRevealed = false
         }
+    }
+    
+    private func canSendMessages() -> Bool {
+        #if targetEnvironment(simulator)
+        return true // Always allow in simulator
+        #else
+        return MFMessageComposeViewController.canSendText()
+        #endif
+    }
+    
+    private func sendRoleViaSMS() {
+        guard let player = gameService.getCurrentPlayer(), let role = gameService.getCurrentPlayerRole() else { return }
+        guard let phone = player.phoneNumber, !phone.isEmpty else {
+            showNoPhoneAlert = true
+            return
+        }
+        guard canSendMessages() else {
+            showNoMessagingAlert = true
+            return
+        }
+        messageRecipient = phone
+        let roleName = role.name.localized
+        let roleEmoji = role.emoji
+        let appName = "Lupus In Fabula"
+        messageBody = "Your secret role: \(roleName) \(roleEmoji) — via \(appName)"
+        showingMessageComposer = true
     }
 }
 
